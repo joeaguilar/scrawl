@@ -1,0 +1,607 @@
+{
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "name": "Scrawl",
+  "patterns": [
+    {
+      "include": "#header_block_specific"
+    },
+    {
+      "include": "#header_block_simple"
+    },
+    {
+      "include": "#section_folding"
+    },
+    {
+      "include": "#url"
+    },
+    {
+      "include": "#fenced_code_block_typescript"
+    },
+    {
+      "include": "#fenced_code_block_javascript"
+    },
+    {
+      "include": "#fenced_code_block_python"
+    },
+    {
+      "include": "#fenced_code_block_ruby"
+    },
+    {
+      "include": "#fenced_code_block_cpp"
+    },
+    {
+      "include": "#fenced_code_block_c"
+    },
+    {
+      "include": "#fenced_code_block_csharp"
+    },
+    {
+      "include": "#fenced_code_block_java"
+    },
+    {
+      "include": "#fenced_code_block_html"
+    },
+    {
+      "include": "#fenced_code_block_css"
+    },
+    {
+      "include": "#fenced_code_block_php"
+    },
+    {
+      "include": "#fenced_code_block_go"
+    },
+    {
+      "include": "#fenced_code_block_rust"
+    },
+    {
+      "include": "#fenced_code_block_bash"
+    },
+    {
+      "include": "#fenced_code_block_sql"
+    },
+    {
+      "include": "#fenced_code_block_json"
+    },
+    {
+      "include": "#fenced_code_block_xml"
+    },
+    {
+      "include": "#fenced_code_block_yaml"
+    },
+    {
+      "include": "#fenced_code_block_markdown"
+    },
+    {
+      "include": "#fenced_code_block_generic"
+    },
+    {
+      "include": "#fenced_code_block_plain"
+    },
+    {
+      "include": "#line_comment"
+    }
+  ],
+  "repository": {
+    "header_block_specific": {
+      "match": "/\\*\\s*\\n\\s*\\*-*\\s*\\n\\s*\\*\\s*/+\\s*\\n\\s*\\*\\s*\\d+/\\d+/\\d+\\s*\\w+\\s*\\n\\s*\\*\\s*/+\\s*\\n\\s*\\*-*\\s*\\n\\s*\\*/",
+      "name": "punctuation.definition.comment.block"
+    },
+    "header_block_simple": {
+      "begin": "/\\*",
+      "beginCaptures": {
+        "0": {
+          "name": "punctuation.definition.comment.block.begin"
+        }
+      },
+      "end": "\\*/",
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.definition.comment.block.end"
+        }
+      },
+      "contentName": "comment.block markup.heading.note-header"
+    },
+    "section_folding": {
+      "match": "(##)([a-zA-Z0-9- \\t]+)(##)",
+      "name": "markup.bold.tag entity.name.section.folding",
+      "captures": {
+        "1": {
+          "name": "punctuation.definition.tag.begin"
+        },
+        "2": {
+          "name": "entity.name.tag"
+        },
+        "3": {
+          "name": "punctuation.definition.tag.end"
+        }
+      }
+    },
+    "url": {
+      "match": "(https?:\\/\\/|www\\.)[a-zA-Z0-9-]+(\\.[a-zA-Z0-9-]+)+(\\/[^\\s\\(\\)\\[\\]]*)?",
+      "name": "markup.underline.link.url",
+      "captures": {
+        "1": {
+          "name": "markup.underline.link.protocol"
+        },
+        "2": {
+          "name": "markup.underline.link.domain"
+        }
+      }
+    },
+    "fenced_code_block_typescript": {
+      "begin": "^(\\s*)(`{3,})(typescript|ts)(\\s*)$",
+      "beginCaptures": {
+        "2": {
+          "name": "punctuation.definition.fenced.code"
+        },
+        "3": {
+          "name": "entity.name.tag.language"
+        }
+      },
+      "end": "^(\\s*)(`{3,})(\\s*)$",
+      "endCaptures": {
+        "2": {
+          "name": "punctuation.definition.fenced.code"
+        }
+      },
+      "contentName": "source.ts",
+      "patterns": [
+        {
+          "include": "source.ts"
+        }
+      ]
+    },
+    "fenced_code_block_javascript": {
+      "begin": "^(\\s*)(`{3,})(javascript|js)(\\s*)$",
+      "beginCaptures": {
+        "2": {
+          "name": "punctuation.definition.fenced.code"
+        },
+        "3": {
+          "name": "entity.name.tag.language"
+        }
+      },
+      "end": "^(\\s*)(`{3,})(\\s*)$",
+      "endCaptures": {
+        "2": {
+          "name": "punctuation.definition.fenced.code"
+        }
+      },
+      "contentName": "source.js",
+      "patterns": [
+        {
+          "include": "source.js"
+        }
+      ]
+    },
+    "fenced_code_block_python": {
+      "begin": "^(\\s*)(`{3,})(python|py)(\\s*)$",
+      "beginCaptures": {
+        "2": {
+          "name": "punctuation.definition.fenced.code"
+        },
+        "3": {
+          "name": "entity.name.tag.language"
+        }
+      },
+      "end": "^(\\s*)(`{3,})(\\s*)$",
+      "endCaptures": {
+        "2": {
+          "name": "punctuation.definition.fenced.code"
+        }
+      },
+      "contentName": "source.python",
+      "patterns": [
+        {
+          "include": "source.python"
+        }
+      ]
+    },
+    "fenced_code_block_ruby": {
+      "begin": "^(\\s*)(`{3,})(ruby|rb)(\\s*)$",
+      "beginCaptures": {
+        "2": {
+          "name": "punctuation.definition.fenced.code"
+        },
+        "3": {
+          "name": "entity.name.tag.language"
+        }
+      },
+      "end": "^(\\s*)(`{3,})(\\s*)$",
+      "endCaptures": {
+        "2": {
+          "name": "punctuation.definition.fenced.code"
+        }
+      },
+      "patterns": [
+        {
+          "include": "source.ruby"
+        }
+      ],
+      "contentName": "source.ruby"
+    },
+    "fenced_code_block_cpp": {
+      "begin": "^(\\s*)(`{3,})(c\\+\\+|cpp|cxx)(\\s*)$",
+      "beginCaptures": {
+        "2": {
+          "name": "punctuation.definition.fenced.code"
+        },
+        "3": {
+          "name": "entity.name.tag.language"
+        }
+      },
+      "end": "^(\\s*)(`{3,})(\\s*)$",
+      "endCaptures": {
+        "2": {
+          "name": "punctuation.definition.fenced.code"
+        }
+      },
+      "patterns": [
+        {
+          "include": "source.cpp"
+        }
+      ],
+      "contentName": "source.cpp"
+    },
+    "fenced_code_block_c": {
+      "begin": "^(\\s*)(`{3,})(c)(\\s*)$",
+      "beginCaptures": {
+        "2": {
+          "name": "punctuation.definition.fenced.code"
+        },
+        "3": {
+          "name": "entity.name.tag.language"
+        }
+      },
+      "end": "^(\\s*)(`{3,})(\\s*)$",
+      "endCaptures": {
+        "2": {
+          "name": "punctuation.definition.fenced.code"
+        }
+      },
+      "patterns": [
+        {
+          "include": "source.c"
+        }
+      ],
+      "contentName": "source.c"
+    },
+    "fenced_code_block_csharp": {
+      "begin": "^(\\s*)(`{3,})(c#|csharp|cs)(\\s*)$",
+      "beginCaptures": {
+        "2": {
+          "name": "punctuation.definition.fenced.code"
+        },
+        "3": {
+          "name": "entity.name.tag.language"
+        }
+      },
+      "end": "^(\\s*)(`{3,})(\\s*)$",
+      "endCaptures": {
+        "2": {
+          "name": "punctuation.definition.fenced.code"
+        }
+      },
+      "patterns": [
+        {
+          "include": "source.cs"
+        }
+      ],
+      "contentName": "source.cs"
+    },
+    "fenced_code_block_java": {
+      "begin": "^(\\s*)(`{3,})(java)(\\s*)$",
+      "beginCaptures": {
+        "2": {
+          "name": "punctuation.definition.fenced.code"
+        },
+        "3": {
+          "name": "entity.name.tag.language"
+        }
+      },
+      "end": "^(\\s*)(`{3,})(\\s*)$",
+      "endCaptures": {
+        "2": {
+          "name": "punctuation.definition.fenced.code"
+        }
+      },
+      "patterns": [
+        {
+          "include": "source.java"
+        }
+      ],
+      "contentName": "source.java"
+    },
+    "fenced_code_block_html": {
+      "begin": "^(\\s*)(`{3,})(html|htm)(\\s*)$",
+      "beginCaptures": {
+        "2": {
+          "name": "punctuation.definition.fenced.code"
+        },
+        "3": {
+          "name": "entity.name.tag.language"
+        }
+      },
+      "end": "^(\\s*)(`{3,})(\\s*)$",
+      "endCaptures": {
+        "2": {
+          "name": "punctuation.definition.fenced.code"
+        }
+      },
+      "patterns": [
+        {
+          "include": "text.html.basic"
+        }
+      ],
+      "contentName": "text.html.basic"
+    },
+    "fenced_code_block_css": {
+      "begin": "^(\\s*)(`{3,})(css|scss|sass|less)(\\s*)$",
+      "beginCaptures": {
+        "2": {
+          "name": "punctuation.definition.fenced.code"
+        },
+        "3": {
+          "name": "entity.name.tag.language"
+        }
+      },
+      "end": "^(\\s*)(`{3,})(\\s*)$",
+      "endCaptures": {
+        "2": {
+          "name": "punctuation.definition.fenced.code"
+        }
+      },
+      "patterns": [
+        {
+          "include": "source.css"
+        }
+      ],
+      "contentName": "source.css"
+    },
+    "fenced_code_block_php": {
+      "begin": "^(\\s*)(`{3,})(php)(\\s*)$",
+      "beginCaptures": {
+        "2": {
+          "name": "punctuation.definition.fenced.code"
+        },
+        "3": {
+          "name": "entity.name.tag.language"
+        }
+      },
+      "end": "^(\\s*)(`{3,})(\\s*)$",
+      "endCaptures": {
+        "2": {
+          "name": "punctuation.definition.fenced.code"
+        }
+      },
+      "patterns": [
+        {
+          "include": "source.php"
+        }
+      ],
+      "contentName": "source.php"
+    },
+    "fenced_code_block_go": {
+      "begin": "^(\\s*)(`{3,})(go)(\\s*)$",
+      "beginCaptures": {
+        "2": {
+          "name": "punctuation.definition.fenced.code"
+        },
+        "3": {
+          "name": "entity.name.tag.language"
+        }
+      },
+      "end": "^(\\s*)(`{3,})(\\s*)$",
+      "endCaptures": {
+        "2": {
+          "name": "punctuation.definition.fenced.code"
+        }
+      },
+      "patterns": [
+        {
+          "include": "source.go"
+        }
+      ],
+      "contentName": "source.go"
+    },
+    "fenced_code_block_rust": {
+      "begin": "^(\\s*)(`{3,})(rust)(\\s*)$",
+      "beginCaptures": {
+        "2": {
+          "name": "punctuation.definition.fenced.code"
+        },
+        "3": {
+          "name": "entity.name.tag.language"
+        }
+      },
+      "end": "^(\\s*)(`{3,})(\\s*)$",
+      "endCaptures": {
+        "2": {
+          "name": "punctuation.definition.fenced.code"
+        }
+      },
+      "patterns": [
+        {
+          "include": "source.rust"
+        }
+      ],
+      "contentName": "source.rust"
+    },
+    "fenced_code_block_bash": {
+      "begin": "^(\\s*)(`{3,})(bash|shell|sh|zsh)(\\s*)$",
+      "beginCaptures": {
+        "2": {
+          "name": "punctuation.definition.fenced.code"
+        },
+        "3": {
+          "name": "entity.name.tag.language"
+        }
+      },
+      "end": "^(\\s*)(`{3,})(\\s*)$",
+      "endCaptures": {
+        "2": {
+          "name": "punctuation.definition.fenced.code"
+        }
+      },
+      "patterns": [
+        {
+          "include": "source.shell"
+        }
+      ],
+      "contentName": "source.shell"
+    },
+    "fenced_code_block_sql": {
+      "begin": "^(\\s*)(`{3,})(sql)(\\s*)$",
+      "beginCaptures": {
+        "2": {
+          "name": "punctuation.definition.fenced.code"
+        },
+        "3": {
+          "name": "entity.name.tag.language"
+        }
+      },
+      "end": "^(\\s*)(`{3,})(\\s*)$",
+      "endCaptures": {
+        "2": {
+          "name": "punctuation.definition.fenced.code"
+        }
+      },
+      "patterns": [
+        {
+          "include": "source.sql"
+        }
+      ],
+      "contentName": "source.sql"
+    },
+    "fenced_code_block_json": {
+      "begin": "^(\\s*)(`{3,})(json)(\\s*)$",
+      "beginCaptures": {
+        "2": {
+          "name": "punctuation.definition.fenced.code"
+        },
+        "3": {
+          "name": "entity.name.tag.language"
+        }
+      },
+      "end": "^(\\s*)(`{3,})(\\s*)$",
+      "endCaptures": {
+        "2": {
+          "name": "punctuation.definition.fenced.code"
+        }
+      },
+      "patterns": [
+        {
+          "include": "source.json"
+        }
+      ],
+      "contentName": "source.json"
+    },
+    "fenced_code_block_xml": {
+      "begin": "^(\\s*)(`{3,})(xml)(\\s*)$",
+      "beginCaptures": {
+        "2": {
+          "name": "punctuation.definition.fenced.code"
+        },
+        "3": {
+          "name": "entity.name.tag.language"
+        }
+      },
+      "end": "^(\\s*)(`{3,})(\\s*)$",
+      "endCaptures": {
+        "2": {
+          "name": "punctuation.definition.fenced.code"
+        }
+      },
+      "patterns": [
+        {
+          "include": "text.xml"
+        }
+      ],
+      "contentName": "text.xml"
+    },
+    "fenced_code_block_yaml": {
+      "begin": "^(\\s*)(`{3,})(yaml|yml)(\\s*)$",
+      "beginCaptures": {
+        "2": {
+          "name": "punctuation.definition.fenced.code"
+        },
+        "3": {
+          "name": "entity.name.tag.language"
+        }
+      },
+      "end": "^(\\s*)(`{3,})(\\s*)$",
+      "endCaptures": {
+        "2": {
+          "name": "punctuation.definition.fenced.code"
+        }
+      },
+      "patterns": [
+        {
+          "include": "source.yaml"
+        }
+      ],
+      "contentName": "source.yaml"
+    },
+    "fenced_code_block_markdown": {
+      "begin": "^(\\s*)(`{3,})(markdown|md)(\\s*)$",
+      "beginCaptures": {
+        "2": {
+          "name": "punctuation.definition.fenced.code"
+        },
+        "3": {
+          "name": "entity.name.tag.language"
+        }
+      },
+      "end": "^(\\s*)(`{3,})(\\s*)$",
+      "endCaptures": {
+        "2": {
+          "name": "punctuation.definition.fenced.code"
+        }
+      },
+      "patterns": [
+        {
+          "include": "text.html.markdown"
+        }
+      ],
+      "contentName": "text.html.markdown"
+    },
+    "fenced_code_block_generic": {
+      "begin": "^(\\s*)(`{3,})([A-Za-z0-9_+-]+)(\\s*)$",
+      "beginCaptures": {
+        "2": {
+          "name": "punctuation.definition.fenced.code"
+        },
+        "3": {
+          "name": "entity.name.tag.language"
+        }
+      },
+      "end": "^(\\s*)(`{3,})(\\s*)$",
+      "endCaptures": {
+        "2": {
+          "name": "punctuation.definition.fenced.code"
+        }
+      },
+      "contentName": "markup.raw.block"
+    },
+    "fenced_code_block_plain": {
+      "begin": "^(\\s*)(`{3,})(\\s*)$",
+      "beginCaptures": {
+        "2": {
+          "name": "punctuation.definition.fenced.code"
+        }
+      },
+      "end": "^(\\s*)(`{3,})(\\s*)$",
+      "endCaptures": {
+        "2": {
+          "name": "punctuation.definition.fenced.code"
+        }
+      },
+      "contentName": "markup.raw.block"
+    },
+    "line_comment": {
+      "match": "//.*$",
+      "name": "comment.line"
+    }
+  },
+  "scopeName": "text.scrawl"
+}

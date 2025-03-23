@@ -1,0 +1,13 @@
+{
+  // Ensure URLs are detected and underlined
+  "detect_indentation": true,
+  "word_wrap": true,
+  "highlight_line": true,
+  "match_brackets": true,
+  "draw_centered": false,
+  "auto_match_enabled": true,
+
+  // Enable highlighting of URLs
+  "detect_urls": true,
+  "hyperlink_to_url": true
+}

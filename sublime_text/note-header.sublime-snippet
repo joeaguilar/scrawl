@@ -1,0 +1,13 @@
+<snippet>
+    <content><![CDATA[/*
+*------------------------
+* ///////////////////////
+*  ${1:${CURRENT_DATE:MM/DD/YY}} ${2:${CURRENT_DATE:ddd}}
+* ///////////////////////
+*------------------------
+*/
+$0]]></content>
+    <tabTrigger>note-header</tabTrigger>
+    <scope>text.scrawl</scope>
+    <description>Insert a note header</description>
+</snippet>

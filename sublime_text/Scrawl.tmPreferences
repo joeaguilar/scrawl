@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>name</key>
+    <string>Scrawl Preferences</string>
+    <key>scope</key>
+    <string>text.scrawl</string>
+    <key>settings</key>
+    <dict>
+        <!-- Define comment syntax for cmd+/ toggle -->
+        <key>shellVariables</key>
+        <array>
+            <dict>
+                <key>name</key>
+                <string>TM_COMMENT_START</string>
+                <key>value</key>
+                <string>// </string>
+            </dict>
+            <dict>
+                <key>name</key>
+                <string>TM_COMMENT_START_2</string>
+                <key>value</key>
+                <string>/* </string>
+            </dict>
+            <dict>
+                <key>name</key>
+                <string>TM_COMMENT_END_2</string>
+                <key>value</key>
+                <string> */</string>
+            </dict>
+        </array>
+
+         <!-- Define folding markers -->
+        <key>foldingStartMarker</key>
+        <string>^\s*##.+##|^```\w*$</string>
+        <key>foldingStopMarker</key>
+        <string>^\s*##.+##|^```$</string>
+        
+        <!-- Define symbol patterns for symbol list -->
+        <key>symbolTransformation</key>
+        <string>s/##(.+?)##/\1/g;</string>
+        
+        <!-- Define word separators -->
+        <key>wordSeparators</key>
+        <string>./\\()\"'-:,.;&lt;&gt;~!@#$%^&amp;*|+=[]{}`~?</string>
+    </dict>
+</dict>
+</plist>

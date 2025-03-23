@@ -1,0 +1,35 @@
+{
+  "name": "scrawl-language",
+  "displayName": "Scrawl",
+  "description": "Syntax highlighting for Scrawl note-taking format",
+  "version": "0.1.0",
+  "engines": {
+    "vscode": "^1.60.0"
+  },
+  "categories": [
+    "Programming Languages"
+  ],
+  "contributes": {
+    "languages": [
+      {
+        "id": "scrawl",
+        "aliases": [
+          "Scrawl",
+          "scrawl"
+        ],
+        "extensions": [
+          ".scrawl",
+          ".note"
+        ],
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "scrawl",
+        "scopeName": "text.scrawl",
+        "path": "./syntaxes/scrawl.tmLanguage.json"
+      }
+    ]
+  }
+}

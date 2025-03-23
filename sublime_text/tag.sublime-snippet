@@ -1,0 +1,6 @@
+<snippet>
+    <content><![CDATA[##${1:tag-name}##$0]]></content>
+    <tabTrigger>tag</tabTrigger>
+    <scope>text.scrawl</scope>
+    <description>Insert a tag</description>
+</snippet>

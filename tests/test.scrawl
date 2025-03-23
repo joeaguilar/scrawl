@@ -1,0 +1,146 @@
+// This is a test file for the "My Notes" custom syntax
+// Testing line comments (should be highlighted and toggleable with cmd+/)
+
+/*
+*------------------------
+* ///////////////////////
+*  3/22/2025 Sat
+* ///////////////////////
+*------------------------
+*/
+
+This header above should be highlighted as a heading.
+
+/* This is a block comment that should be highlighted differently */
+
+Let's test some tags:
+
+##important-note##
+Make sure to check that these tags are properly highlighted.
+
+##example-tag##
+This tag should also work with the symbol list and be navigable.
+
+##nested-elements##
+Tags can contain:
+- Lists
+- **Bold text**
+- *Italic text*
+- `code snippets`
+
+##urls-test##
+URLs should be highlighted and clickable:
+
+https://www.sublimetext.com/docs/syntax.html
+https://packagecontrol.io/
+
+
+##testing-comments##
+// Line comments should work with cmd+/
+/* Block comments should 
+   span multiple
+   lines */
+
+##auto-pairing##
+Testing that typing ## will auto-complete the closing ##
+Also testing for {"brackets"} and [square brackets] and (parentheses)
+
+##cool## ##bruh##
+
+##folding-test##
+This section should be foldable if folding markers are set up correctly.
+Multiple lines of content here
+should be collapsible when you click
+the fold icon in the gutter.
+
+```ts
+   console.log("this works");
+
+```
+
+
+```python
+
+   def fn()
+      print 
+
+```
+
+
+
+```ts
+
+   console.log("this works")
+
+'''
+
+
+
+```md
+
+'''javascript
+
+   console.log("this works")
+
+'''
+```
+
+
+```python
+   def hello():
+    print("This will be highlighted as Python!"
+```
+
+```java
+   for () {}
+
+```
+
+```js
+private main doSomething() {
+ doesThisWork();
+}
+```
+
+'''javascript
+
+console.log("hello");
+'''
+
+```javascript
+private main doSomething() {
+ doesThisWork();
+ }
+}
+```
+
+
+text.html.markdown - meta.frontmatter - meta.disable-markdown - meta.code-fence - markup.raw
+```
+
+```code
+```
+
+
+/*
+*------------------------
+* ///////////////////////
+*  3/23/2025 Sun
+* ///////////////////////
+*------------------------
+*/
+
+The above header should create a new section that's independently foldable.
+
+##snippets-test##
+If you've set up snippets:
+- Type "header" and press Tab to create a note header
+- Type "tag" and press Tab to create a tag
+
+##keyboard-shortcuts##
+- cmd+/ should toggle comments
+- cmd+shift+h should insert a header (if VSCode extension)
+- cmd+shift+t should insert a tag (if VSCode extension)
+
+// Final line with a comment
+

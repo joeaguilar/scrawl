@@ -1,5 +1,7 @@
 %YAML 1.2
 ---
+# Scrawl Language Syntax Definition for Sublime Text
+# Optimized for performance - consolidated indentation patterns
 # See http://www.sublimetext.com/docs/syntax.html
 name: Scrawl
 file_extensions:
@@ -7,23 +9,9 @@ file_extensions:
   - note
 scope: text.scrawl
 
-variables:
-  # Define language aliases and their corresponding scopes
-  typescript_aliases: "typescript|ts"
-  javascript_aliases: "javascript|js"
-  python_aliases: "python|py"
-  ruby_aliases: "ruby|rb"
-  csharp_aliases: "csharp|cs|c#"
-  cpp_aliases: "cpp|c\\+\\+|cxx"
-  bash_aliases: "bash|sh|shell|zsh"
-  html_aliases: "html|htm"
-  css_aliases: "css|scss|sass|less"
-  languages: "typescript|ts|javascript|js|python|py|java|c|cpp|c\\+\\+|cxx|csharp|cs|c#|html|htm|css|scss|sass|less|php|ruby|rb|go|rust|bash|sh|shell|zsh|sql|json|xml|yaml|yml|markdown|md"
-
 contexts:
   main:
     # Decorative date header block - matches the specific format with dashes and slashes
-    # Uses begin/end for multi-line matching
     - match: '/\*\s*$'
       scope: comment.block.scrawl punctuation.definition.comment.block.begin.scrawl
       push: maybe_date_header
@@ -33,12 +21,12 @@ contexts:
       scope: comment.block.scrawl punctuation.definition.comment.block.begin.scrawl
       push: block_comment
 
-    # Section folding markers - red text with green parenthesis
+    # Section folding markers - red text with yellow parenthesis
     - match: '(##)'
       scope: keyword.control.section.begin.scrawl
       push: section_content
 
-    # Fenced code blocks with language - completely new approach
+    # Fenced code blocks with language
     - match: '^(\s*)(`{3,})(typescript|ts)(\s*)$'
       scope: markup.raw.block.markdown punctuation.definition.fenced.markdown
       captures:
@@ -46,7 +34,7 @@ contexts:
         3: constant.other.language-name.markdown
       embed: scope:source.ts
       embed_scope: markup.raw.block.markdown source.ts
-      escape: '^(\s*)(`{3,})(\s*)$'
+      escape: '^\s*`{3,}\s*$'
       escape_captures:
         0: markup.raw.block.markdown punctuation.definition.fenced.markdown
 
@@ -57,7 +45,7 @@ contexts:
         3: constant.other.language-name.markdown
       embed: scope:source.js
       embed_scope: markup.raw.block.markdown source.js
-      escape: '^(\s*)(`{3,})(\s*)$'
+      escape: '^\s*`{3,}\s*$'
       escape_captures:
         0: markup.raw.block.markdown punctuation.definition.fenced.markdown
 
@@ -68,7 +56,7 @@ contexts:
         3: constant.other.language-name.markdown
       embed: scope:source.python
       embed_scope: markup.raw.block.markdown source.python
-      escape: '^(\s*)(`{3,})(\s*)$'
+      escape: '^\s*`{3,}\s*$'
       escape_captures:
         0: markup.raw.block.markdown punctuation.definition.fenced.markdown
 
@@ -79,7 +67,7 @@ contexts:
         3: constant.other.language-name.markdown
       embed: scope:source.ruby
       embed_scope: markup.raw.block.markdown source.ruby
-      escape: '^(\s*)(`{3,})(\s*)$'
+      escape: '^\s*`{3,}\s*$'
       escape_captures:
         0: markup.raw.block.markdown punctuation.definition.fenced.markdown
 
@@ -90,7 +78,7 @@ contexts:
         3: constant.other.language-name.markdown
       embed: scope:source.c++
       embed_scope: markup.raw.block.markdown source.c++
-      escape: '^(\s*)(`{3,})(\s*)$'
+      escape: '^\s*`{3,}\s*$'
       escape_captures:
         0: markup.raw.block.markdown punctuation.definition.fenced.markdown
 
@@ -101,7 +89,7 @@ contexts:
         3: constant.other.language-name.markdown
       embed: scope:source.c
       embed_scope: markup.raw.block.markdown source.c
-      escape: '^(\s*)(`{3,})(\s*)$'
+      escape: '^\s*`{3,}\s*$'
       escape_captures:
         0: markup.raw.block.markdown punctuation.definition.fenced.markdown
 
@@ -112,7 +100,7 @@ contexts:
         3: constant.other.language-name.markdown
       embed: scope:source.cs
       embed_scope: markup.raw.block.markdown source.cs
-      escape: '^(\s*)(`{3,})(\s*)$'
+      escape: '^\s*`{3,}\s*$'
       escape_captures:
         0: markup.raw.block.markdown punctuation.definition.fenced.markdown
 
@@ -123,7 +111,7 @@ contexts:
         3: constant.other.language-name.markdown
       embed: scope:source.java
       embed_scope: markup.raw.block.markdown source.java
-      escape: '^(\s*)(`{3,})(\s*)$'
+      escape: '^\s*`{3,}\s*$'
       escape_captures:
         0: markup.raw.block.markdown punctuation.definition.fenced.markdown
 
@@ -134,18 +122,55 @@ contexts:
         3: constant.other.language-name.markdown
       embed: scope:text.html.basic
       embed_scope: markup.raw.block.markdown text.html.basic
-      escape: '^(\s*)(`{3,})(\s*)$'
+      escape: '^\s*`{3,}\s*$'
       escape_captures:
         0: markup.raw.block.markdown punctuation.definition.fenced.markdown
 
-    - match: '^(\s*)(`{3,})(css|scss|sass|less)(\s*)$'
+    # CSS - plain CSS only
+    - match: '^(\s*)(`{3,})(css)(\s*)$'
       scope: markup.raw.block.markdown punctuation.definition.fenced.markdown
       captures:
         2: punctuation.definition.fenced.markdown
         3: constant.other.language-name.markdown
       embed: scope:source.css
       embed_scope: markup.raw.block.markdown source.css
-      escape: '^(\s*)(`{3,})(\s*)$'
+      escape: '^\s*`{3,}\s*$'
+      escape_captures:
+        0: markup.raw.block.markdown punctuation.definition.fenced.markdown
+
+    # SCSS - proper SCSS syntax
+    - match: '^(\s*)(`{3,})(scss)(\s*)$'
+      scope: markup.raw.block.markdown punctuation.definition.fenced.markdown
+      captures:
+        2: punctuation.definition.fenced.markdown
+        3: constant.other.language-name.markdown
+      embed: scope:source.scss
+      embed_scope: markup.raw.block.markdown source.scss
+      escape: '^\s*`{3,}\s*$'
+      escape_captures:
+        0: markup.raw.block.markdown punctuation.definition.fenced.markdown
+
+    # SASS - proper SASS syntax
+    - match: '^(\s*)(`{3,})(sass)(\s*)$'
+      scope: markup.raw.block.markdown punctuation.definition.fenced.markdown
+      captures:
+        2: punctuation.definition.fenced.markdown
+        3: constant.other.language-name.markdown
+      embed: scope:source.sass
+      embed_scope: markup.raw.block.markdown source.sass
+      escape: '^\s*`{3,}\s*$'
+      escape_captures:
+        0: markup.raw.block.markdown punctuation.definition.fenced.markdown
+
+    # LESS - proper LESS syntax
+    - match: '^(\s*)(`{3,})(less)(\s*)$'
+      scope: markup.raw.block.markdown punctuation.definition.fenced.markdown
+      captures:
+        2: punctuation.definition.fenced.markdown
+        3: constant.other.language-name.markdown
+      embed: scope:source.less
+      embed_scope: markup.raw.block.markdown source.less
+      escape: '^\s*`{3,}\s*$'
       escape_captures:
         0: markup.raw.block.markdown punctuation.definition.fenced.markdown
 
@@ -156,7 +181,7 @@ contexts:
         3: constant.other.language-name.markdown
       embed: scope:source.php
       embed_scope: markup.raw.block.markdown source.php
-      escape: '^(\s*)(`{3,})(\s*)$'
+      escape: '^\s*`{3,}\s*$'
       escape_captures:
         0: markup.raw.block.markdown punctuation.definition.fenced.markdown
 
@@ -167,7 +192,7 @@ contexts:
         3: constant.other.language-name.markdown
       embed: scope:source.go
       embed_scope: markup.raw.block.markdown source.go
-      escape: '^(\s*)(`{3,})(\s*)$'
+      escape: '^\s*`{3,}\s*$'
       escape_captures:
         0: markup.raw.block.markdown punctuation.definition.fenced.markdown
 
@@ -178,7 +203,7 @@ contexts:
         3: constant.other.language-name.markdown
       embed: scope:source.rust
       embed_scope: markup.raw.block.markdown source.rust
-      escape: '^(\s*)(`{3,})(\s*)$'
+      escape: '^\s*`{3,}\s*$'
       escape_captures:
         0: markup.raw.block.markdown punctuation.definition.fenced.markdown
 
@@ -189,7 +214,7 @@ contexts:
         3: constant.other.language-name.markdown
       embed: scope:source.shell
       embed_scope: markup.raw.block.markdown source.shell
-      escape: '^(\s*)(`{3,})(\s*)$'
+      escape: '^\s*`{3,}\s*$'
       escape_captures:
         0: markup.raw.block.markdown punctuation.definition.fenced.markdown
 
@@ -200,7 +225,7 @@ contexts:
         3: constant.other.language-name.markdown
       embed: scope:source.sql
       embed_scope: markup.raw.block.markdown source.sql
-      escape: '^(\s*)(`{3,})(\s*)$'
+      escape: '^\s*`{3,}\s*$'
       escape_captures:
         0: markup.raw.block.markdown punctuation.definition.fenced.markdown
 
@@ -211,7 +236,7 @@ contexts:
         3: constant.other.language-name.markdown
       embed: scope:source.json
       embed_scope: markup.raw.block.markdown source.json
-      escape: '^(\s*)(`{3,})(\s*)$'
+      escape: '^\s*`{3,}\s*$'
       escape_captures:
         0: markup.raw.block.markdown punctuation.definition.fenced.markdown
 
@@ -222,7 +247,7 @@ contexts:
         3: constant.other.language-name.markdown
       embed: scope:text.xml
       embed_scope: markup.raw.block.markdown text.xml
-      escape: '^(\s*)(`{3,})(\s*)$'
+      escape: '^\s*`{3,}\s*$'
       escape_captures:
         0: markup.raw.block.markdown punctuation.definition.fenced.markdown
 
@@ -233,7 +258,7 @@ contexts:
         3: constant.other.language-name.markdown
       embed: scope:source.yaml
       embed_scope: markup.raw.block.markdown source.yaml
-      escape: '^(\s*)(`{3,})(\s*)$'
+      escape: '^\s*`{3,}\s*$'
       escape_captures:
         0: markup.raw.block.markdown punctuation.definition.fenced.markdown
 
@@ -244,7 +269,7 @@ contexts:
         3: constant.other.language-name.markdown
       embed: scope:text.html.markdown
       embed_scope: markup.raw.block.markdown text.html.markdown
-      escape: '^(\s*)(`{3,})(\s*)$'
+      escape: '^\s*`{3,}\s*$'
       escape_captures:
         0: markup.raw.block.markdown punctuation.definition.fenced.markdown
 
@@ -264,490 +289,136 @@ contexts:
       push: code_block_plain
 
     # =========================================================================
-    # PHASE 1 & 2: Task Management and Inline Content
+    # TASK MANAGEMENT - Consolidated patterns (all indentation levels)
     # Task title (up to ' - ') is colored, notes after are default
     # =========================================================================
 
-    # Priority tasks [!0] through [!3] - Level 0 (no indent)
-    - match: '^(\[)(![0-3])(\])(\s+)(.+?)(?= - |$)'
+    # Priority tasks [!0] through [!3] - all indentation levels
+    - match: '^\s*\[(![0-3])\]\s+([^\r\n]+?)(?= - |$)'
       captures:
+        1: keyword.control.scrawl
         2: keyword.control.scrawl
-        5: keyword.control.scrawl
       push: task_notes
 
-    # Priority tasks - Level 1 (4 spaces)
-    - match: '^(    )(\[)(![0-3])(\])(\s+)(.+?)(?= - |$)'
+    # Urgent tasks [!] without priority - all indentation levels
+    - match: '^\s*\[(!)\]\s+([^\r\n]+?)(?= - |$)'
       captures:
-        3: keyword.control.scrawl
-        6: keyword.control.scrawl
-      push: task_notes
-
-    # Priority tasks - Level 2 (8 spaces)
-    - match: '^(        )(\[)(![0-3])(\])(\s+)(.+?)(?= - |$)'
-      captures:
-        3: keyword.control.scrawl
-        6: keyword.control.scrawl
-      push: task_notes
-
-    # Priority tasks - Level 3+ (12+ spaces)
-    - match: '^(            +)(\[)(![0-3])(\])(\s+)(.+?)(?= - |$)'
-      captures:
-        3: keyword.control.scrawl
-        6: keyword.control.scrawl
-      push: task_notes
-
-    # Urgent tasks [!] without priority - Level 0
-    - match: '^(\[)(!)(\])(\s+)(.+?)(?= - |$)'
-      captures:
+        1: keyword.control.scrawl
         2: keyword.control.scrawl
-        5: keyword.control.scrawl
       push: task_notes
 
-    # Urgent tasks [!] - Level 1
-    - match: '^(    )(\[)(!)(\])(\s+)(.+?)(?= - |$)'
+    # In-progress tasks [•] - all indentation levels
+    - match: '^\s*\[(•)\]\s+([^\r\n]+?)(?= - |$)'
       captures:
-        3: keyword.control.scrawl
-        6: keyword.control.scrawl
-      push: task_notes
-
-    # Urgent tasks [!] - Level 2
-    - match: '^(        )(\[)(!)(\])(\s+)(.+?)(?= - |$)'
-      captures:
-        3: keyword.control.scrawl
-        6: keyword.control.scrawl
-      push: task_notes
-
-    # Urgent tasks [!] - Level 3+
-    - match: '^(            +)(\[)(!)(\])(\s+)(.+?)(?= - |$)'
-      captures:
-        3: keyword.control.scrawl
-        6: keyword.control.scrawl
-      push: task_notes
-
-    # In-progress tasks [•] - Level 0
-    - match: '^(\[)(•)(\])(\s+)(.+?)(?= - |$)'
-      captures:
+        1: constant.language.scrawl
         2: constant.language.scrawl
-        5: constant.language.scrawl
       push: task_notes
 
-    # In-progress tasks [•] - Level 1
-    - match: '^(    )(\[)(•)(\])(\s+)(.+?)(?= - |$)'
+    # Completed tasks [√] - all indentation levels
+    - match: '^\s*\[(√)\]\s+([^\r\n]+?)(?= - |$)'
       captures:
-        3: constant.language.scrawl
-        6: constant.language.scrawl
-      push: task_notes
-
-    # In-progress tasks [•] - Level 2
-    - match: '^(        )(\[)(•)(\])(\s+)(.+?)(?= - |$)'
-      captures:
-        3: constant.language.scrawl
-        6: constant.language.scrawl
-      push: task_notes
-
-    # In-progress tasks [•] - Level 3+
-    - match: '^(            +)(\[)(•)(\])(\s+)(.+?)(?= - |$)'
-      captures:
-        3: constant.language.scrawl
-        6: constant.language.scrawl
-      push: task_notes
-
-    # Completed tasks [√] - Level 0
-    - match: '^(\[)(√)(\])(\s+)(.+?)(?= - |$)'
-      captures:
+        1: string.scrawl
         2: string.scrawl
-        5: string.scrawl
       push: task_notes
 
-    # Completed tasks [√] - Level 1
-    - match: '^(    )(\[)(√)(\])(\s+)(.+?)(?= - |$)'
+    # Completed tasks [x] - all indentation levels
+    - match: '^\s*\[(x)\]\s+([^\r\n]+?)(?= - |$)'
       captures:
-        3: string.scrawl
-        6: string.scrawl
-      push: task_notes
-
-    # Completed tasks [√] - Level 2
-    - match: '^(        )(\[)(√)(\])(\s+)(.+?)(?= - |$)'
-      captures:
-        3: string.scrawl
-        6: string.scrawl
-      push: task_notes
-
-    # Completed tasks [√] - Level 3+
-    - match: '^(            +)(\[)(√)(\])(\s+)(.+?)(?= - |$)'
-      captures:
-        3: string.scrawl
-        6: string.scrawl
-      push: task_notes
-
-    # Completed tasks [x] - Level 0
-    - match: '^(\[)(x)(\])(\s+)(.+?)(?= - |$)'
-      captures:
+        1: string.scrawl
         2: string.scrawl
-        5: string.scrawl
       push: task_notes
 
-    # Completed tasks [x] - Level 1
-    - match: '^(    )(\[)(x)(\])(\s+)(.+?)(?= - |$)'
+    # Skipped tasks [-] - all indentation levels
+    - match: '^\s*\[(-)\]\s+([^\r\n]+?)(?= - |$)'
       captures:
-        3: string.scrawl
-        6: string.scrawl
-      push: task_notes
-
-    # Completed tasks [x] - Level 2
-    - match: '^(        )(\[)(x)(\])(\s+)(.+?)(?= - |$)'
-      captures:
-        3: string.scrawl
-        6: string.scrawl
-      push: task_notes
-
-    # Completed tasks [x] - Level 3+
-    - match: '^(            +)(\[)(x)(\])(\s+)(.+?)(?= - |$)'
-      captures:
-        3: string.scrawl
-        6: string.scrawl
-      push: task_notes
-
-    # Skipped tasks [-] - Level 0
-    - match: '^(\[)(-)(\])(\s+)(.+?)(?= - |$)'
-      captures:
+        1: comment.scrawl
         2: comment.scrawl
-        5: comment.scrawl
       push: task_notes
 
-    # Skipped tasks [-] - Level 1
-    - match: '^(    )(\[)(-)(\])(\s+)(.+?)(?= - |$)'
+    # On-hold tasks [.] - all indentation levels
+    - match: '^\s*\[(\.)\]\s+([^\r\n]+?)(?= - |$)'
       captures:
-        3: comment.scrawl
-        6: comment.scrawl
-      push: task_notes
-
-    # Skipped tasks [-] - Level 2
-    - match: '^(        )(\[)(-)(\])(\s+)(.+?)(?= - |$)'
-      captures:
-        3: comment.scrawl
-        6: comment.scrawl
-      push: task_notes
-
-    # Skipped tasks [-] - Level 3+
-    - match: '^(            +)(\[)(-)(\])(\s+)(.+?)(?= - |$)'
-      captures:
-        3: comment.scrawl
-        6: comment.scrawl
-      push: task_notes
-
-    # On-hold tasks [.] - Level 0
-    - match: '^(\[)(\.)(\])(\s+)(.+?)(?= - |$)'
-      captures:
+        1: comment.scrawl
         2: comment.scrawl
-        5: comment.scrawl
       push: task_notes
 
-    # On-hold tasks [.] - Level 1
-    - match: '^(    )(\[)(\.)(\])(\s+)(.+?)(?= - |$)'
+    # Added tasks [+] - all indentation levels
+    - match: '^\s*\[(\+)\]\s+([^\r\n]+?)(?= - |$)'
       captures:
-        3: comment.scrawl
-        6: comment.scrawl
-      push: task_notes
-
-    # On-hold tasks [.] - Level 2
-    - match: '^(        )(\[)(\.)(\])(\s+)(.+?)(?= - |$)'
-      captures:
-        3: comment.scrawl
-        6: comment.scrawl
-      push: task_notes
-
-    # On-hold tasks [.] - Level 3+
-    - match: '^(            +)(\[)(\.)(\])(\s+)(.+?)(?= - |$)'
-      captures:
-        3: comment.scrawl
-        6: comment.scrawl
-      push: task_notes
-
-    # Added tasks [+] - Level 0
-    - match: '^(\[)(\+)(\])(\s+)(.+?)(?= - |$)'
-      captures:
+        1: entity.name.function.scrawl
         2: entity.name.function.scrawl
-        5: entity.name.function.scrawl
       push: task_notes
 
-    # Added tasks [+] - Level 1
-    - match: '^(    )(\[)(\+)(\])(\s+)(.+?)(?= - |$)'
+    # Question tasks [?] - all indentation levels
+    - match: '^\s*\[(\?)\]\s+([^\r\n]+?)(?= - |$)'
       captures:
-        3: entity.name.function.scrawl
-        6: entity.name.function.scrawl
-      push: task_notes
-
-    # Added tasks [+] - Level 2
-    - match: '^(        )(\[)(\+)(\])(\s+)(.+?)(?= - |$)'
-      captures:
-        3: entity.name.function.scrawl
-        6: entity.name.function.scrawl
-      push: task_notes
-
-    # Added tasks [+] - Level 3+
-    - match: '^(            +)(\[)(\+)(\])(\s+)(.+?)(?= - |$)'
-      captures:
-        3: entity.name.function.scrawl
-        6: entity.name.function.scrawl
-      push: task_notes
-
-    # Question tasks [?] - Level 0
-    - match: '^(\[)(\?)(\])(\s+)(.+?)(?= - |$)'
-      captures:
+        1: variable.scrawl
         2: variable.scrawl
-        5: variable.scrawl
       push: task_notes
 
-    # Question tasks [?] - Level 1
-    - match: '^(    )(\[)(\?)(\])(\s+)(.+?)(?= - |$)'
+    # Unchecked tasks [ ] - all indentation levels
+    - match: '^\s*\[( )\]\s+([^\r\n]+?)(?= - |$)'
       captures:
-        3: variable.scrawl
-        6: variable.scrawl
-      push: task_notes
-
-    # Question tasks [?] - Level 2
-    - match: '^(        )(\[)(\?)(\])(\s+)(.+?)(?= - |$)'
-      captures:
-        3: variable.scrawl
-        6: variable.scrawl
-      push: task_notes
-
-    # Question tasks [?] - Level 3+
-    - match: '^(            +)(\[)(\?)(\])(\s+)(.+?)(?= - |$)'
-      captures:
-        3: variable.scrawl
-        6: variable.scrawl
-      push: task_notes
-
-    # Unchecked tasks [ ] - Level 0
-    - match: '^(\[)( )(\])(\s+)(.+?)(?= - |$)'
-      captures:
+        1: constant.language.scrawl
         2: constant.language.scrawl
-        5: constant.language.scrawl
-      push: task_notes
-
-    # Unchecked tasks [ ] - Level 1
-    - match: '^(    )(\[)( )(\])(\s+)(.+?)(?= - |$)'
-      captures:
-        3: constant.language.scrawl
-        6: constant.language.scrawl
-      push: task_notes
-
-    # Unchecked tasks [ ] - Level 2
-    - match: '^(        )(\[)( )(\])(\s+)(.+?)(?= - |$)'
-      captures:
-        3: constant.language.scrawl
-        6: constant.language.scrawl
-      push: task_notes
-
-    # Unchecked tasks [ ] - Level 3+
-    - match: '^(            +)(\[)( )(\])(\s+)(.+?)(?= - |$)'
-      captures:
-        3: constant.language.scrawl
-        6: constant.language.scrawl
       push: task_notes
 
     # =========================================================================
-    # LIST STYLES
+    # LIST STYLES - Consolidated patterns (all indentation levels)
     # =========================================================================
 
-    # Arrow list -> Level 0
-    - match: '^(->)\s+'
+    # Arrow list -> all indentation levels
+    - match: '^\s*(->)\s+'
       captures:
-        1: markup.list.arrow.marker.level0.scrawl
-      push: list_content_level0
+        1: punctuation.definition.list.begin.scrawl
+      push: list_content
 
-    # Arrow list -> Level 1
-    - match: '^(    )(->)\s+'
+    # Thick arrow list => all indentation levels
+    - match: '^\s*(=>)\s+'
       captures:
-        1: markup.list.indent.scrawl
-        2: markup.list.arrow.marker.level1.scrawl
-      push: list_content_level1
+        1: punctuation.definition.list.begin.scrawl
+      push: list_content
 
-    # Arrow list -> Level 2
-    - match: '^(        )(->)\s+'
+    # Numbered list with sub-numbering (e.g., 1.1., 1.2.3.) - must come before simple numbered
+    - match: '^\s*(\d+(?:\.\d+)+\.)\s+'
       captures:
-        1: markup.list.indent.scrawl
-        2: markup.list.arrow.marker.level2.scrawl
-      push: list_content_level2
-
-    # Arrow list -> Level 3+
-    - match: '^(            +)(->)\s+'
-      captures:
-        1: markup.list.indent.scrawl
-        2: markup.list.arrow.marker.level3.scrawl
-      push: list_content_level3
-
-    # Thick arrow list => Level 0
-    - match: '^(=>)\s+'
-      captures:
-        1: markup.list.thickarrow.marker.level0.scrawl
-      push: list_content_level0
-
-    # Thick arrow list => Level 1
-    - match: '^(    )(=>)\s+'
-      captures:
-        1: markup.list.indent.scrawl
-        2: markup.list.thickarrow.marker.level1.scrawl
-      push: list_content_level1
-
-    # Thick arrow list => Level 2
-    - match: '^(        )(=>)\s+'
-      captures:
-        1: markup.list.indent.scrawl
-        2: markup.list.thickarrow.marker.level2.scrawl
-      push: list_content_level2
-
-    # Thick arrow list => Level 3+
-    - match: '^(            +)(=>)\s+'
-      captures:
-        1: markup.list.indent.scrawl
-        2: markup.list.thickarrow.marker.level3.scrawl
-      push: list_content_level3
-
-    # Numbered list with sub-numbering (e.g., 1.1., 1.2.3.)
-    - match: '^(\d+(?:\.\d+)+\.)\s+'
-      captures:
-        1: markup.list.numbered.marker.level0.scrawl
-      push: list_content_level0
-
-    - match: '^(    )(\d+(?:\.\d+)+\.)\s+'
-      captures:
-        1: markup.list.indent.scrawl
-        2: markup.list.numbered.marker.level1.scrawl
-      push: list_content_level1
-
-    - match: '^(        )(\d+(?:\.\d+)+\.)\s+'
-      captures:
-        1: markup.list.indent.scrawl
-        2: markup.list.numbered.marker.level2.scrawl
-      push: list_content_level2
-
-    - match: '^(            +)(\d+(?:\.\d+)+\.)\s+'
-      captures:
-        1: markup.list.indent.scrawl
-        2: markup.list.numbered.marker.level3.scrawl
-      push: list_content_level3
+        1: punctuation.definition.list.begin.scrawl
+      push: list_content
 
     # Simple numbered list (e.g., 1., 2., 10.)
-    - match: '^(\d+\.)\s+'
+    - match: '^\s*(\d+\.)\s+'
       captures:
-        1: markup.list.numbered.marker.level0.scrawl
-      push: list_content_level0
+        1: punctuation.definition.list.begin.scrawl
+      push: list_content
 
-    - match: '^(    )(\d+\.)\s+'
+    # Dash list - all indentation levels
+    - match: '^\s*(-)\s+'
       captures:
-        1: markup.list.indent.scrawl
-        2: markup.list.numbered.marker.level1.scrawl
-      push: list_content_level1
+        1: punctuation.definition.list.begin.scrawl
+      push: list_content
 
-    - match: '^(        )(\d+\.)\s+'
+    # Asterisk list * all indentation levels
+    - match: '^\s*(\*)\s+'
       captures:
-        1: markup.list.indent.scrawl
-        2: markup.list.numbered.marker.level2.scrawl
-      push: list_content_level2
+        1: punctuation.definition.list.begin.scrawl
+      push: list_content
 
-    - match: '^(            +)(\d+\.)\s+'
+    # Bullet list • all indentation levels
+    - match: '^\s*(•)\s+'
       captures:
-        1: markup.list.indent.scrawl
-        2: markup.list.numbered.marker.level3.scrawl
-      push: list_content_level3
+        1: punctuation.definition.list.begin.scrawl
+      push: list_content
 
-    # Dash list - Level 0
-    - match: '^(-)\s+'
-      captures:
-        1: markup.list.dash.marker.level0.scrawl
-      push: list_content_level0
-
-    # Dash list - Level 1
-    - match: '^(    )(-)\s+'
-      captures:
-        1: markup.list.indent.scrawl
-        2: markup.list.dash.marker.level1.scrawl
-      push: list_content_level1
-
-    # Dash list - Level 2
-    - match: '^(        )(-)\s+'
-      captures:
-        1: markup.list.indent.scrawl
-        2: markup.list.dash.marker.level2.scrawl
-      push: list_content_level2
-
-    # Dash list - Level 3+
-    - match: '^(            +)(-)\s+'
-      captures:
-        1: markup.list.indent.scrawl
-        2: markup.list.dash.marker.level3.scrawl
-      push: list_content_level3
-
-    # Asterisk list * Level 0
-    - match: '^(\*)\s+'
-      captures:
-        1: markup.list.asterisk.marker.level0.scrawl
-      push: list_content_level0
-
-    # Asterisk list * Level 1
-    - match: '^(    )(\*)\s+'
-      captures:
-        1: markup.list.indent.scrawl
-        2: markup.list.asterisk.marker.level1.scrawl
-      push: list_content_level1
-
-    # Asterisk list * Level 2
-    - match: '^(        )(\*)\s+'
-      captures:
-        1: markup.list.indent.scrawl
-        2: markup.list.asterisk.marker.level2.scrawl
-      push: list_content_level2
-
-    # Asterisk list * Level 3+
-    - match: '^(            +)(\*)\s+'
-      captures:
-        1: markup.list.indent.scrawl
-        2: markup.list.asterisk.marker.level3.scrawl
-      push: list_content_level3
-
-    # Bullet list • Level 0
-    - match: '^(•)\s+'
-      captures:
-        1: markup.list.bullet.marker.level0.scrawl
-      push: list_content_level0
-
-    # Bullet list • Level 1
-    - match: '^(    )(•)\s+'
-      captures:
-        1: markup.list.indent.scrawl
-        2: markup.list.bullet.marker.level1.scrawl
-      push: list_content_level1
-
-    # Bullet list • Level 2
-    - match: '^(        )(•)\s+'
-      captures:
-        1: markup.list.indent.scrawl
-        2: markup.list.bullet.marker.level2.scrawl
-      push: list_content_level2
-
-    # Bullet list • Level 3+
-    - match: '^(            +)(•)\s+'
-      captures:
-        1: markup.list.indent.scrawl
-        2: markup.list.bullet.marker.level3.scrawl
-      push: list_content_level3
-
-    # URL highlighting
-    - match: '(https?:\/\/|www\.)[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)+(\/[^\s\(\)\[\]]*)?'
+    # URL highlighting - improved regex to prevent backtracking
+    - match: '(?:https?://|www\.)(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?\.)+[a-zA-Z]{2,}(?:/[^\s\(\)\[\]]{0,2000})?'
       scope: markup.underline.link.url
-      captures:
-        1: markup.underline.link.protocol
-        2: markup.underline.link.domain
 
     # Basic comment support
     - match: "//"
       scope: punctuation.definition.comment
       push: line_comment
 
-    # Standalone inline content (Phase 2) - for non-task lines
+    # Standalone inline content - for non-task lines
     - include: inline_content
 
   # =========================================================================
@@ -762,87 +433,50 @@ contexts:
       pop: true
 
   # =========================================================================
-  # LIST CONTENT CONTEXTS
+  # LIST CONTENT CONTEXT - Consolidated (was 4 separate level contexts)
   # =========================================================================
 
-  list_content_level0:
-    - meta_scope: markup.list.content.level0.scrawl
-    - include: inline_content
-    - match: $
-      pop: true
-
-  list_content_level1:
-    - meta_scope: markup.list.content.level1.scrawl
-    - include: inline_content
-    - match: $
-      pop: true
-
-  list_content_level2:
-    - meta_scope: markup.list.content.level2.scrawl
-    - include: inline_content
-    - match: $
-      pop: true
-
-  list_content_level3:
-    - meta_scope: markup.list.content.level3.scrawl
+  list_content:
     - include: inline_content
     - match: $
       pop: true
 
   # =========================================================================
-  # PHASE 2: INLINE CONTENT PATTERNS
+  # INLINE CONTENT PATTERNS
   # =========================================================================
 
   inline_content:
     # Text in parenthesis - yellow (same as Added Task)
-    - match: '(\()([^)]*)(\))'
-      captures:
-        1: entity.name.function.scrawl
-        2: entity.name.function.scrawl
-        3: entity.name.function.scrawl
+    - match: '\([^)]*\)'
+      scope: entity.name.function.scrawl
 
-    # Date token d@ with ISO format (YYYY-MM-DD with optional time) - yellow (same as Added Task)
-    - match: '(d@)(\d{4}-\d{2}-\d{2})(\s+\d{1,2}:\d{2})?'
-      captures:
-        1: entity.name.function.scrawl
-        2: entity.name.function.scrawl
-        3: entity.name.function.scrawl
+    # Date token d@ with ISO format (YYYY-MM-DD with optional time) - yellow
+    - match: 'd@\d{4}-\d{2}-\d{2}(?:\s+\d{1,2}:\d{2})?'
+      scope: entity.name.function.scrawl
 
-    # Date token d@ with US format (MM/DD/YYYY with optional 12-hour time) - yellow (same as Added Task)
-    - match: '(d@)(\d{1,2}/\d{1,2}/\d{4})(\s+\d{1,2}(:\d{2})?\s*(AM|PM|am|pm))?'
-      captures:
-        1: entity.name.function.scrawl
-        2: entity.name.function.scrawl
-        3: entity.name.function.scrawl
+    # Date token d@ with US format (MM/DD/YYYY with optional 12-hour time) - yellow
+    - match: 'd@\d{1,2}/\d{1,2}/\d{4}(?:\s+\d{1,2}(?::\d{2})?\s*(?:AM|PM|am|pm))?'
+      scope: entity.name.function.scrawl
 
-    # Time estimate token e@ (hours and/or minutes) - yellow (same as Added Task)
-    - match: '(e@)(\d+h)?(\d+m)?'
-      captures:
-        1: entity.name.function.scrawl
-        2: entity.name.function.scrawl
-        3: entity.name.function.scrawl
+    # Time estimate token e@ (hours and/or minutes) - yellow
+    - match: 'e@(?:\d+h)?(?:\d+m)?'
+      scope: entity.name.function.scrawl
 
     # Progress bar [====>    ] or similar
-    - match: '\[([=>\-\s]{3,20})\]'
+    - match: '\[(?:[=>\-\s]{3,20})\]'
       scope: markup.progress.bar.scrawl
 
     # Percentage (e.g., 50%, 100%)
-    - match: '\b(\d{1,3})(%)'
-      captures:
-        1: constant.numeric.percentage.value.scrawl
-        2: constant.numeric.percentage.sign.scrawl
+    - match: '\b\d{1,3}%'
+      scope: constant.numeric.percentage.scrawl
 
     # Quick tags @word (but not d@ or e@)
-    - match: '(?<![de])(@)([a-zA-Z][a-zA-Z0-9_-]*)'
-      captures:
-        1: punctuation.definition.tag.quick.scrawl
-        2: entity.name.tag.quick.scrawl
+    - match: '(?<![de])@[a-zA-Z][a-zA-Z0-9_-]*'
+      scope: entity.name.tag.quick.scrawl
 
     # Hashtags #word
-    - match: '(#)([a-zA-Z][a-zA-Z0-9_-]*)'
-      captures:
-        1: punctuation.definition.tag.hashtag.scrawl
-        2: entity.name.tag.hashtag.scrawl
+    - match: '#[a-zA-Z][a-zA-Z0-9_-]*'
+      scope: entity.name.tag.hashtag.scrawl
 
   # =========================================================================
   # EXISTING CONTEXTS
@@ -851,13 +485,13 @@ contexts:
   # Code block contexts for generic or plain code blocks
   code_block_generic:
     - meta_scope: markup.raw.block.markdown
-    - match: '^(\s*)(`{3,})(\s*)$'
+    - match: '^\s*`{3,}\s*$'
       scope: markup.raw.block.markdown punctuation.definition.fenced.markdown
       pop: true
 
   code_block_plain:
     - meta_scope: markup.raw.block.markdown
-    - match: '^(\s*)(`{3,})(\s*)$'
+    - match: '^\s*`{3,}\s*$'
       scope: markup.raw.block.markdown punctuation.definition.fenced.markdown
       pop: true
 
@@ -871,8 +505,9 @@ contexts:
     # If first content line doesn't match header pattern, treat as regular comment
     - match: '(?=\S)'
       set: block_comment
-    # Empty lines are ok
+    # Empty lines - continue checking for header pattern
     - match: '^\s*$'
+      scope: comment.block.scrawl
     # Closing immediately means empty comment
     - match: '\*/'
       scope: comment.block.scrawl punctuation.definition.comment.block.end.scrawl
@@ -903,14 +538,11 @@ contexts:
     - match: $
       pop: true
 
-  # Section content - red text with yellow parenthesis (same as Added Task)
+  # Section content - red text with yellow parenthesis
   section_content:
     - meta_scope: keyword.control.section.content.scrawl
-    - match: '(\()([^)]*)(\))'
-      captures:
-        1: entity.name.function.scrawl
-        2: entity.name.function.scrawl
-        3: entity.name.function.scrawl
+    - match: '\([^)]*\)'
+      scope: entity.name.function.scrawl
     - match: '(##)'
       scope: keyword.control.section.end.scrawl
       pop: true

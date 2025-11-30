@@ -14,6 +14,9 @@
     { "include": "#fenced_code_block_java" },
     { "include": "#fenced_code_block_html" },
     { "include": "#fenced_code_block_css" },
+    { "include": "#fenced_code_block_scss" },
+    { "include": "#fenced_code_block_sass" },
+    { "include": "#fenced_code_block_less" },
     { "include": "#fenced_code_block_php" },
     { "include": "#fenced_code_block_go" },
     { "include": "#fenced_code_block_rust" },
@@ -25,74 +28,23 @@
     { "include": "#fenced_code_block_markdown" },
     { "include": "#fenced_code_block_generic" },
     { "include": "#fenced_code_block_plain" },
-    { "include": "#task_priority_level0" },
-    { "include": "#task_priority_level1" },
-    { "include": "#task_priority_level2" },
-    { "include": "#task_priority_level3" },
-    { "include": "#task_urgent_level0" },
-    { "include": "#task_urgent_level1" },
-    { "include": "#task_urgent_level2" },
-    { "include": "#task_urgent_level3" },
-    { "include": "#task_inprogress_level0" },
-    { "include": "#task_inprogress_level1" },
-    { "include": "#task_inprogress_level2" },
-    { "include": "#task_inprogress_level3" },
-    { "include": "#task_completed_check_level0" },
-    { "include": "#task_completed_check_level1" },
-    { "include": "#task_completed_check_level2" },
-    { "include": "#task_completed_check_level3" },
-    { "include": "#task_completed_x_level0" },
-    { "include": "#task_completed_x_level1" },
-    { "include": "#task_completed_x_level2" },
-    { "include": "#task_completed_x_level3" },
-    { "include": "#task_skipped_level0" },
-    { "include": "#task_skipped_level1" },
-    { "include": "#task_skipped_level2" },
-    { "include": "#task_skipped_level3" },
-    { "include": "#task_onhold_level0" },
-    { "include": "#task_onhold_level1" },
-    { "include": "#task_onhold_level2" },
-    { "include": "#task_onhold_level3" },
-    { "include": "#task_added_level0" },
-    { "include": "#task_added_level1" },
-    { "include": "#task_added_level2" },
-    { "include": "#task_added_level3" },
-    { "include": "#task_question_level0" },
-    { "include": "#task_question_level1" },
-    { "include": "#task_question_level2" },
-    { "include": "#task_question_level3" },
-    { "include": "#task_unchecked_level0" },
-    { "include": "#task_unchecked_level1" },
-    { "include": "#task_unchecked_level2" },
-    { "include": "#task_unchecked_level3" },
-    { "include": "#list_arrow_level0" },
-    { "include": "#list_arrow_level1" },
-    { "include": "#list_arrow_level2" },
-    { "include": "#list_arrow_level3" },
-    { "include": "#list_thickarrow_level0" },
-    { "include": "#list_thickarrow_level1" },
-    { "include": "#list_thickarrow_level2" },
-    { "include": "#list_thickarrow_level3" },
-    { "include": "#list_numbered_sub_level0" },
-    { "include": "#list_numbered_sub_level1" },
-    { "include": "#list_numbered_sub_level2" },
-    { "include": "#list_numbered_sub_level3" },
-    { "include": "#list_numbered_level0" },
-    { "include": "#list_numbered_level1" },
-    { "include": "#list_numbered_level2" },
-    { "include": "#list_numbered_level3" },
-    { "include": "#list_dash_level0" },
-    { "include": "#list_dash_level1" },
-    { "include": "#list_dash_level2" },
-    { "include": "#list_dash_level3" },
-    { "include": "#list_asterisk_level0" },
-    { "include": "#list_asterisk_level1" },
-    { "include": "#list_asterisk_level2" },
-    { "include": "#list_asterisk_level3" },
-    { "include": "#list_bullet_level0" },
-    { "include": "#list_bullet_level1" },
-    { "include": "#list_bullet_level2" },
-    { "include": "#list_bullet_level3" },
+    { "include": "#task_priority" },
+    { "include": "#task_urgent" },
+    { "include": "#task_inprogress" },
+    { "include": "#task_completed_check" },
+    { "include": "#task_completed_x" },
+    { "include": "#task_skipped" },
+    { "include": "#task_onhold" },
+    { "include": "#task_added" },
+    { "include": "#task_question" },
+    { "include": "#task_unchecked" },
+    { "include": "#list_arrow" },
+    { "include": "#list_thickarrow" },
+    { "include": "#list_numbered_sub" },
+    { "include": "#list_numbered" },
+    { "include": "#list_dash" },
+    { "include": "#list_asterisk" },
+    { "include": "#list_bullet" },
     { "include": "#url" },
     { "include": "#line_comment" },
     { "include": "#inline_content" }
@@ -132,22 +84,15 @@
       "contentName": "keyword.control.section.content.scrawl",
       "patterns": [
         {
-          "match": "(\\()([^)]*)(\\))",
-          "captures": {
-            "1": { "name": "entity.name.function.scrawl" },
-            "2": { "name": "entity.name.function.scrawl" },
-            "3": { "name": "entity.name.function.scrawl" }
-          }
+          "match": "\\([^)]*\\)",
+          "name": "entity.name.function.scrawl"
         }
       ]
     },
     "url": {
-      "match": "(https?:\\/\\/|www\\.)[a-zA-Z0-9-]+(\\.[a-zA-Z0-9-]+)+(\\/[^\\s\\(\\)\\[\\]]*)?",
-      "name": "markup.underline.link.url",
-      "captures": {
-        "1": { "name": "markup.underline.link.protocol" },
-        "2": { "name": "markup.underline.link.domain" }
-      }
+      "comment": "URL pattern with bounded path length to prevent backtracking",
+      "match": "(?:https?:\\/\\/|www\\.)(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?\\.)+[a-zA-Z]{2,}(?:\\/[^\\s\\(\\)\\[\\]]{0,2000})?",
+      "name": "markup.underline.link.url"
     },
     "line_comment": {
       "match": "//.*$",
@@ -158,940 +103,537 @@
       "patterns": [
         {
           "comment": "Text in parenthesis - yellow (same as Added Task)",
-          "match": "(\\()([^)]*)(\\))",
-          "captures": {
-            "1": { "name": "entity.name.function.scrawl" },
-            "2": { "name": "entity.name.function.scrawl" },
-            "3": { "name": "entity.name.function.scrawl" }
-          }
+          "match": "\\([^)]*\\)",
+          "name": "entity.name.function.scrawl"
         },
         {
           "comment": "Date token d@ with ISO format - yellow (same as Added Task)",
-          "match": "(d@)(\\d{4}-\\d{2}-\\d{2})(\\s+\\d{1,2}:\\d{2})?",
-          "captures": {
-            "1": { "name": "entity.name.function.scrawl" },
-            "2": { "name": "entity.name.function.scrawl" },
-            "3": { "name": "entity.name.function.scrawl" }
-          }
+          "match": "d@\\d{4}-\\d{2}-\\d{2}(?:\\s+\\d{1,2}:\\d{2})?",
+          "name": "entity.name.function.scrawl"
         },
         {
           "comment": "Date token d@ with US format - yellow (same as Added Task)",
-          "match": "(d@)(\\d{1,2}/\\d{1,2}/\\d{4})(\\s+\\d{1,2}(:\\d{2})?\\s*(AM|PM|am|pm))?",
-          "captures": {
-            "1": { "name": "entity.name.function.scrawl" },
-            "2": { "name": "entity.name.function.scrawl" },
-            "3": { "name": "entity.name.function.scrawl" }
-          }
+          "match": "d@\\d{1,2}/\\d{1,2}/\\d{4}(?:\\s+\\d{1,2}(?::\\d{2})?\\s*(?:AM|PM|am|pm))?",
+          "name": "entity.name.function.scrawl"
         },
         {
           "comment": "Time estimate token e@ - yellow (same as Added Task)",
-          "match": "(e@)(\\d+h)?(\\d+m)?",
-          "captures": {
-            "1": { "name": "entity.name.function.scrawl" },
-            "2": { "name": "entity.name.function.scrawl" },
-            "3": { "name": "entity.name.function.scrawl" }
-          }
+          "match": "e@(?:\\d+h)?(?:\\d+m)?",
+          "name": "entity.name.function.scrawl"
         },
         {
           "comment": "Progress bar",
-          "match": "\\[([=>\\-\\s]{3,20})\\]",
+          "match": "\\[(?:[=>\\-\\s]{3,20})\\]",
           "name": "markup.progress.bar.scrawl"
         },
         {
           "comment": "Percentage",
-          "match": "\\b(\\d{1,3})(%)",
-          "captures": {
-            "1": { "name": "constant.numeric.percentage.value.scrawl" },
-            "2": { "name": "constant.numeric.percentage.sign.scrawl" }
-          }
+          "match": "\\b\\d{1,3}%",
+          "name": "constant.numeric.percentage.scrawl"
         },
         {
           "comment": "Quick tags @word (not d@ or e@)",
-          "match": "(?<![de])(@)([a-zA-Z][a-zA-Z0-9_-]*)",
-          "captures": {
-            "1": { "name": "punctuation.definition.tag.quick.scrawl" },
-            "2": { "name": "entity.name.tag.quick.scrawl" }
-          }
+          "match": "(?<![de])@[a-zA-Z][a-zA-Z0-9_-]*",
+          "name": "entity.name.tag.quick.scrawl"
         },
         {
           "comment": "Hashtags #word",
-          "match": "(#)([a-zA-Z][a-zA-Z0-9_-]*)",
-          "captures": {
-            "1": { "name": "punctuation.definition.tag.hashtag.scrawl" },
-            "2": { "name": "entity.name.tag.hashtag.scrawl" }
-          }
+          "match": "#[a-zA-Z][a-zA-Z0-9_-]*",
+          "name": "entity.name.tag.hashtag.scrawl"
         }
       ]
     },
 
-    "task_priority_level0": {
-      "begin": "^(\\[)(![0-3])(\\])(\\s+)(.+?)(?= - |$)",
+    "task_priority": {
+      "comment": "Priority tasks [!0-3] - all indentation levels",
+      "begin": "^\\s*\\[(![0-3])\\]\\s+([^\\r\\n]+?)(?= - |$)",
       "beginCaptures": {
-        "2": { "name": "keyword.control.scrawl" },
-        "5": { "name": "keyword.control.scrawl" }
-      },
-      "end": "$",
-      "patterns": [{ "include": "#inline_content" }]
-    },
-    "task_priority_level1": {
-      "begin": "^(    )(\\[)(![0-3])(\\])(\\s+)(.+?)(?= - |$)",
-      "beginCaptures": {
-        "3": { "name": "keyword.control.scrawl" },
-        "6": { "name": "keyword.control.scrawl" }
-      },
-      "end": "$",
-      "patterns": [{ "include": "#inline_content" }]
-    },
-    "task_priority_level2": {
-      "begin": "^(        )(\\[)(![0-3])(\\])(\\s+)(.+?)(?= - |$)",
-      "beginCaptures": {
-        "3": { "name": "keyword.control.scrawl" },
-        "6": { "name": "keyword.control.scrawl" }
-      },
-      "end": "$",
-      "patterns": [{ "include": "#inline_content" }]
-    },
-    "task_priority_level3": {
-      "begin": "^(            +)(\\[)(![0-3])(\\])(\\s+)(.+?)(?= - |$)",
-      "beginCaptures": {
-        "3": { "name": "keyword.control.scrawl" },
-        "6": { "name": "keyword.control.scrawl" }
+        "1": { "name": "keyword.control.scrawl" },
+        "2": { "name": "keyword.control.scrawl" }
       },
       "end": "$",
       "patterns": [{ "include": "#inline_content" }]
     },
 
-    "task_urgent_level0": {
-      "begin": "^(\\[)(!)(\\])(\\s+)(.+?)(?= - |$)",
+    "task_urgent": {
+      "comment": "Urgent tasks [!] - all indentation levels",
+      "begin": "^\\s*\\[(!)\\]\\s+([^\\r\\n]+?)(?= - |$)",
       "beginCaptures": {
-        "2": { "name": "keyword.control.scrawl" },
-        "5": { "name": "keyword.control.scrawl" }
-      },
-      "end": "$",
-      "patterns": [{ "include": "#inline_content" }]
-    },
-    "task_urgent_level1": {
-      "begin": "^(    )(\\[)(!)(\\])(\\s+)(.+?)(?= - |$)",
-      "beginCaptures": {
-        "3": { "name": "keyword.control.scrawl" },
-        "6": { "name": "keyword.control.scrawl" }
-      },
-      "end": "$",
-      "patterns": [{ "include": "#inline_content" }]
-    },
-    "task_urgent_level2": {
-      "begin": "^(        )(\\[)(!)(\\])(\\s+)(.+?)(?= - |$)",
-      "beginCaptures": {
-        "3": { "name": "keyword.control.scrawl" },
-        "6": { "name": "keyword.control.scrawl" }
-      },
-      "end": "$",
-      "patterns": [{ "include": "#inline_content" }]
-    },
-    "task_urgent_level3": {
-      "begin": "^(            +)(\\[)(!)(\\])(\\s+)(.+?)(?= - |$)",
-      "beginCaptures": {
-        "3": { "name": "keyword.control.scrawl" },
-        "6": { "name": "keyword.control.scrawl" }
+        "1": { "name": "keyword.control.scrawl" },
+        "2": { "name": "keyword.control.scrawl" }
       },
       "end": "$",
       "patterns": [{ "include": "#inline_content" }]
     },
 
-    "task_inprogress_level0": {
-      "begin": "^(\\[)(•)(\\])(\\s+)(.+?)(?= - |$)",
+    "task_inprogress": {
+      "comment": "In-progress tasks [•] - all indentation levels",
+      "begin": "^\\s*\\[(•)\\]\\s+([^\\r\\n]+?)(?= - |$)",
       "beginCaptures": {
-        "2": { "name": "constant.language.scrawl" },
-        "5": { "name": "constant.language.scrawl" }
-      },
-      "end": "$",
-      "patterns": [{ "include": "#inline_content" }]
-    },
-    "task_inprogress_level1": {
-      "begin": "^(    )(\\[)(•)(\\])(\\s+)(.+?)(?= - |$)",
-      "beginCaptures": {
-        "3": { "name": "constant.language.scrawl" },
-        "6": { "name": "constant.language.scrawl" }
-      },
-      "end": "$",
-      "patterns": [{ "include": "#inline_content" }]
-    },
-    "task_inprogress_level2": {
-      "begin": "^(        )(\\[)(•)(\\])(\\s+)(.+?)(?= - |$)",
-      "beginCaptures": {
-        "3": { "name": "constant.language.scrawl" },
-        "6": { "name": "constant.language.scrawl" }
-      },
-      "end": "$",
-      "patterns": [{ "include": "#inline_content" }]
-    },
-    "task_inprogress_level3": {
-      "begin": "^(            +)(\\[)(•)(\\])(\\s+)(.+?)(?= - |$)",
-      "beginCaptures": {
-        "3": { "name": "constant.language.scrawl" },
-        "6": { "name": "constant.language.scrawl" }
+        "1": { "name": "constant.language.scrawl" },
+        "2": { "name": "constant.language.scrawl" }
       },
       "end": "$",
       "patterns": [{ "include": "#inline_content" }]
     },
 
-    "task_completed_check_level0": {
-      "begin": "^(\\[)(√)(\\])(\\s+)(.+?)(?= - |$)",
+    "task_completed_check": {
+      "comment": "Completed tasks [√] - all indentation levels",
+      "begin": "^\\s*\\[(√)\\]\\s+([^\\r\\n]+?)(?= - |$)",
       "beginCaptures": {
-        "2": { "name": "string.scrawl" },
-        "5": { "name": "string.scrawl" }
-      },
-      "end": "$",
-      "patterns": [{ "include": "#inline_content" }]
-    },
-    "task_completed_check_level1": {
-      "begin": "^(    )(\\[)(√)(\\])(\\s+)(.+?)(?= - |$)",
-      "beginCaptures": {
-        "3": { "name": "string.scrawl" },
-        "6": { "name": "string.scrawl" }
-      },
-      "end": "$",
-      "patterns": [{ "include": "#inline_content" }]
-    },
-    "task_completed_check_level2": {
-      "begin": "^(        )(\\[)(√)(\\])(\\s+)(.+?)(?= - |$)",
-      "beginCaptures": {
-        "3": { "name": "string.scrawl" },
-        "6": { "name": "string.scrawl" }
-      },
-      "end": "$",
-      "patterns": [{ "include": "#inline_content" }]
-    },
-    "task_completed_check_level3": {
-      "begin": "^(            +)(\\[)(√)(\\])(\\s+)(.+?)(?= - |$)",
-      "beginCaptures": {
-        "3": { "name": "string.scrawl" },
-        "6": { "name": "string.scrawl" }
+        "1": { "name": "string.scrawl" },
+        "2": { "name": "string.scrawl" }
       },
       "end": "$",
       "patterns": [{ "include": "#inline_content" }]
     },
 
-    "task_completed_x_level0": {
-      "begin": "^(\\[)(x)(\\])(\\s+)(.+?)(?= - |$)",
+    "task_completed_x": {
+      "comment": "Completed tasks [x] - all indentation levels",
+      "begin": "^\\s*\\[(x)\\]\\s+([^\\r\\n]+?)(?= - |$)",
       "beginCaptures": {
-        "2": { "name": "string.scrawl" },
-        "5": { "name": "string.scrawl" }
-      },
-      "end": "$",
-      "patterns": [{ "include": "#inline_content" }]
-    },
-    "task_completed_x_level1": {
-      "begin": "^(    )(\\[)(x)(\\])(\\s+)(.+?)(?= - |$)",
-      "beginCaptures": {
-        "3": { "name": "string.scrawl" },
-        "6": { "name": "string.scrawl" }
-      },
-      "end": "$",
-      "patterns": [{ "include": "#inline_content" }]
-    },
-    "task_completed_x_level2": {
-      "begin": "^(        )(\\[)(x)(\\])(\\s+)(.+?)(?= - |$)",
-      "beginCaptures": {
-        "3": { "name": "string.scrawl" },
-        "6": { "name": "string.scrawl" }
-      },
-      "end": "$",
-      "patterns": [{ "include": "#inline_content" }]
-    },
-    "task_completed_x_level3": {
-      "begin": "^(            +)(\\[)(x)(\\])(\\s+)(.+?)(?= - |$)",
-      "beginCaptures": {
-        "3": { "name": "string.scrawl" },
-        "6": { "name": "string.scrawl" }
+        "1": { "name": "string.scrawl" },
+        "2": { "name": "string.scrawl" }
       },
       "end": "$",
       "patterns": [{ "include": "#inline_content" }]
     },
 
-    "task_skipped_level0": {
-      "begin": "^(\\[)(-)(\\])(\\s+)(.+?)(?= - |$)",
+    "task_skipped": {
+      "comment": "Skipped tasks [-] - all indentation levels",
+      "begin": "^\\s*\\[(-)\\]\\s+([^\\r\\n]+?)(?= - |$)",
       "beginCaptures": {
-        "2": { "name": "comment.scrawl" },
-        "5": { "name": "comment.scrawl" }
-      },
-      "end": "$",
-      "patterns": [{ "include": "#inline_content" }]
-    },
-    "task_skipped_level1": {
-      "begin": "^(    )(\\[)(-)(\\])(\\s+)(.+?)(?= - |$)",
-      "beginCaptures": {
-        "3": { "name": "comment.scrawl" },
-        "6": { "name": "comment.scrawl" }
-      },
-      "end": "$",
-      "patterns": [{ "include": "#inline_content" }]
-    },
-    "task_skipped_level2": {
-      "begin": "^(        )(\\[)(-)(\\])(\\s+)(.+?)(?= - |$)",
-      "beginCaptures": {
-        "3": { "name": "comment.scrawl" },
-        "6": { "name": "comment.scrawl" }
-      },
-      "end": "$",
-      "patterns": [{ "include": "#inline_content" }]
-    },
-    "task_skipped_level3": {
-      "begin": "^(            +)(\\[)(-)(\\])(\\s+)(.+?)(?= - |$)",
-      "beginCaptures": {
-        "3": { "name": "comment.scrawl" },
-        "6": { "name": "comment.scrawl" }
+        "1": { "name": "comment.scrawl" },
+        "2": { "name": "comment.scrawl" }
       },
       "end": "$",
       "patterns": [{ "include": "#inline_content" }]
     },
 
-    "task_onhold_level0": {
-      "begin": "^(\\[)(\\.)(\\])(\\s+)(.+?)(?= - |$)",
+    "task_onhold": {
+      "comment": "On-hold tasks [.] - all indentation levels",
+      "begin": "^\\s*\\[(\\.)\\]\\s+([^\\r\\n]+?)(?= - |$)",
       "beginCaptures": {
-        "2": { "name": "comment.scrawl" },
-        "5": { "name": "comment.scrawl" }
-      },
-      "end": "$",
-      "patterns": [{ "include": "#inline_content" }]
-    },
-    "task_onhold_level1": {
-      "begin": "^(    )(\\[)(\\.)(\\])(\\s+)(.+?)(?= - |$)",
-      "beginCaptures": {
-        "3": { "name": "comment.scrawl" },
-        "6": { "name": "comment.scrawl" }
-      },
-      "end": "$",
-      "patterns": [{ "include": "#inline_content" }]
-    },
-    "task_onhold_level2": {
-      "begin": "^(        )(\\[)(\\.)(\\])(\\s+)(.+?)(?= - |$)",
-      "beginCaptures": {
-        "3": { "name": "comment.scrawl" },
-        "6": { "name": "comment.scrawl" }
-      },
-      "end": "$",
-      "patterns": [{ "include": "#inline_content" }]
-    },
-    "task_onhold_level3": {
-      "begin": "^(            +)(\\[)(\\.)(\\])(\\s+)(.+?)(?= - |$)",
-      "beginCaptures": {
-        "3": { "name": "comment.scrawl" },
-        "6": { "name": "comment.scrawl" }
+        "1": { "name": "comment.scrawl" },
+        "2": { "name": "comment.scrawl" }
       },
       "end": "$",
       "patterns": [{ "include": "#inline_content" }]
     },
 
-    "task_added_level0": {
-      "begin": "^(\\[)(\\+)(\\])(\\s+)(.+?)(?= - |$)",
+    "task_added": {
+      "comment": "Added tasks [+] - all indentation levels",
+      "begin": "^\\s*\\[(\\+)\\]\\s+([^\\r\\n]+?)(?= - |$)",
       "beginCaptures": {
-        "2": { "name": "entity.name.function.scrawl" },
-        "5": { "name": "entity.name.function.scrawl" }
-      },
-      "end": "$",
-      "patterns": [{ "include": "#inline_content" }]
-    },
-    "task_added_level1": {
-      "begin": "^(    )(\\[)(\\+)(\\])(\\s+)(.+?)(?= - |$)",
-      "beginCaptures": {
-        "3": { "name": "entity.name.function.scrawl" },
-        "6": { "name": "entity.name.function.scrawl" }
-      },
-      "end": "$",
-      "patterns": [{ "include": "#inline_content" }]
-    },
-    "task_added_level2": {
-      "begin": "^(        )(\\[)(\\+)(\\])(\\s+)(.+?)(?= - |$)",
-      "beginCaptures": {
-        "3": { "name": "entity.name.function.scrawl" },
-        "6": { "name": "entity.name.function.scrawl" }
-      },
-      "end": "$",
-      "patterns": [{ "include": "#inline_content" }]
-    },
-    "task_added_level3": {
-      "begin": "^(            +)(\\[)(\\+)(\\])(\\s+)(.+?)(?= - |$)",
-      "beginCaptures": {
-        "3": { "name": "entity.name.function.scrawl" },
-        "6": { "name": "entity.name.function.scrawl" }
+        "1": { "name": "entity.name.function.scrawl" },
+        "2": { "name": "entity.name.function.scrawl" }
       },
       "end": "$",
       "patterns": [{ "include": "#inline_content" }]
     },
 
-    "task_question_level0": {
-      "begin": "^(\\[)(\\?)(\\])(\\s+)(.+?)(?= - |$)",
+    "task_question": {
+      "comment": "Question tasks [?] - all indentation levels",
+      "begin": "^\\s*\\[(\\?)\\]\\s+([^\\r\\n]+?)(?= - |$)",
       "beginCaptures": {
-        "2": { "name": "variable.scrawl" },
-        "5": { "name": "variable.scrawl" }
-      },
-      "end": "$",
-      "patterns": [{ "include": "#inline_content" }]
-    },
-    "task_question_level1": {
-      "begin": "^(    )(\\[)(\\?)(\\])(\\s+)(.+?)(?= - |$)",
-      "beginCaptures": {
-        "3": { "name": "variable.scrawl" },
-        "6": { "name": "variable.scrawl" }
-      },
-      "end": "$",
-      "patterns": [{ "include": "#inline_content" }]
-    },
-    "task_question_level2": {
-      "begin": "^(        )(\\[)(\\?)(\\])(\\s+)(.+?)(?= - |$)",
-      "beginCaptures": {
-        "3": { "name": "variable.scrawl" },
-        "6": { "name": "variable.scrawl" }
-      },
-      "end": "$",
-      "patterns": [{ "include": "#inline_content" }]
-    },
-    "task_question_level3": {
-      "begin": "^(            +)(\\[)(\\?)(\\])(\\s+)(.+?)(?= - |$)",
-      "beginCaptures": {
-        "3": { "name": "variable.scrawl" },
-        "6": { "name": "variable.scrawl" }
+        "1": { "name": "variable.scrawl" },
+        "2": { "name": "variable.scrawl" }
       },
       "end": "$",
       "patterns": [{ "include": "#inline_content" }]
     },
 
-    "task_unchecked_level0": {
-      "begin": "^(\\[)( )(\\])(\\s+)(.+?)(?= - |$)",
+    "task_unchecked": {
+      "comment": "Unchecked tasks [ ] - all indentation levels",
+      "begin": "^\\s*\\[( )\\]\\s+([^\\r\\n]+?)(?= - |$)",
       "beginCaptures": {
-        "2": { "name": "constant.language.scrawl" },
-        "5": { "name": "constant.language.scrawl" }
-      },
-      "end": "$",
-      "patterns": [{ "include": "#inline_content" }]
-    },
-    "task_unchecked_level1": {
-      "begin": "^(    )(\\[)( )(\\])(\\s+)(.+?)(?= - |$)",
-      "beginCaptures": {
-        "3": { "name": "constant.language.scrawl" },
-        "6": { "name": "constant.language.scrawl" }
-      },
-      "end": "$",
-      "patterns": [{ "include": "#inline_content" }]
-    },
-    "task_unchecked_level2": {
-      "begin": "^(        )(\\[)( )(\\])(\\s+)(.+?)(?= - |$)",
-      "beginCaptures": {
-        "3": { "name": "constant.language.scrawl" },
-        "6": { "name": "constant.language.scrawl" }
-      },
-      "end": "$",
-      "patterns": [{ "include": "#inline_content" }]
-    },
-    "task_unchecked_level3": {
-      "begin": "^(            +)(\\[)( )(\\])(\\s+)(.+?)(?= - |$)",
-      "beginCaptures": {
-        "3": { "name": "constant.language.scrawl" },
-        "6": { "name": "constant.language.scrawl" }
+        "1": { "name": "constant.language.scrawl" },
+        "2": { "name": "constant.language.scrawl" }
       },
       "end": "$",
       "patterns": [{ "include": "#inline_content" }]
     },
 
-    "list_arrow_level0": {
-      "begin": "^(->)\\s+",
+    "list_arrow": {
+      "comment": "Arrow list -> all indentation levels",
+      "begin": "^\\s*(->)\\s+",
       "beginCaptures": {
         "1": { "name": "punctuation.definition.list.begin.scrawl" }
       },
       "end": "$",
       "patterns": [{ "include": "#inline_content" }]
     },
-    "list_arrow_level1": {
-      "begin": "^(    )(->)\\s+",
-      "beginCaptures": {
-        "2": { "name": "punctuation.definition.list.begin.scrawl" }
-      },
-      "end": "$",
-      "patterns": [{ "include": "#inline_content" }]
-    },
-    "list_arrow_level2": {
-      "begin": "^(        )(->)\\s+",
-      "beginCaptures": {
-        "2": { "name": "punctuation.definition.list.begin.scrawl" }
-      },
-      "end": "$",
-      "patterns": [{ "include": "#inline_content" }]
-    },
-    "list_arrow_level3": {
-      "begin": "^(            +)(->)\\s+",
-      "beginCaptures": {
-        "2": { "name": "punctuation.definition.list.begin.scrawl" }
-      },
-      "end": "$",
-      "patterns": [{ "include": "#inline_content" }]
-    },
 
-    "list_thickarrow_level0": {
-      "begin": "^(=>)\\s+",
+    "list_thickarrow": {
+      "comment": "Thick arrow list => all indentation levels",
+      "begin": "^\\s*(=>)\\s+",
       "beginCaptures": {
         "1": { "name": "punctuation.definition.list.begin.scrawl" }
       },
       "end": "$",
       "patterns": [{ "include": "#inline_content" }]
     },
-    "list_thickarrow_level1": {
-      "begin": "^(    )(=>)\\s+",
-      "beginCaptures": {
-        "2": { "name": "punctuation.definition.list.begin.scrawl" }
-      },
-      "end": "$",
-      "patterns": [{ "include": "#inline_content" }]
-    },
-    "list_thickarrow_level2": {
-      "begin": "^(        )(=>)\\s+",
-      "beginCaptures": {
-        "2": { "name": "punctuation.definition.list.begin.scrawl" }
-      },
-      "end": "$",
-      "patterns": [{ "include": "#inline_content" }]
-    },
-    "list_thickarrow_level3": {
-      "begin": "^(            +)(=>)\\s+",
-      "beginCaptures": {
-        "2": { "name": "punctuation.definition.list.begin.scrawl" }
-      },
-      "end": "$",
-      "patterns": [{ "include": "#inline_content" }]
-    },
 
-    "list_numbered_sub_level0": {
-      "begin": "^(\\d+(?:\\.\\d+)+\\.)\\s+",
+    "list_numbered_sub": {
+      "comment": "Numbered list with sub-numbering (e.g., 1.1., 1.2.3.)",
+      "begin": "^\\s*(\\d+(?:\\.\\d+)+\\.)\\s+",
       "beginCaptures": {
         "1": { "name": "punctuation.definition.list.begin.scrawl" }
       },
       "end": "$",
       "patterns": [{ "include": "#inline_content" }]
     },
-    "list_numbered_sub_level1": {
-      "begin": "^(    )(\\d+(?:\\.\\d+)+\\.)\\s+",
-      "beginCaptures": {
-        "2": { "name": "punctuation.definition.list.begin.scrawl" }
-      },
-      "end": "$",
-      "patterns": [{ "include": "#inline_content" }]
-    },
-    "list_numbered_sub_level2": {
-      "begin": "^(        )(\\d+(?:\\.\\d+)+\\.)\\s+",
-      "beginCaptures": {
-        "2": { "name": "punctuation.definition.list.begin.scrawl" }
-      },
-      "end": "$",
-      "patterns": [{ "include": "#inline_content" }]
-    },
-    "list_numbered_sub_level3": {
-      "begin": "^(            +)(\\d+(?:\\.\\d+)+\\.)\\s+",
-      "beginCaptures": {
-        "2": { "name": "punctuation.definition.list.begin.scrawl" }
-      },
-      "end": "$",
-      "patterns": [{ "include": "#inline_content" }]
-    },
 
-    "list_numbered_level0": {
-      "begin": "^(\\d+\\.)\\s+",
+    "list_numbered": {
+      "comment": "Simple numbered list (e.g., 1., 2., 10.)",
+      "begin": "^\\s*(\\d+\\.)\\s+",
       "beginCaptures": {
         "1": { "name": "punctuation.definition.list.begin.scrawl" }
       },
       "end": "$",
       "patterns": [{ "include": "#inline_content" }]
     },
-    "list_numbered_level1": {
-      "begin": "^(    )(\\d+\\.)\\s+",
-      "beginCaptures": {
-        "2": { "name": "punctuation.definition.list.begin.scrawl" }
-      },
-      "end": "$",
-      "patterns": [{ "include": "#inline_content" }]
-    },
-    "list_numbered_level2": {
-      "begin": "^(        )(\\d+\\.)\\s+",
-      "beginCaptures": {
-        "2": { "name": "punctuation.definition.list.begin.scrawl" }
-      },
-      "end": "$",
-      "patterns": [{ "include": "#inline_content" }]
-    },
-    "list_numbered_level3": {
-      "begin": "^(            +)(\\d+\\.)\\s+",
-      "beginCaptures": {
-        "2": { "name": "punctuation.definition.list.begin.scrawl" }
-      },
-      "end": "$",
-      "patterns": [{ "include": "#inline_content" }]
-    },
 
-    "list_dash_level0": {
-      "begin": "^(-)\\s+",
+    "list_dash": {
+      "comment": "Dash list - all indentation levels",
+      "begin": "^\\s*(-)\\s+",
       "beginCaptures": {
         "1": { "name": "punctuation.definition.list.begin.scrawl" }
       },
       "end": "$",
       "patterns": [{ "include": "#inline_content" }]
     },
-    "list_dash_level1": {
-      "begin": "^(    )(-)\\s+",
-      "beginCaptures": {
-        "2": { "name": "punctuation.definition.list.begin.scrawl" }
-      },
-      "end": "$",
-      "patterns": [{ "include": "#inline_content" }]
-    },
-    "list_dash_level2": {
-      "begin": "^(        )(-)\\s+",
-      "beginCaptures": {
-        "2": { "name": "punctuation.definition.list.begin.scrawl" }
-      },
-      "end": "$",
-      "patterns": [{ "include": "#inline_content" }]
-    },
-    "list_dash_level3": {
-      "begin": "^(            +)(-)\\s+",
-      "beginCaptures": {
-        "2": { "name": "punctuation.definition.list.begin.scrawl" }
-      },
-      "end": "$",
-      "patterns": [{ "include": "#inline_content" }]
-    },
 
-    "list_asterisk_level0": {
-      "begin": "^(\\*)\\s+",
+    "list_asterisk": {
+      "comment": "Asterisk list * all indentation levels",
+      "begin": "^\\s*(\\*)\\s+",
       "beginCaptures": {
         "1": { "name": "punctuation.definition.list.begin.scrawl" }
       },
       "end": "$",
       "patterns": [{ "include": "#inline_content" }]
     },
-    "list_asterisk_level1": {
-      "begin": "^(    )(\\*)\\s+",
-      "beginCaptures": {
-        "2": { "name": "punctuation.definition.list.begin.scrawl" }
-      },
-      "end": "$",
-      "patterns": [{ "include": "#inline_content" }]
-    },
-    "list_asterisk_level2": {
-      "begin": "^(        )(\\*)\\s+",
-      "beginCaptures": {
-        "2": { "name": "punctuation.definition.list.begin.scrawl" }
-      },
-      "end": "$",
-      "patterns": [{ "include": "#inline_content" }]
-    },
-    "list_asterisk_level3": {
-      "begin": "^(            +)(\\*)\\s+",
-      "beginCaptures": {
-        "2": { "name": "punctuation.definition.list.begin.scrawl" }
-      },
-      "end": "$",
-      "patterns": [{ "include": "#inline_content" }]
-    },
 
-    "list_bullet_level0": {
-      "begin": "^(•)\\s+",
+    "list_bullet": {
+      "comment": "Bullet list • all indentation levels",
+      "begin": "^\\s*(•)\\s+",
       "beginCaptures": {
         "1": { "name": "punctuation.definition.list.begin.scrawl" }
-      },
-      "end": "$",
-      "patterns": [{ "include": "#inline_content" }]
-    },
-    "list_bullet_level1": {
-      "begin": "^(    )(•)\\s+",
-      "beginCaptures": {
-        "2": { "name": "punctuation.definition.list.begin.scrawl" }
-      },
-      "end": "$",
-      "patterns": [{ "include": "#inline_content" }]
-    },
-    "list_bullet_level2": {
-      "begin": "^(        )(•)\\s+",
-      "beginCaptures": {
-        "2": { "name": "punctuation.definition.list.begin.scrawl" }
-      },
-      "end": "$",
-      "patterns": [{ "include": "#inline_content" }]
-    },
-    "list_bullet_level3": {
-      "begin": "^(            +)(•)\\s+",
-      "beginCaptures": {
-        "2": { "name": "punctuation.definition.list.begin.scrawl" }
       },
       "end": "$",
       "patterns": [{ "include": "#inline_content" }]
     },
 
     "fenced_code_block_typescript": {
-      "begin": "^(\\s*)(`{3,})(typescript|ts)(\\s*)$",
+      "begin": "^\\s*(`{3,})(typescript|ts)\\s*$",
       "beginCaptures": {
-        "2": { "name": "punctuation.definition.fenced.code" },
-        "3": { "name": "entity.name.tag.language" }
+        "1": { "name": "punctuation.definition.fenced.code" },
+        "2": { "name": "entity.name.tag.language" }
       },
-      "end": "^(\\s*)(`{3,})(\\s*)$",
+      "end": "^\\s*`{3,}\\s*$",
       "endCaptures": {
-        "2": { "name": "punctuation.definition.fenced.code" }
+        "0": { "name": "punctuation.definition.fenced.code" }
       },
       "contentName": "source.ts",
       "patterns": [{ "include": "source.ts" }]
     },
     "fenced_code_block_javascript": {
-      "begin": "^(\\s*)(`{3,})(javascript|js)(\\s*)$",
+      "begin": "^\\s*(`{3,})(javascript|js)\\s*$",
       "beginCaptures": {
-        "2": { "name": "punctuation.definition.fenced.code" },
-        "3": { "name": "entity.name.tag.language" }
+        "1": { "name": "punctuation.definition.fenced.code" },
+        "2": { "name": "entity.name.tag.language" }
       },
-      "end": "^(\\s*)(`{3,})(\\s*)$",
+      "end": "^\\s*`{3,}\\s*$",
       "endCaptures": {
-        "2": { "name": "punctuation.definition.fenced.code" }
+        "0": { "name": "punctuation.definition.fenced.code" }
       },
       "contentName": "source.js",
       "patterns": [{ "include": "source.js" }]
     },
     "fenced_code_block_python": {
-      "begin": "^(\\s*)(`{3,})(python|py)(\\s*)$",
+      "begin": "^\\s*(`{3,})(python|py)\\s*$",
       "beginCaptures": {
-        "2": { "name": "punctuation.definition.fenced.code" },
-        "3": { "name": "entity.name.tag.language" }
+        "1": { "name": "punctuation.definition.fenced.code" },
+        "2": { "name": "entity.name.tag.language" }
       },
-      "end": "^(\\s*)(`{3,})(\\s*)$",
+      "end": "^\\s*`{3,}\\s*$",
       "endCaptures": {
-        "2": { "name": "punctuation.definition.fenced.code" }
+        "0": { "name": "punctuation.definition.fenced.code" }
       },
       "contentName": "source.python",
       "patterns": [{ "include": "source.python" }]
     },
     "fenced_code_block_ruby": {
-      "begin": "^(\\s*)(`{3,})(ruby|rb)(\\s*)$",
+      "begin": "^\\s*(`{3,})(ruby|rb)\\s*$",
       "beginCaptures": {
-        "2": { "name": "punctuation.definition.fenced.code" },
-        "3": { "name": "entity.name.tag.language" }
+        "1": { "name": "punctuation.definition.fenced.code" },
+        "2": { "name": "entity.name.tag.language" }
       },
-      "end": "^(\\s*)(`{3,})(\\s*)$",
+      "end": "^\\s*`{3,}\\s*$",
       "endCaptures": {
-        "2": { "name": "punctuation.definition.fenced.code" }
+        "0": { "name": "punctuation.definition.fenced.code" }
       },
-      "patterns": [{ "include": "source.ruby" }],
-      "contentName": "source.ruby"
+      "contentName": "source.ruby",
+      "patterns": [{ "include": "source.ruby" }]
     },
     "fenced_code_block_cpp": {
-      "begin": "^(\\s*)(`{3,})(c\\+\\+|cpp|cxx)(\\s*)$",
+      "begin": "^\\s*(`{3,})(c\\+\\+|cpp|cxx)\\s*$",
       "beginCaptures": {
-        "2": { "name": "punctuation.definition.fenced.code" },
-        "3": { "name": "entity.name.tag.language" }
+        "1": { "name": "punctuation.definition.fenced.code" },
+        "2": { "name": "entity.name.tag.language" }
       },
-      "end": "^(\\s*)(`{3,})(\\s*)$",
+      "end": "^\\s*`{3,}\\s*$",
       "endCaptures": {
-        "2": { "name": "punctuation.definition.fenced.code" }
+        "0": { "name": "punctuation.definition.fenced.code" }
       },
-      "patterns": [{ "include": "source.cpp" }],
-      "contentName": "source.cpp"
+      "contentName": "source.cpp",
+      "patterns": [{ "include": "source.cpp" }]
     },
     "fenced_code_block_c": {
-      "begin": "^(\\s*)(`{3,})(c)(\\s*)$",
+      "begin": "^\\s*(`{3,})(c)\\s*$",
       "beginCaptures": {
-        "2": { "name": "punctuation.definition.fenced.code" },
-        "3": { "name": "entity.name.tag.language" }
+        "1": { "name": "punctuation.definition.fenced.code" },
+        "2": { "name": "entity.name.tag.language" }
       },
-      "end": "^(\\s*)(`{3,})(\\s*)$",
+      "end": "^\\s*`{3,}\\s*$",
       "endCaptures": {
-        "2": { "name": "punctuation.definition.fenced.code" }
+        "0": { "name": "punctuation.definition.fenced.code" }
       },
-      "patterns": [{ "include": "source.c" }],
-      "contentName": "source.c"
+      "contentName": "source.c",
+      "patterns": [{ "include": "source.c" }]
     },
     "fenced_code_block_csharp": {
-      "begin": "^(\\s*)(`{3,})(c#|csharp|cs)(\\s*)$",
+      "begin": "^\\s*(`{3,})(c#|csharp|cs)\\s*$",
       "beginCaptures": {
-        "2": { "name": "punctuation.definition.fenced.code" },
-        "3": { "name": "entity.name.tag.language" }
+        "1": { "name": "punctuation.definition.fenced.code" },
+        "2": { "name": "entity.name.tag.language" }
       },
-      "end": "^(\\s*)(`{3,})(\\s*)$",
+      "end": "^\\s*`{3,}\\s*$",
       "endCaptures": {
-        "2": { "name": "punctuation.definition.fenced.code" }
+        "0": { "name": "punctuation.definition.fenced.code" }
       },
-      "patterns": [{ "include": "source.cs" }],
-      "contentName": "source.cs"
+      "contentName": "source.cs",
+      "patterns": [{ "include": "source.cs" }]
     },
     "fenced_code_block_java": {
-      "begin": "^(\\s*)(`{3,})(java)(\\s*)$",
+      "begin": "^\\s*(`{3,})(java)\\s*$",
       "beginCaptures": {
-        "2": { "name": "punctuation.definition.fenced.code" },
-        "3": { "name": "entity.name.tag.language" }
+        "1": { "name": "punctuation.definition.fenced.code" },
+        "2": { "name": "entity.name.tag.language" }
       },
-      "end": "^(\\s*)(`{3,})(\\s*)$",
+      "end": "^\\s*`{3,}\\s*$",
       "endCaptures": {
-        "2": { "name": "punctuation.definition.fenced.code" }
+        "0": { "name": "punctuation.definition.fenced.code" }
       },
-      "patterns": [{ "include": "source.java" }],
-      "contentName": "source.java"
+      "contentName": "source.java",
+      "patterns": [{ "include": "source.java" }]
     },
     "fenced_code_block_html": {
-      "begin": "^(\\s*)(`{3,})(html|htm)(\\s*)$",
+      "begin": "^\\s*(`{3,})(html|htm)\\s*$",
       "beginCaptures": {
-        "2": { "name": "punctuation.definition.fenced.code" },
-        "3": { "name": "entity.name.tag.language" }
+        "1": { "name": "punctuation.definition.fenced.code" },
+        "2": { "name": "entity.name.tag.language" }
       },
-      "end": "^(\\s*)(`{3,})(\\s*)$",
+      "end": "^\\s*`{3,}\\s*$",
       "endCaptures": {
-        "2": { "name": "punctuation.definition.fenced.code" }
+        "0": { "name": "punctuation.definition.fenced.code" }
       },
-      "patterns": [{ "include": "text.html.basic" }],
-      "contentName": "text.html.basic"
+      "contentName": "text.html.basic",
+      "patterns": [{ "include": "text.html.basic" }]
     },
     "fenced_code_block_css": {
-      "begin": "^(\\s*)(`{3,})(css|scss|sass|less)(\\s*)$",
+      "comment": "CSS code blocks - only plain CSS",
+      "begin": "^\\s*(`{3,})(css)\\s*$",
       "beginCaptures": {
-        "2": { "name": "punctuation.definition.fenced.code" },
-        "3": { "name": "entity.name.tag.language" }
+        "1": { "name": "punctuation.definition.fenced.code" },
+        "2": { "name": "entity.name.tag.language" }
       },
-      "end": "^(\\s*)(`{3,})(\\s*)$",
+      "end": "^\\s*`{3,}\\s*$",
       "endCaptures": {
-        "2": { "name": "punctuation.definition.fenced.code" }
+        "0": { "name": "punctuation.definition.fenced.code" }
       },
-      "patterns": [{ "include": "source.css" }],
-      "contentName": "source.css"
+      "contentName": "source.css",
+      "patterns": [{ "include": "source.css" }]
+    },
+    "fenced_code_block_scss": {
+      "comment": "SCSS code blocks - proper SCSS syntax",
+      "begin": "^\\s*(`{3,})(scss)\\s*$",
+      "beginCaptures": {
+        "1": { "name": "punctuation.definition.fenced.code" },
+        "2": { "name": "entity.name.tag.language" }
+      },
+      "end": "^\\s*`{3,}\\s*$",
+      "endCaptures": {
+        "0": { "name": "punctuation.definition.fenced.code" }
+      },
+      "contentName": "source.css.scss",
+      "patterns": [{ "include": "source.css.scss" }]
+    },
+    "fenced_code_block_sass": {
+      "comment": "SASS code blocks - proper SASS syntax",
+      "begin": "^\\s*(`{3,})(sass)\\s*$",
+      "beginCaptures": {
+        "1": { "name": "punctuation.definition.fenced.code" },
+        "2": { "name": "entity.name.tag.language" }
+      },
+      "end": "^\\s*`{3,}\\s*$",
+      "endCaptures": {
+        "0": { "name": "punctuation.definition.fenced.code" }
+      },
+      "contentName": "source.sass",
+      "patterns": [{ "include": "source.sass" }]
+    },
+    "fenced_code_block_less": {
+      "comment": "LESS code blocks - proper LESS syntax",
+      "begin": "^\\s*(`{3,})(less)\\s*$",
+      "beginCaptures": {
+        "1": { "name": "punctuation.definition.fenced.code" },
+        "2": { "name": "entity.name.tag.language" }
+      },
+      "end": "^\\s*`{3,}\\s*$",
+      "endCaptures": {
+        "0": { "name": "punctuation.definition.fenced.code" }
+      },
+      "contentName": "source.css.less",
+      "patterns": [{ "include": "source.css.less" }]
     },
     "fenced_code_block_php": {
-      "begin": "^(\\s*)(`{3,})(php)(\\s*)$",
+      "begin": "^\\s*(`{3,})(php)\\s*$",
       "beginCaptures": {
-        "2": { "name": "punctuation.definition.fenced.code" },
-        "3": { "name": "entity.name.tag.language" }
+        "1": { "name": "punctuation.definition.fenced.code" },
+        "2": { "name": "entity.name.tag.language" }
       },
-      "end": "^(\\s*)(`{3,})(\\s*)$",
+      "end": "^\\s*`{3,}\\s*$",
       "endCaptures": {
-        "2": { "name": "punctuation.definition.fenced.code" }
+        "0": { "name": "punctuation.definition.fenced.code" }
       },
-      "patterns": [{ "include": "source.php" }],
-      "contentName": "source.php"
+      "contentName": "source.php",
+      "patterns": [{ "include": "source.php" }]
     },
     "fenced_code_block_go": {
-      "begin": "^(\\s*)(`{3,})(go)(\\s*)$",
+      "begin": "^\\s*(`{3,})(go)\\s*$",
       "beginCaptures": {
-        "2": { "name": "punctuation.definition.fenced.code" },
-        "3": { "name": "entity.name.tag.language" }
+        "1": { "name": "punctuation.definition.fenced.code" },
+        "2": { "name": "entity.name.tag.language" }
       },
-      "end": "^(\\s*)(`{3,})(\\s*)$",
+      "end": "^\\s*`{3,}\\s*$",
       "endCaptures": {
-        "2": { "name": "punctuation.definition.fenced.code" }
+        "0": { "name": "punctuation.definition.fenced.code" }
       },
-      "patterns": [{ "include": "source.go" }],
-      "contentName": "source.go"
+      "contentName": "source.go",
+      "patterns": [{ "include": "source.go" }]
     },
     "fenced_code_block_rust": {
-      "begin": "^(\\s*)(`{3,})(rust)(\\s*)$",
+      "begin": "^\\s*(`{3,})(rust)\\s*$",
       "beginCaptures": {
-        "2": { "name": "punctuation.definition.fenced.code" },
-        "3": { "name": "entity.name.tag.language" }
+        "1": { "name": "punctuation.definition.fenced.code" },
+        "2": { "name": "entity.name.tag.language" }
       },
-      "end": "^(\\s*)(`{3,})(\\s*)$",
+      "end": "^\\s*`{3,}\\s*$",
       "endCaptures": {
-        "2": { "name": "punctuation.definition.fenced.code" }
+        "0": { "name": "punctuation.definition.fenced.code" }
       },
-      "patterns": [{ "include": "source.rust" }],
-      "contentName": "source.rust"
+      "contentName": "source.rust",
+      "patterns": [{ "include": "source.rust" }]
     },
     "fenced_code_block_bash": {
-      "begin": "^(\\s*)(`{3,})(bash|shell|sh|zsh)(\\s*)$",
+      "begin": "^\\s*(`{3,})(bash|shell|sh|zsh)\\s*$",
       "beginCaptures": {
-        "2": { "name": "punctuation.definition.fenced.code" },
-        "3": { "name": "entity.name.tag.language" }
+        "1": { "name": "punctuation.definition.fenced.code" },
+        "2": { "name": "entity.name.tag.language" }
       },
-      "end": "^(\\s*)(`{3,})(\\s*)$",
+      "end": "^\\s*`{3,}\\s*$",
       "endCaptures": {
-        "2": { "name": "punctuation.definition.fenced.code" }
+        "0": { "name": "punctuation.definition.fenced.code" }
       },
-      "patterns": [{ "include": "source.shell" }],
-      "contentName": "source.shell"
+      "contentName": "source.shell",
+      "patterns": [{ "include": "source.shell" }]
     },
     "fenced_code_block_sql": {
-      "begin": "^(\\s*)(`{3,})(sql)(\\s*)$",
+      "begin": "^\\s*(`{3,})(sql)\\s*$",
       "beginCaptures": {
-        "2": { "name": "punctuation.definition.fenced.code" },
-        "3": { "name": "entity.name.tag.language" }
+        "1": { "name": "punctuation.definition.fenced.code" },
+        "2": { "name": "entity.name.tag.language" }
       },
-      "end": "^(\\s*)(`{3,})(\\s*)$",
+      "end": "^\\s*`{3,}\\s*$",
       "endCaptures": {
-        "2": { "name": "punctuation.definition.fenced.code" }
+        "0": { "name": "punctuation.definition.fenced.code" }
       },
-      "patterns": [{ "include": "source.sql" }],
-      "contentName": "source.sql"
+      "contentName": "source.sql",
+      "patterns": [{ "include": "source.sql" }]
     },
     "fenced_code_block_json": {
-      "begin": "^(\\s*)(`{3,})(json)(\\s*)$",
+      "begin": "^\\s*(`{3,})(json)\\s*$",
       "beginCaptures": {
-        "2": { "name": "punctuation.definition.fenced.code" },
-        "3": { "name": "entity.name.tag.language" }
+        "1": { "name": "punctuation.definition.fenced.code" },
+        "2": { "name": "entity.name.tag.language" }
       },
-      "end": "^(\\s*)(`{3,})(\\s*)$",
+      "end": "^\\s*`{3,}\\s*$",
       "endCaptures": {
-        "2": { "name": "punctuation.definition.fenced.code" }
+        "0": { "name": "punctuation.definition.fenced.code" }
       },
-      "patterns": [{ "include": "source.json" }],
-      "contentName": "source.json"
+      "contentName": "source.json",
+      "patterns": [{ "include": "source.json" }]
     },
     "fenced_code_block_xml": {
-      "begin": "^(\\s*)(`{3,})(xml)(\\s*)$",
+      "begin": "^\\s*(`{3,})(xml)\\s*$",
       "beginCaptures": {
-        "2": { "name": "punctuation.definition.fenced.code" },
-        "3": { "name": "entity.name.tag.language" }
+        "1": { "name": "punctuation.definition.fenced.code" },
+        "2": { "name": "entity.name.tag.language" }
       },
-      "end": "^(\\s*)(`{3,})(\\s*)$",
+      "end": "^\\s*`{3,}\\s*$",
       "endCaptures": {
-        "2": { "name": "punctuation.definition.fenced.code" }
+        "0": { "name": "punctuation.definition.fenced.code" }
       },
-      "patterns": [{ "include": "text.xml" }],
-      "contentName": "text.xml"
+      "contentName": "text.xml",
+      "patterns": [{ "include": "text.xml" }]
     },
     "fenced_code_block_yaml": {
-      "begin": "^(\\s*)(`{3,})(yaml|yml)(\\s*)$",
+      "begin": "^\\s*(`{3,})(yaml|yml)\\s*$",
       "beginCaptures": {
-        "2": { "name": "punctuation.definition.fenced.code" },
-        "3": { "name": "entity.name.tag.language" }
+        "1": { "name": "punctuation.definition.fenced.code" },
+        "2": { "name": "entity.name.tag.language" }
       },
-      "end": "^(\\s*)(`{3,})(\\s*)$",
+      "end": "^\\s*`{3,}\\s*$",
       "endCaptures": {
-        "2": { "name": "punctuation.definition.fenced.code" }
+        "0": { "name": "punctuation.definition.fenced.code" }
       },
-      "patterns": [{ "include": "source.yaml" }],
-      "contentName": "source.yaml"
+      "contentName": "source.yaml",
+      "patterns": [{ "include": "source.yaml" }]
     },
     "fenced_code_block_markdown": {
-      "begin": "^(\\s*)(`{3,})(markdown|md)(\\s*)$",
+      "begin": "^\\s*(`{3,})(markdown|md)\\s*$",
       "beginCaptures": {
-        "2": { "name": "punctuation.definition.fenced.code" },
-        "3": { "name": "entity.name.tag.language" }
+        "1": { "name": "punctuation.definition.fenced.code" },
+        "2": { "name": "entity.name.tag.language" }
       },
-      "end": "^(\\s*)(`{3,})(\\s*)$",
+      "end": "^\\s*`{3,}\\s*$",
       "endCaptures": {
-        "2": { "name": "punctuation.definition.fenced.code" }
+        "0": { "name": "punctuation.definition.fenced.code" }
       },
-      "patterns": [{ "include": "text.html.markdown" }],
-      "contentName": "text.html.markdown"
+      "contentName": "text.html.markdown",
+      "patterns": [{ "include": "text.html.markdown" }]
     },
     "fenced_code_block_generic": {
-      "begin": "^(\\s*)(`{3,})([A-Za-z0-9_+-]+)(\\s*)$",
+      "begin": "^\\s*(`{3,})([A-Za-z0-9_+-]+)\\s*$",
       "beginCaptures": {
-        "2": { "name": "punctuation.definition.fenced.code" },
-        "3": { "name": "entity.name.tag.language" }
+        "1": { "name": "punctuation.definition.fenced.code" },
+        "2": { "name": "entity.name.tag.language" }
       },
-      "end": "^(\\s*)(`{3,})(\\s*)$",
+      "end": "^\\s*`{3,}\\s*$",
       "endCaptures": {
-        "2": { "name": "punctuation.definition.fenced.code" }
+        "0": { "name": "punctuation.definition.fenced.code" }
       },
       "contentName": "markup.raw.block"
     },
     "fenced_code_block_plain": {
-      "begin": "^(\\s*)(`{3,})(\\s*)$",
+      "begin": "^\\s*(`{3,})\\s*$",
       "beginCaptures": {
-        "2": { "name": "punctuation.definition.fenced.code" }
+        "1": { "name": "punctuation.definition.fenced.code" }
       },
-      "end": "^(\\s*)(`{3,})(\\s*)$",
+      "end": "^\\s*`{3,}\\s*$",
       "endCaptures": {
-        "2": { "name": "punctuation.definition.fenced.code" }
+        "0": { "name": "punctuation.definition.fenced.code" }
       },
       "contentName": "markup.raw.block"
     }

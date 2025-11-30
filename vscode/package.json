@@ -1,14 +1,25 @@
 {
   "name": "scrawl",
   "displayName": "Scrawl",
-  "description": "Syntax highlighting for Scrawl note-taking format",
-  "version": "0.2.0",
+  "description": "Syntax highlighting for Scrawl note-taking format with task management, code blocks, and inline markup",
+  "version": "0.3.0",
   "publisher": "scrawl",
+  "license": "MIT",
+  "keywords": [
+    "scrawl",
+    "note-taking",
+    "notes",
+    "markup",
+    "syntax",
+    "task",
+    "todo"
+  ],
   "engines": {
     "vscode": "^1.60.0"
   },
   "categories": [
-    "Programming Languages"
+    "Programming Languages",
+    "Other"
   ],
   "contributes": {
     "languages": [

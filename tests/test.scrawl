@@ -1,3 +1,6 @@
+
+
+
 /*
 *-----------------------------------------
 * ///////////
@@ -11,6 +14,18 @@ const foo = "bar";
 
 ```
 
+```java
+// Demonstrate a broken string in Java
+"SATURDAY
+This is a broken string in Java
+"
+```
+
+<<| This is error |>>
+<<| This is highlighted in Sublime Text and not but still styled in VSCODE
+This is error stuff (Not counted as an error in Sublime but visible in VSCODE)
+|>> This is not styled in either editor.
+How about this?
 
 ##Phase 1 and 2 Test File##
 
@@ -242,3 +257,7 @@ def process_task(task: dict) -> bool:
 ```
 
 ##End##
+
+<<| END |>>
+
+

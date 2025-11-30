@@ -75,13 +75,13 @@
     "section_folding": {
       "begin": "(##)",
       "beginCaptures": {
-        "1": { "name": "keyword.control.section.begin.scrawl" }
+        "1": { "name": "storage.type.section.scrawl" }
       },
       "end": "(##)",
       "endCaptures": {
-        "1": { "name": "keyword.control.section.end.scrawl" }
+        "1": { "name": "storage.type.section.scrawl" }
       },
-      "contentName": "keyword.control.section.content.scrawl",
+      "contentName": "keyword.control.section.scrawl",
       "patterns": [
         {
           "match": "\\([^)]*\\)",
@@ -101,6 +101,18 @@
 
     "inline_content": {
       "patterns": [
+        {
+          "comment": "Highlight marker <<|...|>> - hot pink/invalid styling",
+          "begin": "<<\\|",
+          "end": "\\|>>",
+          "beginCaptures": {
+            "0": { "name": "punctuation.definition.highlight.begin.scrawl" }
+          },
+          "endCaptures": {
+            "0": { "name": "punctuation.definition.highlight.end.scrawl" }
+          },
+          "contentName": "invalid.illegal.highlight.scrawl"
+        },
         {
           "comment": "Text in parenthesis - yellow (same as Added Task)",
           "match": "\\([^)]*\\)",

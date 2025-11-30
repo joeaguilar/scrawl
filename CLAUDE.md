@@ -92,7 +92,10 @@ vscode/
 
 #### 3. Section Folding
 - **Pattern**: `##SectionName##` creates foldable regions
-- **Sublime**: Grammar matches pattern with scope `markup.bold.tag entity.name.section.folding`
+- **Scopes**:
+  - `##` markers: `storage.type.section.scrawl` (cyan in Monokai)
+  - Content: `keyword.control.section.scrawl` (red in Monokai)
+  - Parentheses inside: `entity.name.function.scrawl` (yellow in Monokai)
 - **VS Code**: Folding markers in `language-configuration.json`:
   - Start: `^\\s*##\\s*[a-zA-Z0-9- \\t]+\\s*##`
   - End: `^\\s*##\\s*End\\s*##`
@@ -166,3 +169,35 @@ When making changes to language features:
 **Changing comment styles**:
 - Sublime: Edit patterns in `main` context (line_comment, block_comment)
 - VS Code: Edit both grammar patterns AND `comments` section in `language-configuration.json`
+
+### Known Quirks
+
+#### Highlight Marker Rendering (`<<|...|>>`)
+The highlight marker `<<|...|>>` uses the `invalid.illegal.highlight.scrawl` scope to create attention-grabbing styling. However, the editors render this scope differently:
+
+| Editor | Rendering | Visual Effect |
+|--------|-----------|---------------|
+| Sublime Text | Background color | Hot pink background (Monokai) |
+| VS Code | Foreground color only | Red text, no background |
+
+This is a fundamental limitation of VS Code's TextMate grammar rendering - it doesn't support background colors through scopes. The `editor.tokenColorCustomizations` setting's `background` property is also ignored for token colors.
+
+**To get background highlighting in VS Code**, you would need to create a dedicated extension using VS Code's Decorations API, which is beyond what TextMate grammars can achieve.
+
+#### Sublime Text Scope Inheritance
+Sublime Text handles scope inheritance differently than VS Code. When using `meta_scope` in a context, scopes applied to matched patterns within that context may not override the `meta_scope` color in some themes (including built-in Monokai).
+
+**Example**: For section folding `##Heading##`:
+- If `meta_scope` is `storage.type` (cyan) and the `##` markers are `punctuation.definition` (white), Sublime may show both as cyan because `punctuation.definition` isn't explicitly styled in Monokai.
+- **Solution**: Use scopes that ARE explicitly styled in the theme. We use `keyword.control` for content (red) and `storage.type` for `##` markers (cyan) because both have explicit Monokai styles.
+
+**When adding new scoped elements in Sublime Text**:
+1. Test with multiple themes, especially built-in Monokai
+2. Prefer well-known scopes that themes explicitly style:
+   - `keyword.control` → red
+   - `string` → yellow
+   - `comment` → grey
+   - `storage.type` → cyan
+   - `entity.name.function` → green
+   - `constant.numeric` → purple
+3. Avoid `punctuation.*` scopes for colored elements - they're often unstyled

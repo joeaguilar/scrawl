@@ -33,13 +33,10 @@ contexts:
       scope: comment.block.scrawl punctuation.definition.comment.block.begin.scrawl
       push: block_comment
 
-    # Section folding markers
-    - match: "(##)([a-zA-Z0-9- \t]+)(##)"
-      scope: markup.bold.tag entity.name.section.folding
-      captures:
-        1: punctuation.definition.tag.begin
-        2: entity.name.tag
-        3: punctuation.definition.tag.end
+    # Section folding markers - red text with green parenthesis
+    - match: '(##)'
+      scope: keyword.control.section.begin.scrawl
+      push: section_content
 
     # Fenced code blocks with language - completely new approach
     - match: '^(\s*)(`{3,})(typescript|ts)(\s*)$'
@@ -274,360 +271,280 @@ contexts:
     # Priority tasks [!0] through [!3] - Level 0 (no indent)
     - match: '^(\[)(![0-3])(\])(\s+)(.+?)(?= - |$)'
       captures:
-        1: punctuation.definition.task.begin.scrawl
         2: keyword.control.scrawl
-        3: punctuation.definition.task.end.scrawl
         5: keyword.control.scrawl
       push: task_notes
 
     # Priority tasks - Level 1 (4 spaces)
     - match: '^(    )(\[)(![0-3])(\])(\s+)(.+?)(?= - |$)'
       captures:
-        2: punctuation.definition.task.begin.scrawl
         3: keyword.control.scrawl
-        4: punctuation.definition.task.end.scrawl
         6: keyword.control.scrawl
       push: task_notes
 
     # Priority tasks - Level 2 (8 spaces)
     - match: '^(        )(\[)(![0-3])(\])(\s+)(.+?)(?= - |$)'
       captures:
-        2: punctuation.definition.task.begin.scrawl
         3: keyword.control.scrawl
-        4: punctuation.definition.task.end.scrawl
         6: keyword.control.scrawl
       push: task_notes
 
     # Priority tasks - Level 3+ (12+ spaces)
     - match: '^(            +)(\[)(![0-3])(\])(\s+)(.+?)(?= - |$)'
       captures:
-        2: punctuation.definition.task.begin.scrawl
         3: keyword.control.scrawl
-        4: punctuation.definition.task.end.scrawl
         6: keyword.control.scrawl
       push: task_notes
 
     # Urgent tasks [!] without priority - Level 0
     - match: '^(\[)(!)(\])(\s+)(.+?)(?= - |$)'
       captures:
-        1: punctuation.definition.task.begin.scrawl
         2: keyword.control.scrawl
-        3: punctuation.definition.task.end.scrawl
         5: keyword.control.scrawl
       push: task_notes
 
     # Urgent tasks [!] - Level 1
     - match: '^(    )(\[)(!)(\])(\s+)(.+?)(?= - |$)'
       captures:
-        2: punctuation.definition.task.begin.scrawl
         3: keyword.control.scrawl
-        4: punctuation.definition.task.end.scrawl
         6: keyword.control.scrawl
       push: task_notes
 
     # Urgent tasks [!] - Level 2
     - match: '^(        )(\[)(!)(\])(\s+)(.+?)(?= - |$)'
       captures:
-        2: punctuation.definition.task.begin.scrawl
         3: keyword.control.scrawl
-        4: punctuation.definition.task.end.scrawl
         6: keyword.control.scrawl
       push: task_notes
 
     # Urgent tasks [!] - Level 3+
     - match: '^(            +)(\[)(!)(\])(\s+)(.+?)(?= - |$)'
       captures:
-        2: punctuation.definition.task.begin.scrawl
         3: keyword.control.scrawl
-        4: punctuation.definition.task.end.scrawl
         6: keyword.control.scrawl
       push: task_notes
 
     # In-progress tasks [•] - Level 0
     - match: '^(\[)(•)(\])(\s+)(.+?)(?= - |$)'
       captures:
-        1: punctuation.definition.task.begin.scrawl
         2: constant.language.scrawl
-        3: punctuation.definition.task.end.scrawl
         5: constant.language.scrawl
       push: task_notes
 
     # In-progress tasks [•] - Level 1
     - match: '^(    )(\[)(•)(\])(\s+)(.+?)(?= - |$)'
       captures:
-        2: punctuation.definition.task.begin.scrawl
         3: constant.language.scrawl
-        4: punctuation.definition.task.end.scrawl
         6: constant.language.scrawl
       push: task_notes
 
     # In-progress tasks [•] - Level 2
     - match: '^(        )(\[)(•)(\])(\s+)(.+?)(?= - |$)'
       captures:
-        2: punctuation.definition.task.begin.scrawl
         3: constant.language.scrawl
-        4: punctuation.definition.task.end.scrawl
         6: constant.language.scrawl
       push: task_notes
 
     # In-progress tasks [•] - Level 3+
     - match: '^(            +)(\[)(•)(\])(\s+)(.+?)(?= - |$)'
       captures:
-        2: punctuation.definition.task.begin.scrawl
         3: constant.language.scrawl
-        4: punctuation.definition.task.end.scrawl
         6: constant.language.scrawl
       push: task_notes
 
     # Completed tasks [√] - Level 0
     - match: '^(\[)(√)(\])(\s+)(.+?)(?= - |$)'
       captures:
-        1: punctuation.definition.task.begin.scrawl
         2: string.scrawl
-        3: punctuation.definition.task.end.scrawl
         5: string.scrawl
       push: task_notes
 
     # Completed tasks [√] - Level 1
     - match: '^(    )(\[)(√)(\])(\s+)(.+?)(?= - |$)'
       captures:
-        2: punctuation.definition.task.begin.scrawl
         3: string.scrawl
-        4: punctuation.definition.task.end.scrawl
         6: string.scrawl
       push: task_notes
 
     # Completed tasks [√] - Level 2
     - match: '^(        )(\[)(√)(\])(\s+)(.+?)(?= - |$)'
       captures:
-        2: punctuation.definition.task.begin.scrawl
         3: string.scrawl
-        4: punctuation.definition.task.end.scrawl
         6: string.scrawl
       push: task_notes
 
     # Completed tasks [√] - Level 3+
     - match: '^(            +)(\[)(√)(\])(\s+)(.+?)(?= - |$)'
       captures:
-        2: punctuation.definition.task.begin.scrawl
         3: string.scrawl
-        4: punctuation.definition.task.end.scrawl
         6: string.scrawl
       push: task_notes
 
     # Completed tasks [x] - Level 0
     - match: '^(\[)(x)(\])(\s+)(.+?)(?= - |$)'
       captures:
-        1: punctuation.definition.task.begin.scrawl
         2: string.scrawl
-        3: punctuation.definition.task.end.scrawl
         5: string.scrawl
       push: task_notes
 
     # Completed tasks [x] - Level 1
     - match: '^(    )(\[)(x)(\])(\s+)(.+?)(?= - |$)'
       captures:
-        2: punctuation.definition.task.begin.scrawl
         3: string.scrawl
-        4: punctuation.definition.task.end.scrawl
         6: string.scrawl
       push: task_notes
 
     # Completed tasks [x] - Level 2
     - match: '^(        )(\[)(x)(\])(\s+)(.+?)(?= - |$)'
       captures:
-        2: punctuation.definition.task.begin.scrawl
         3: string.scrawl
-        4: punctuation.definition.task.end.scrawl
         6: string.scrawl
       push: task_notes
 
     # Completed tasks [x] - Level 3+
     - match: '^(            +)(\[)(x)(\])(\s+)(.+?)(?= - |$)'
       captures:
-        2: punctuation.definition.task.begin.scrawl
         3: string.scrawl
-        4: punctuation.definition.task.end.scrawl
         6: string.scrawl
       push: task_notes
 
     # Skipped tasks [-] - Level 0
     - match: '^(\[)(-)(\])(\s+)(.+?)(?= - |$)'
       captures:
-        1: punctuation.definition.task.begin.scrawl
         2: comment.scrawl
-        3: punctuation.definition.task.end.scrawl
         5: comment.scrawl
       push: task_notes
 
     # Skipped tasks [-] - Level 1
     - match: '^(    )(\[)(-)(\])(\s+)(.+?)(?= - |$)'
       captures:
-        2: punctuation.definition.task.begin.scrawl
         3: comment.scrawl
-        4: punctuation.definition.task.end.scrawl
         6: comment.scrawl
       push: task_notes
 
     # Skipped tasks [-] - Level 2
     - match: '^(        )(\[)(-)(\])(\s+)(.+?)(?= - |$)'
       captures:
-        2: punctuation.definition.task.begin.scrawl
         3: comment.scrawl
-        4: punctuation.definition.task.end.scrawl
         6: comment.scrawl
       push: task_notes
 
     # Skipped tasks [-] - Level 3+
     - match: '^(            +)(\[)(-)(\])(\s+)(.+?)(?= - |$)'
       captures:
-        2: punctuation.definition.task.begin.scrawl
         3: comment.scrawl
-        4: punctuation.definition.task.end.scrawl
         6: comment.scrawl
       push: task_notes
 
     # On-hold tasks [.] - Level 0
     - match: '^(\[)(\.)(\])(\s+)(.+?)(?= - |$)'
       captures:
-        1: punctuation.definition.task.begin.scrawl
         2: comment.scrawl
-        3: punctuation.definition.task.end.scrawl
         5: comment.scrawl
       push: task_notes
 
     # On-hold tasks [.] - Level 1
     - match: '^(    )(\[)(\.)(\])(\s+)(.+?)(?= - |$)'
       captures:
-        2: punctuation.definition.task.begin.scrawl
         3: comment.scrawl
-        4: punctuation.definition.task.end.scrawl
         6: comment.scrawl
       push: task_notes
 
     # On-hold tasks [.] - Level 2
     - match: '^(        )(\[)(\.)(\])(\s+)(.+?)(?= - |$)'
       captures:
-        2: punctuation.definition.task.begin.scrawl
         3: comment.scrawl
-        4: punctuation.definition.task.end.scrawl
         6: comment.scrawl
       push: task_notes
 
     # On-hold tasks [.] - Level 3+
     - match: '^(            +)(\[)(\.)(\])(\s+)(.+?)(?= - |$)'
       captures:
-        2: punctuation.definition.task.begin.scrawl
         3: comment.scrawl
-        4: punctuation.definition.task.end.scrawl
         6: comment.scrawl
       push: task_notes
 
     # Added tasks [+] - Level 0
     - match: '^(\[)(\+)(\])(\s+)(.+?)(?= - |$)'
       captures:
-        1: punctuation.definition.task.begin.scrawl
         2: entity.name.function.scrawl
-        3: punctuation.definition.task.end.scrawl
         5: entity.name.function.scrawl
       push: task_notes
 
     # Added tasks [+] - Level 1
     - match: '^(    )(\[)(\+)(\])(\s+)(.+?)(?= - |$)'
       captures:
-        2: punctuation.definition.task.begin.scrawl
         3: entity.name.function.scrawl
-        4: punctuation.definition.task.end.scrawl
         6: entity.name.function.scrawl
       push: task_notes
 
     # Added tasks [+] - Level 2
     - match: '^(        )(\[)(\+)(\])(\s+)(.+?)(?= - |$)'
       captures:
-        2: punctuation.definition.task.begin.scrawl
         3: entity.name.function.scrawl
-        4: punctuation.definition.task.end.scrawl
         6: entity.name.function.scrawl
       push: task_notes
 
     # Added tasks [+] - Level 3+
     - match: '^(            +)(\[)(\+)(\])(\s+)(.+?)(?= - |$)'
       captures:
-        2: punctuation.definition.task.begin.scrawl
         3: entity.name.function.scrawl
-        4: punctuation.definition.task.end.scrawl
         6: entity.name.function.scrawl
       push: task_notes
 
     # Question tasks [?] - Level 0
     - match: '^(\[)(\?)(\])(\s+)(.+?)(?= - |$)'
       captures:
-        1: punctuation.definition.task.begin.scrawl
         2: variable.scrawl
-        3: punctuation.definition.task.end.scrawl
         5: variable.scrawl
       push: task_notes
 
     # Question tasks [?] - Level 1
     - match: '^(    )(\[)(\?)(\])(\s+)(.+?)(?= - |$)'
       captures:
-        2: punctuation.definition.task.begin.scrawl
         3: variable.scrawl
-        4: punctuation.definition.task.end.scrawl
         6: variable.scrawl
       push: task_notes
 
     # Question tasks [?] - Level 2
     - match: '^(        )(\[)(\?)(\])(\s+)(.+?)(?= - |$)'
       captures:
-        2: punctuation.definition.task.begin.scrawl
         3: variable.scrawl
-        4: punctuation.definition.task.end.scrawl
         6: variable.scrawl
       push: task_notes
 
     # Question tasks [?] - Level 3+
     - match: '^(            +)(\[)(\?)(\])(\s+)(.+?)(?= - |$)'
       captures:
-        2: punctuation.definition.task.begin.scrawl
         3: variable.scrawl
-        4: punctuation.definition.task.end.scrawl
         6: variable.scrawl
       push: task_notes
 
     # Unchecked tasks [ ] - Level 0
     - match: '^(\[)( )(\])(\s+)(.+?)(?= - |$)'
       captures:
-        1: punctuation.definition.task.begin.scrawl
         2: constant.language.scrawl
-        3: punctuation.definition.task.end.scrawl
         5: constant.language.scrawl
       push: task_notes
 
     # Unchecked tasks [ ] - Level 1
     - match: '^(    )(\[)( )(\])(\s+)(.+?)(?= - |$)'
       captures:
-        2: punctuation.definition.task.begin.scrawl
         3: constant.language.scrawl
-        4: punctuation.definition.task.end.scrawl
         6: constant.language.scrawl
       push: task_notes
 
     # Unchecked tasks [ ] - Level 2
     - match: '^(        )(\[)( )(\])(\s+)(.+?)(?= - |$)'
       captures:
-        2: punctuation.definition.task.begin.scrawl
         3: constant.language.scrawl
-        4: punctuation.definition.task.end.scrawl
         6: constant.language.scrawl
       push: task_notes
 
     # Unchecked tasks [ ] - Level 3+
     - match: '^(            +)(\[)( )(\])(\s+)(.+?)(?= - |$)'
       captures:
-        2: punctuation.definition.task.begin.scrawl
         3: constant.language.scrawl
-        4: punctuation.definition.task.end.scrawl
         6: constant.language.scrawl
       push: task_notes
 
@@ -877,26 +794,33 @@ contexts:
   # =========================================================================
 
   inline_content:
-    # Date token d@ with ISO format (YYYY-MM-DD with optional time)
+    # Text in parenthesis - yellow (same as Added Task)
+    - match: '(\()([^)]*)(\))'
+      captures:
+        1: entity.name.function.scrawl
+        2: entity.name.function.scrawl
+        3: entity.name.function.scrawl
+
+    # Date token d@ with ISO format (YYYY-MM-DD with optional time) - yellow (same as Added Task)
     - match: '(d@)(\d{4}-\d{2}-\d{2})(\s+\d{1,2}:\d{2})?'
       captures:
-        1: keyword.operator.date-marker.scrawl
-        2: constant.other.date.scrawl
-        3: constant.other.time.scrawl
+        1: entity.name.function.scrawl
+        2: entity.name.function.scrawl
+        3: entity.name.function.scrawl
 
-    # Date token d@ with US format (MM/DD/YYYY with optional 12-hour time)
+    # Date token d@ with US format (MM/DD/YYYY with optional 12-hour time) - yellow (same as Added Task)
     - match: '(d@)(\d{1,2}/\d{1,2}/\d{4})(\s+\d{1,2}(:\d{2})?\s*(AM|PM|am|pm))?'
       captures:
-        1: keyword.operator.date-marker.scrawl
-        2: constant.other.date.scrawl
-        3: constant.other.time.scrawl
+        1: entity.name.function.scrawl
+        2: entity.name.function.scrawl
+        3: entity.name.function.scrawl
 
-    # Time estimate token e@ (hours and/or minutes)
+    # Time estimate token e@ (hours and/or minutes) - yellow (same as Added Task)
     - match: '(e@)(\d+h)?(\d+m)?'
       captures:
-        1: keyword.operator.time-marker.scrawl
-        2: constant.numeric.time-estimate.hours.scrawl
-        3: constant.numeric.time-estimate.minutes.scrawl
+        1: entity.name.function.scrawl
+        2: entity.name.function.scrawl
+        3: entity.name.function.scrawl
 
     # Progress bar [====>    ] or similar
     - match: '\[([=>\-\s]{3,20})\]'
@@ -977,4 +901,18 @@ contexts:
   line_comment:
     - meta_scope: comment.line.scrawl
     - match: $
+      pop: true
+
+  # Section content - red text with yellow parenthesis (same as Added Task)
+  section_content:
+    - meta_scope: keyword.control.section.content.scrawl
+    - match: '(\()([^)]*)(\))'
+      captures:
+        1: entity.name.function.scrawl
+        2: entity.name.function.scrawl
+        3: entity.name.function.scrawl
+    - match: '(##)'
+      scope: keyword.control.section.end.scrawl
+      pop: true
+    - match: '$'
       pop: true

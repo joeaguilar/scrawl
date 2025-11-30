@@ -27,6 +27,7 @@ const foo = "bar";
 [.] On hold task - paused for now
 [+] Added task - newly added
 [?] Question task - needs clarification
+[!] Critical task - needs attention before d@2025-12-01 e@30m
 
 ##Task States - Level 1 (4 spaces)##
 
@@ -37,7 +38,7 @@ const foo = "bar";
     [!] Level 1 urgent task
     [-] Level 1 skipped task
     [.] Level 1 on hold task - paused for now
-    [+] Level 1 added task - newly added
+    [+] Level 1 added task - newly added to be done by d@2025-12-01
     [?] Level 1 question task
 
 ##Task States - Level 2 (8 spaces)##
@@ -157,9 +158,9 @@ List Styles - Numbered
 
 ##Date Tokens - ISO Format##
 
-[ ] Complete report d@2025-12-15
-[•] Working on feature d@2025-12-01
-[ ] Meeting scheduled d@2025-12-20 14:30
+[ ] Complete report - d@2025-12-15
+[•] Working on feature -  d@2025-12-01
+[ ] Meeting scheduled - This has to be done by d@2025-12-20 14:30
 [!] Deadline approaching d@2025-12-10 09:00
 
 ##Date Tokens - US Format##
@@ -189,7 +190,7 @@ List Styles - Numbered
 
 [ ] Review documentation #urgent #technical
 [•] Working on feature #development #frontend
-[ ] Backend changes #api #database
+[√] Backend changes #api #database
 [!] Critical bug #bug #production #urgent
 
 ##Progress Bars and Percentages##

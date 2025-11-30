@@ -121,13 +121,25 @@
       ]
     },
     "section_folding": {
-      "match": "(##)([a-zA-Z0-9- \\t]+)(##)",
-      "name": "markup.bold.tag entity.name.section.folding",
-      "captures": {
-        "1": { "name": "punctuation.definition.tag.begin" },
-        "2": { "name": "entity.name.tag" },
-        "3": { "name": "punctuation.definition.tag.end" }
-      }
+      "begin": "(##)",
+      "beginCaptures": {
+        "1": { "name": "keyword.control.section.begin.scrawl" }
+      },
+      "end": "(##)",
+      "endCaptures": {
+        "1": { "name": "keyword.control.section.end.scrawl" }
+      },
+      "contentName": "keyword.control.section.content.scrawl",
+      "patterns": [
+        {
+          "match": "(\\()([^)]*)(\\))",
+          "captures": {
+            "1": { "name": "entity.name.function.scrawl" },
+            "2": { "name": "entity.name.function.scrawl" },
+            "3": { "name": "entity.name.function.scrawl" }
+          }
+        }
+      ]
     },
     "url": {
       "match": "(https?:\\/\\/|www\\.)[a-zA-Z0-9-]+(\\.[a-zA-Z0-9-]+)+(\\/[^\\s\\(\\)\\[\\]]*)?",
@@ -145,30 +157,39 @@
     "inline_content": {
       "patterns": [
         {
-          "comment": "Date token d@ with ISO format",
+          "comment": "Text in parenthesis - yellow (same as Added Task)",
+          "match": "(\\()([^)]*)(\\))",
+          "captures": {
+            "1": { "name": "entity.name.function.scrawl" },
+            "2": { "name": "entity.name.function.scrawl" },
+            "3": { "name": "entity.name.function.scrawl" }
+          }
+        },
+        {
+          "comment": "Date token d@ with ISO format - yellow (same as Added Task)",
           "match": "(d@)(\\d{4}-\\d{2}-\\d{2})(\\s+\\d{1,2}:\\d{2})?",
           "captures": {
-            "1": { "name": "keyword.operator.date-marker.scrawl" },
-            "2": { "name": "constant.other.date.scrawl" },
-            "3": { "name": "constant.other.time.scrawl" }
+            "1": { "name": "entity.name.function.scrawl" },
+            "2": { "name": "entity.name.function.scrawl" },
+            "3": { "name": "entity.name.function.scrawl" }
           }
         },
         {
-          "comment": "Date token d@ with US format",
+          "comment": "Date token d@ with US format - yellow (same as Added Task)",
           "match": "(d@)(\\d{1,2}/\\d{1,2}/\\d{4})(\\s+\\d{1,2}(:\\d{2})?\\s*(AM|PM|am|pm))?",
           "captures": {
-            "1": { "name": "keyword.operator.date-marker.scrawl" },
-            "2": { "name": "constant.other.date.scrawl" },
-            "3": { "name": "constant.other.time.scrawl" }
+            "1": { "name": "entity.name.function.scrawl" },
+            "2": { "name": "entity.name.function.scrawl" },
+            "3": { "name": "entity.name.function.scrawl" }
           }
         },
         {
-          "comment": "Time estimate token e@",
+          "comment": "Time estimate token e@ - yellow (same as Added Task)",
           "match": "(e@)(\\d+h)?(\\d+m)?",
           "captures": {
-            "1": { "name": "keyword.operator.time-marker.scrawl" },
-            "2": { "name": "constant.numeric.time-estimate.hours.scrawl" },
-            "3": { "name": "constant.numeric.time-estimate.minutes.scrawl" }
+            "1": { "name": "entity.name.function.scrawl" },
+            "2": { "name": "entity.name.function.scrawl" },
+            "3": { "name": "entity.name.function.scrawl" }
           }
         },
         {
@@ -204,333 +225,333 @@
     },
 
     "task_priority_level0": {
-      "begin": "^(\\[![0-3]\\])(\\s+)(.+?)(?= - |$)",
+      "begin": "^(\\[)(![0-3])(\\])(\\s+)(.+?)(?= - |$)",
       "beginCaptures": {
-        "1": { "name": "keyword.control.scrawl" },
-        "3": { "name": "keyword.control.scrawl" }
+        "2": { "name": "keyword.control.scrawl" },
+        "5": { "name": "keyword.control.scrawl" }
       },
       "end": "$",
       "patterns": [{ "include": "#inline_content" }]
     },
     "task_priority_level1": {
-      "begin": "^(    )(\\[![0-3]\\])(\\s+)(.+?)(?= - |$)",
+      "begin": "^(    )(\\[)(![0-3])(\\])(\\s+)(.+?)(?= - |$)",
       "beginCaptures": {
-        "2": { "name": "keyword.control.scrawl" },
-        "4": { "name": "keyword.control.scrawl" }
+        "3": { "name": "keyword.control.scrawl" },
+        "6": { "name": "keyword.control.scrawl" }
       },
       "end": "$",
       "patterns": [{ "include": "#inline_content" }]
     },
     "task_priority_level2": {
-      "begin": "^(        )(\\[![0-3]\\])(\\s+)(.+?)(?= - |$)",
+      "begin": "^(        )(\\[)(![0-3])(\\])(\\s+)(.+?)(?= - |$)",
       "beginCaptures": {
-        "2": { "name": "keyword.control.scrawl" },
-        "4": { "name": "keyword.control.scrawl" }
+        "3": { "name": "keyword.control.scrawl" },
+        "6": { "name": "keyword.control.scrawl" }
       },
       "end": "$",
       "patterns": [{ "include": "#inline_content" }]
     },
     "task_priority_level3": {
-      "begin": "^(            +)(\\[![0-3]\\])(\\s+)(.+?)(?= - |$)",
+      "begin": "^(            +)(\\[)(![0-3])(\\])(\\s+)(.+?)(?= - |$)",
       "beginCaptures": {
-        "2": { "name": "keyword.control.scrawl" },
-        "4": { "name": "keyword.control.scrawl" }
+        "3": { "name": "keyword.control.scrawl" },
+        "6": { "name": "keyword.control.scrawl" }
       },
       "end": "$",
       "patterns": [{ "include": "#inline_content" }]
     },
 
     "task_urgent_level0": {
-      "begin": "^(\\[!\\])(\\s+)(.+?)(?= - |$)",
+      "begin": "^(\\[)(!)(\\])(\\s+)(.+?)(?= - |$)",
       "beginCaptures": {
-        "1": { "name": "keyword.control.scrawl" },
-        "3": { "name": "keyword.control.scrawl" }
+        "2": { "name": "keyword.control.scrawl" },
+        "5": { "name": "keyword.control.scrawl" }
       },
       "end": "$",
       "patterns": [{ "include": "#inline_content" }]
     },
     "task_urgent_level1": {
-      "begin": "^(    )(\\[!\\])(\\s+)(.+?)(?= - |$)",
+      "begin": "^(    )(\\[)(!)(\\])(\\s+)(.+?)(?= - |$)",
       "beginCaptures": {
-        "2": { "name": "keyword.control.scrawl" },
-        "4": { "name": "keyword.control.scrawl" }
+        "3": { "name": "keyword.control.scrawl" },
+        "6": { "name": "keyword.control.scrawl" }
       },
       "end": "$",
       "patterns": [{ "include": "#inline_content" }]
     },
     "task_urgent_level2": {
-      "begin": "^(        )(\\[!\\])(\\s+)(.+?)(?= - |$)",
+      "begin": "^(        )(\\[)(!)(\\])(\\s+)(.+?)(?= - |$)",
       "beginCaptures": {
-        "2": { "name": "keyword.control.scrawl" },
-        "4": { "name": "keyword.control.scrawl" }
+        "3": { "name": "keyword.control.scrawl" },
+        "6": { "name": "keyword.control.scrawl" }
       },
       "end": "$",
       "patterns": [{ "include": "#inline_content" }]
     },
     "task_urgent_level3": {
-      "begin": "^(            +)(\\[!\\])(\\s+)(.+?)(?= - |$)",
+      "begin": "^(            +)(\\[)(!)(\\])(\\s+)(.+?)(?= - |$)",
       "beginCaptures": {
-        "2": { "name": "keyword.control.scrawl" },
-        "4": { "name": "keyword.control.scrawl" }
+        "3": { "name": "keyword.control.scrawl" },
+        "6": { "name": "keyword.control.scrawl" }
       },
       "end": "$",
       "patterns": [{ "include": "#inline_content" }]
     },
 
     "task_inprogress_level0": {
-      "begin": "^(\\[•\\])(\\s+)(.+?)(?= - |$)",
+      "begin": "^(\\[)(•)(\\])(\\s+)(.+?)(?= - |$)",
       "beginCaptures": {
-        "1": { "name": "constant.language.scrawl" },
-        "3": { "name": "constant.language.scrawl" }
+        "2": { "name": "constant.language.scrawl" },
+        "5": { "name": "constant.language.scrawl" }
       },
       "end": "$",
       "patterns": [{ "include": "#inline_content" }]
     },
     "task_inprogress_level1": {
-      "begin": "^(    )(\\[•\\])(\\s+)(.+?)(?= - |$)",
+      "begin": "^(    )(\\[)(•)(\\])(\\s+)(.+?)(?= - |$)",
       "beginCaptures": {
-        "2": { "name": "constant.language.scrawl" },
-        "4": { "name": "constant.language.scrawl" }
+        "3": { "name": "constant.language.scrawl" },
+        "6": { "name": "constant.language.scrawl" }
       },
       "end": "$",
       "patterns": [{ "include": "#inline_content" }]
     },
     "task_inprogress_level2": {
-      "begin": "^(        )(\\[•\\])(\\s+)(.+?)(?= - |$)",
+      "begin": "^(        )(\\[)(•)(\\])(\\s+)(.+?)(?= - |$)",
       "beginCaptures": {
-        "2": { "name": "constant.language.scrawl" },
-        "4": { "name": "constant.language.scrawl" }
+        "3": { "name": "constant.language.scrawl" },
+        "6": { "name": "constant.language.scrawl" }
       },
       "end": "$",
       "patterns": [{ "include": "#inline_content" }]
     },
     "task_inprogress_level3": {
-      "begin": "^(            +)(\\[•\\])(\\s+)(.+?)(?= - |$)",
+      "begin": "^(            +)(\\[)(•)(\\])(\\s+)(.+?)(?= - |$)",
       "beginCaptures": {
-        "2": { "name": "constant.language.scrawl" },
-        "4": { "name": "constant.language.scrawl" }
+        "3": { "name": "constant.language.scrawl" },
+        "6": { "name": "constant.language.scrawl" }
       },
       "end": "$",
       "patterns": [{ "include": "#inline_content" }]
     },
 
     "task_completed_check_level0": {
-      "begin": "^(\\[√\\])(\\s+)(.+?)(?= - |$)",
+      "begin": "^(\\[)(√)(\\])(\\s+)(.+?)(?= - |$)",
       "beginCaptures": {
-        "1": { "name": "string.scrawl" },
-        "3": { "name": "string.scrawl" }
+        "2": { "name": "string.scrawl" },
+        "5": { "name": "string.scrawl" }
       },
       "end": "$",
       "patterns": [{ "include": "#inline_content" }]
     },
     "task_completed_check_level1": {
-      "begin": "^(    )(\\[√\\])(\\s+)(.+?)(?= - |$)",
+      "begin": "^(    )(\\[)(√)(\\])(\\s+)(.+?)(?= - |$)",
       "beginCaptures": {
-        "2": { "name": "string.scrawl" },
-        "4": { "name": "string.scrawl" }
+        "3": { "name": "string.scrawl" },
+        "6": { "name": "string.scrawl" }
       },
       "end": "$",
       "patterns": [{ "include": "#inline_content" }]
     },
     "task_completed_check_level2": {
-      "begin": "^(        )(\\[√\\])(\\s+)(.+?)(?= - |$)",
+      "begin": "^(        )(\\[)(√)(\\])(\\s+)(.+?)(?= - |$)",
       "beginCaptures": {
-        "2": { "name": "string.scrawl" },
-        "4": { "name": "string.scrawl" }
+        "3": { "name": "string.scrawl" },
+        "6": { "name": "string.scrawl" }
       },
       "end": "$",
       "patterns": [{ "include": "#inline_content" }]
     },
     "task_completed_check_level3": {
-      "begin": "^(            +)(\\[√\\])(\\s+)(.+?)(?= - |$)",
+      "begin": "^(            +)(\\[)(√)(\\])(\\s+)(.+?)(?= - |$)",
       "beginCaptures": {
-        "2": { "name": "string.scrawl" },
-        "4": { "name": "string.scrawl" }
+        "3": { "name": "string.scrawl" },
+        "6": { "name": "string.scrawl" }
       },
       "end": "$",
       "patterns": [{ "include": "#inline_content" }]
     },
 
     "task_completed_x_level0": {
-      "begin": "^(\\[x\\])(\\s+)(.+?)(?= - |$)",
+      "begin": "^(\\[)(x)(\\])(\\s+)(.+?)(?= - |$)",
       "beginCaptures": {
-        "1": { "name": "string.scrawl" },
-        "3": { "name": "string.scrawl" }
+        "2": { "name": "string.scrawl" },
+        "5": { "name": "string.scrawl" }
       },
       "end": "$",
       "patterns": [{ "include": "#inline_content" }]
     },
     "task_completed_x_level1": {
-      "begin": "^(    )(\\[x\\])(\\s+)(.+?)(?= - |$)",
+      "begin": "^(    )(\\[)(x)(\\])(\\s+)(.+?)(?= - |$)",
       "beginCaptures": {
-        "2": { "name": "string.scrawl" },
-        "4": { "name": "string.scrawl" }
+        "3": { "name": "string.scrawl" },
+        "6": { "name": "string.scrawl" }
       },
       "end": "$",
       "patterns": [{ "include": "#inline_content" }]
     },
     "task_completed_x_level2": {
-      "begin": "^(        )(\\[x\\])(\\s+)(.+?)(?= - |$)",
+      "begin": "^(        )(\\[)(x)(\\])(\\s+)(.+?)(?= - |$)",
       "beginCaptures": {
-        "2": { "name": "string.scrawl" },
-        "4": { "name": "string.scrawl" }
+        "3": { "name": "string.scrawl" },
+        "6": { "name": "string.scrawl" }
       },
       "end": "$",
       "patterns": [{ "include": "#inline_content" }]
     },
     "task_completed_x_level3": {
-      "begin": "^(            +)(\\[x\\])(\\s+)(.+?)(?= - |$)",
+      "begin": "^(            +)(\\[)(x)(\\])(\\s+)(.+?)(?= - |$)",
       "beginCaptures": {
-        "2": { "name": "string.scrawl" },
-        "4": { "name": "string.scrawl" }
+        "3": { "name": "string.scrawl" },
+        "6": { "name": "string.scrawl" }
       },
       "end": "$",
       "patterns": [{ "include": "#inline_content" }]
     },
 
     "task_skipped_level0": {
-      "begin": "^(\\[-\\])(\\s+)(.+?)(?= - |$)",
+      "begin": "^(\\[)(-)(\\])(\\s+)(.+?)(?= - |$)",
       "beginCaptures": {
-        "1": { "name": "comment.scrawl" },
-        "3": { "name": "comment.scrawl" }
+        "2": { "name": "comment.scrawl" },
+        "5": { "name": "comment.scrawl" }
       },
       "end": "$",
       "patterns": [{ "include": "#inline_content" }]
     },
     "task_skipped_level1": {
-      "begin": "^(    )(\\[-\\])(\\s+)(.+?)(?= - |$)",
+      "begin": "^(    )(\\[)(-)(\\])(\\s+)(.+?)(?= - |$)",
       "beginCaptures": {
-        "2": { "name": "comment.scrawl" },
-        "4": { "name": "comment.scrawl" }
+        "3": { "name": "comment.scrawl" },
+        "6": { "name": "comment.scrawl" }
       },
       "end": "$",
       "patterns": [{ "include": "#inline_content" }]
     },
     "task_skipped_level2": {
-      "begin": "^(        )(\\[-\\])(\\s+)(.+?)(?= - |$)",
+      "begin": "^(        )(\\[)(-)(\\])(\\s+)(.+?)(?= - |$)",
       "beginCaptures": {
-        "2": { "name": "comment.scrawl" },
-        "4": { "name": "comment.scrawl" }
+        "3": { "name": "comment.scrawl" },
+        "6": { "name": "comment.scrawl" }
       },
       "end": "$",
       "patterns": [{ "include": "#inline_content" }]
     },
     "task_skipped_level3": {
-      "begin": "^(            +)(\\[-\\])(\\s+)(.+?)(?= - |$)",
+      "begin": "^(            +)(\\[)(-)(\\])(\\s+)(.+?)(?= - |$)",
       "beginCaptures": {
-        "2": { "name": "comment.scrawl" },
-        "4": { "name": "comment.scrawl" }
+        "3": { "name": "comment.scrawl" },
+        "6": { "name": "comment.scrawl" }
       },
       "end": "$",
       "patterns": [{ "include": "#inline_content" }]
     },
 
     "task_onhold_level0": {
-      "begin": "^(\\[\\.\\])(\\s+)(.+?)(?= - |$)",
+      "begin": "^(\\[)(\\.)(\\])(\\s+)(.+?)(?= - |$)",
       "beginCaptures": {
-        "1": { "name": "comment.scrawl" },
-        "3": { "name": "comment.scrawl" }
+        "2": { "name": "comment.scrawl" },
+        "5": { "name": "comment.scrawl" }
       },
       "end": "$",
       "patterns": [{ "include": "#inline_content" }]
     },
     "task_onhold_level1": {
-      "begin": "^(    )(\\[\\.\\])(\\s+)(.+?)(?= - |$)",
+      "begin": "^(    )(\\[)(\\.)(\\])(\\s+)(.+?)(?= - |$)",
       "beginCaptures": {
-        "2": { "name": "comment.scrawl" },
-        "4": { "name": "comment.scrawl" }
+        "3": { "name": "comment.scrawl" },
+        "6": { "name": "comment.scrawl" }
       },
       "end": "$",
       "patterns": [{ "include": "#inline_content" }]
     },
     "task_onhold_level2": {
-      "begin": "^(        )(\\[\\.\\])(\\s+)(.+?)(?= - |$)",
+      "begin": "^(        )(\\[)(\\.)(\\])(\\s+)(.+?)(?= - |$)",
       "beginCaptures": {
-        "2": { "name": "comment.scrawl" },
-        "4": { "name": "comment.scrawl" }
+        "3": { "name": "comment.scrawl" },
+        "6": { "name": "comment.scrawl" }
       },
       "end": "$",
       "patterns": [{ "include": "#inline_content" }]
     },
     "task_onhold_level3": {
-      "begin": "^(            +)(\\[\\.\\])(\\s+)(.+?)(?= - |$)",
+      "begin": "^(            +)(\\[)(\\.)(\\])(\\s+)(.+?)(?= - |$)",
       "beginCaptures": {
-        "2": { "name": "comment.scrawl" },
-        "4": { "name": "comment.scrawl" }
+        "3": { "name": "comment.scrawl" },
+        "6": { "name": "comment.scrawl" }
       },
       "end": "$",
       "patterns": [{ "include": "#inline_content" }]
     },
 
     "task_added_level0": {
-      "begin": "^(\\[\\+\\])(\\s+)(.+?)(?= - |$)",
+      "begin": "^(\\[)(\\+)(\\])(\\s+)(.+?)(?= - |$)",
       "beginCaptures": {
-        "1": { "name": "entity.name.function.scrawl" },
-        "3": { "name": "entity.name.function.scrawl" }
+        "2": { "name": "entity.name.function.scrawl" },
+        "5": { "name": "entity.name.function.scrawl" }
       },
       "end": "$",
       "patterns": [{ "include": "#inline_content" }]
     },
     "task_added_level1": {
-      "begin": "^(    )(\\[\\+\\])(\\s+)(.+?)(?= - |$)",
+      "begin": "^(    )(\\[)(\\+)(\\])(\\s+)(.+?)(?= - |$)",
       "beginCaptures": {
-        "2": { "name": "entity.name.function.scrawl" },
-        "4": { "name": "entity.name.function.scrawl" }
+        "3": { "name": "entity.name.function.scrawl" },
+        "6": { "name": "entity.name.function.scrawl" }
       },
       "end": "$",
       "patterns": [{ "include": "#inline_content" }]
     },
     "task_added_level2": {
-      "begin": "^(        )(\\[\\+\\])(\\s+)(.+?)(?= - |$)",
+      "begin": "^(        )(\\[)(\\+)(\\])(\\s+)(.+?)(?= - |$)",
       "beginCaptures": {
-        "2": { "name": "entity.name.function.scrawl" },
-        "4": { "name": "entity.name.function.scrawl" }
+        "3": { "name": "entity.name.function.scrawl" },
+        "6": { "name": "entity.name.function.scrawl" }
       },
       "end": "$",
       "patterns": [{ "include": "#inline_content" }]
     },
     "task_added_level3": {
-      "begin": "^(            +)(\\[\\+\\])(\\s+)(.+?)(?= - |$)",
+      "begin": "^(            +)(\\[)(\\+)(\\])(\\s+)(.+?)(?= - |$)",
       "beginCaptures": {
-        "2": { "name": "entity.name.function.scrawl" },
-        "4": { "name": "entity.name.function.scrawl" }
+        "3": { "name": "entity.name.function.scrawl" },
+        "6": { "name": "entity.name.function.scrawl" }
       },
       "end": "$",
       "patterns": [{ "include": "#inline_content" }]
     },
 
     "task_question_level0": {
-      "begin": "^(\\[\\?\\])(\\s+)(.+?)(?= - |$)",
+      "begin": "^(\\[)(\\?)(\\])(\\s+)(.+?)(?= - |$)",
       "beginCaptures": {
-        "1": { "name": "variable.scrawl" },
-        "3": { "name": "variable.scrawl" }
+        "2": { "name": "variable.scrawl" },
+        "5": { "name": "variable.scrawl" }
       },
       "end": "$",
       "patterns": [{ "include": "#inline_content" }]
     },
     "task_question_level1": {
-      "begin": "^(    )(\\[\\?\\])(\\s+)(.+?)(?= - |$)",
+      "begin": "^(    )(\\[)(\\?)(\\])(\\s+)(.+?)(?= - |$)",
       "beginCaptures": {
-        "2": { "name": "variable.scrawl" },
-        "4": { "name": "variable.scrawl" }
+        "3": { "name": "variable.scrawl" },
+        "6": { "name": "variable.scrawl" }
       },
       "end": "$",
       "patterns": [{ "include": "#inline_content" }]
     },
     "task_question_level2": {
-      "begin": "^(        )(\\[\\?\\])(\\s+)(.+?)(?= - |$)",
+      "begin": "^(        )(\\[)(\\?)(\\])(\\s+)(.+?)(?= - |$)",
       "beginCaptures": {
-        "2": { "name": "variable.scrawl" },
-        "4": { "name": "variable.scrawl" }
+        "3": { "name": "variable.scrawl" },
+        "6": { "name": "variable.scrawl" }
       },
       "end": "$",
       "patterns": [{ "include": "#inline_content" }]
     },
     "task_question_level3": {
-      "begin": "^(            +)(\\[\\?\\])(\\s+)(.+?)(?= - |$)",
+      "begin": "^(            +)(\\[)(\\?)(\\])(\\s+)(.+?)(?= - |$)",
       "beginCaptures": {
-        "2": { "name": "variable.scrawl" },
-        "4": { "name": "variable.scrawl" }
+        "3": { "name": "variable.scrawl" },
+        "6": { "name": "variable.scrawl" }
       },
       "end": "$",
       "patterns": [{ "include": "#inline_content" }]
@@ -539,9 +560,7 @@
     "task_unchecked_level0": {
       "begin": "^(\\[)( )(\\])(\\s+)(.+?)(?= - |$)",
       "beginCaptures": {
-        "1": { "name": "punctuation.definition.task.begin.scrawl" },
         "2": { "name": "constant.language.scrawl" },
-        "3": { "name": "punctuation.definition.task.end.scrawl" },
         "5": { "name": "constant.language.scrawl" }
       },
       "end": "$",
@@ -550,9 +569,7 @@
     "task_unchecked_level1": {
       "begin": "^(    )(\\[)( )(\\])(\\s+)(.+?)(?= - |$)",
       "beginCaptures": {
-        "2": { "name": "punctuation.definition.task.begin.scrawl" },
         "3": { "name": "constant.language.scrawl" },
-        "4": { "name": "punctuation.definition.task.end.scrawl" },
         "6": { "name": "constant.language.scrawl" }
       },
       "end": "$",
@@ -561,9 +578,7 @@
     "task_unchecked_level2": {
       "begin": "^(        )(\\[)( )(\\])(\\s+)(.+?)(?= - |$)",
       "beginCaptures": {
-        "2": { "name": "punctuation.definition.task.begin.scrawl" },
         "3": { "name": "constant.language.scrawl" },
-        "4": { "name": "punctuation.definition.task.end.scrawl" },
         "6": { "name": "constant.language.scrawl" }
       },
       "end": "$",
@@ -572,9 +587,7 @@
     "task_unchecked_level3": {
       "begin": "^(            +)(\\[)( )(\\])(\\s+)(.+?)(?= - |$)",
       "beginCaptures": {
-        "2": { "name": "punctuation.definition.task.begin.scrawl" },
         "3": { "name": "constant.language.scrawl" },
-        "4": { "name": "punctuation.definition.task.end.scrawl" },
         "6": { "name": "constant.language.scrawl" }
       },
       "end": "$",

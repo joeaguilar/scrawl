@@ -203,7 +203,7 @@
         "1": { "name": "keyword.control.scrawl" }
       },
       "end": "$",
-      "contentName": "markup.list.task.urgent.level0.scrawl",
+      "contentName": "keyword.control.scrawl",
       "patterns": [{ "include": "#inline_content" }]
     },
     "task_priority_level1": {
@@ -213,7 +213,7 @@
         "2": { "name": "keyword.control.scrawl" }
       },
       "end": "$",
-      "contentName": "markup.list.task.urgent.level1.scrawl",
+      "contentName": "keyword.control.scrawl",
       "patterns": [{ "include": "#inline_content" }]
     },
     "task_priority_level2": {
@@ -223,7 +223,7 @@
         "2": { "name": "keyword.control.scrawl" }
       },
       "end": "$",
-      "contentName": "markup.list.task.urgent.level2.scrawl",
+      "contentName": "keyword.control.scrawl",
       "patterns": [{ "include": "#inline_content" }]
     },
     "task_priority_level3": {
@@ -233,7 +233,7 @@
         "2": { "name": "keyword.control.scrawl" }
       },
       "end": "$",
-      "contentName": "markup.list.task.urgent.level3.scrawl",
+      "contentName": "keyword.control.scrawl",
       "patterns": [{ "include": "#inline_content" }]
     },
 
@@ -243,7 +243,7 @@
         "1": { "name": "keyword.control.scrawl" }
       },
       "end": "$",
-      "contentName": "markup.list.task.urgent.level0.scrawl",
+      "contentName": "keyword.control.scrawl",
       "patterns": [{ "include": "#inline_content" }]
     },
     "task_urgent_level1": {
@@ -253,7 +253,7 @@
         "2": { "name": "keyword.control.scrawl" }
       },
       "end": "$",
-      "contentName": "markup.list.task.urgent.level1.scrawl",
+      "contentName": "keyword.control.scrawl",
       "patterns": [{ "include": "#inline_content" }]
     },
     "task_urgent_level2": {
@@ -263,7 +263,7 @@
         "2": { "name": "keyword.control.scrawl" }
       },
       "end": "$",
-      "contentName": "markup.list.task.urgent.level2.scrawl",
+      "contentName": "keyword.control.scrawl",
       "patterns": [{ "include": "#inline_content" }]
     },
     "task_urgent_level3": {
@@ -273,7 +273,7 @@
         "2": { "name": "keyword.control.scrawl" }
       },
       "end": "$",
-      "contentName": "markup.list.task.urgent.level3.scrawl",
+      "contentName": "keyword.control.scrawl",
       "patterns": [{ "include": "#inline_content" }]
     },
 
@@ -283,7 +283,7 @@
         "1": { "name": "constant.language.scrawl" }
       },
       "end": "$",
-      "contentName": "markup.list.task.inprogress.level0.scrawl",
+      "contentName": "constant.language.scrawl",
       "patterns": [{ "include": "#inline_content" }]
     },
     "task_inprogress_level1": {
@@ -293,7 +293,7 @@
         "2": { "name": "constant.language.scrawl" }
       },
       "end": "$",
-      "contentName": "markup.list.task.inprogress.level1.scrawl",
+      "contentName": "constant.language.scrawl",
       "patterns": [{ "include": "#inline_content" }]
     },
     "task_inprogress_level2": {
@@ -303,7 +303,7 @@
         "2": { "name": "constant.language.scrawl" }
       },
       "end": "$",
-      "contentName": "markup.list.task.inprogress.level2.scrawl",
+      "contentName": "constant.language.scrawl",
       "patterns": [{ "include": "#inline_content" }]
     },
     "task_inprogress_level3": {
@@ -313,7 +313,7 @@
         "2": { "name": "constant.language.scrawl" }
       },
       "end": "$",
-      "contentName": "markup.list.task.inprogress.level3.scrawl",
+      "contentName": "constant.language.scrawl",
       "patterns": [{ "include": "#inline_content" }]
     },
 
@@ -323,7 +323,7 @@
         "1": { "name": "string.scrawl" }
       },
       "end": "$",
-      "contentName": "markup.list.task.completed.level0.scrawl",
+      "contentName": "string.scrawl",
       "patterns": [{ "include": "#inline_content" }]
     },
     "task_completed_check_level1": {
@@ -333,7 +333,7 @@
         "2": { "name": "string.scrawl" }
       },
       "end": "$",
-      "contentName": "markup.list.task.completed.level1.scrawl",
+      "contentName": "string.scrawl",
       "patterns": [{ "include": "#inline_content" }]
     },
     "task_completed_check_level2": {
@@ -343,7 +343,7 @@
         "2": { "name": "string.scrawl" }
       },
       "end": "$",
-      "contentName": "markup.list.task.completed.level2.scrawl",
+      "contentName": "string.scrawl",
       "patterns": [{ "include": "#inline_content" }]
     },
     "task_completed_check_level3": {
@@ -353,7 +353,7 @@
         "2": { "name": "string.scrawl" }
       },
       "end": "$",
-      "contentName": "markup.list.task.completed.level3.scrawl",
+      "contentName": "string.scrawl",
       "patterns": [{ "include": "#inline_content" }]
     },
 
@@ -363,7 +363,7 @@
         "1": { "name": "string.scrawl" }
       },
       "end": "$",
-      "contentName": "markup.list.task.completed.level0.scrawl",
+      "contentName": "string.scrawl",
       "patterns": [{ "include": "#inline_content" }]
     },
     "task_completed_x_level1": {
@@ -373,7 +373,7 @@
         "2": { "name": "string.scrawl" }
       },
       "end": "$",
-      "contentName": "markup.list.task.completed.level1.scrawl",
+      "contentName": "string.scrawl",
       "patterns": [{ "include": "#inline_content" }]
     },
     "task_completed_x_level2": {
@@ -383,7 +383,7 @@
         "2": { "name": "string.scrawl" }
       },
       "end": "$",
-      "contentName": "markup.list.task.completed.level2.scrawl",
+      "contentName": "string.scrawl",
       "patterns": [{ "include": "#inline_content" }]
     },
     "task_completed_x_level3": {
@@ -393,7 +393,7 @@
         "2": { "name": "string.scrawl" }
       },
       "end": "$",
-      "contentName": "markup.list.task.completed.level3.scrawl",
+      "contentName": "string.scrawl",
       "patterns": [{ "include": "#inline_content" }]
     },
 
@@ -403,7 +403,7 @@
         "1": { "name": "comment.scrawl" }
       },
       "end": "$",
-      "contentName": "markup.list.task.skipped.level0.scrawl",
+      "contentName": "comment.scrawl",
       "patterns": [{ "include": "#inline_content" }]
     },
     "task_skipped_level1": {
@@ -413,7 +413,7 @@
         "2": { "name": "comment.scrawl" }
       },
       "end": "$",
-      "contentName": "markup.list.task.skipped.level1.scrawl",
+      "contentName": "comment.scrawl",
       "patterns": [{ "include": "#inline_content" }]
     },
     "task_skipped_level2": {
@@ -423,7 +423,7 @@
         "2": { "name": "comment.scrawl" }
       },
       "end": "$",
-      "contentName": "markup.list.task.skipped.level2.scrawl",
+      "contentName": "comment.scrawl",
       "patterns": [{ "include": "#inline_content" }]
     },
     "task_skipped_level3": {
@@ -433,7 +433,7 @@
         "2": { "name": "comment.scrawl" }
       },
       "end": "$",
-      "contentName": "markup.list.task.skipped.level3.scrawl",
+      "contentName": "comment.scrawl",
       "patterns": [{ "include": "#inline_content" }]
     },
 
@@ -443,7 +443,7 @@
         "1": { "name": "comment.scrawl" }
       },
       "end": "$",
-      "contentName": "markup.list.task.onhold.level0.scrawl",
+      "contentName": "comment.scrawl",
       "patterns": [{ "include": "#inline_content" }]
     },
     "task_onhold_level1": {
@@ -453,7 +453,7 @@
         "2": { "name": "comment.scrawl" }
       },
       "end": "$",
-      "contentName": "markup.list.task.onhold.level1.scrawl",
+      "contentName": "comment.scrawl",
       "patterns": [{ "include": "#inline_content" }]
     },
     "task_onhold_level2": {
@@ -463,7 +463,7 @@
         "2": { "name": "comment.scrawl" }
       },
       "end": "$",
-      "contentName": "markup.list.task.onhold.level2.scrawl",
+      "contentName": "comment.scrawl",
       "patterns": [{ "include": "#inline_content" }]
     },
     "task_onhold_level3": {
@@ -473,7 +473,7 @@
         "2": { "name": "comment.scrawl" }
       },
       "end": "$",
-      "contentName": "markup.list.task.onhold.level3.scrawl",
+      "contentName": "comment.scrawl",
       "patterns": [{ "include": "#inline_content" }]
     },
 
@@ -483,7 +483,7 @@
         "1": { "name": "entity.name.function.scrawl" }
       },
       "end": "$",
-      "contentName": "markup.list.task.added.level0.scrawl",
+      "contentName": "entity.name.function.scrawl",
       "patterns": [{ "include": "#inline_content" }]
     },
     "task_added_level1": {
@@ -493,7 +493,7 @@
         "2": { "name": "entity.name.function.scrawl" }
       },
       "end": "$",
-      "contentName": "markup.list.task.added.level1.scrawl",
+      "contentName": "entity.name.function.scrawl",
       "patterns": [{ "include": "#inline_content" }]
     },
     "task_added_level2": {
@@ -503,7 +503,7 @@
         "2": { "name": "entity.name.function.scrawl" }
       },
       "end": "$",
-      "contentName": "markup.list.task.added.level2.scrawl",
+      "contentName": "entity.name.function.scrawl",
       "patterns": [{ "include": "#inline_content" }]
     },
     "task_added_level3": {
@@ -513,7 +513,7 @@
         "2": { "name": "entity.name.function.scrawl" }
       },
       "end": "$",
-      "contentName": "markup.list.task.added.level3.scrawl",
+      "contentName": "entity.name.function.scrawl",
       "patterns": [{ "include": "#inline_content" }]
     },
 
@@ -523,7 +523,7 @@
         "1": { "name": "variable.scrawl" }
       },
       "end": "$",
-      "contentName": "markup.list.task.question.level0.scrawl",
+      "contentName": "variable.scrawl",
       "patterns": [{ "include": "#inline_content" }]
     },
     "task_question_level1": {
@@ -533,7 +533,7 @@
         "2": { "name": "variable.scrawl" }
       },
       "end": "$",
-      "contentName": "markup.list.task.question.level1.scrawl",
+      "contentName": "variable.scrawl",
       "patterns": [{ "include": "#inline_content" }]
     },
     "task_question_level2": {
@@ -543,7 +543,7 @@
         "2": { "name": "variable.scrawl" }
       },
       "end": "$",
-      "contentName": "markup.list.task.question.level2.scrawl",
+      "contentName": "variable.scrawl",
       "patterns": [{ "include": "#inline_content" }]
     },
     "task_question_level3": {
@@ -553,7 +553,7 @@
         "2": { "name": "variable.scrawl" }
       },
       "end": "$",
-      "contentName": "markup.list.task.question.level3.scrawl",
+      "contentName": "variable.scrawl",
       "patterns": [{ "include": "#inline_content" }]
     },
 
@@ -600,280 +600,231 @@
     "list_arrow_level0": {
       "begin": "^(->)\\s+",
       "beginCaptures": {
-        "1": { "name": "markup.list.arrow.marker.level0.scrawl" }
+        "1": { "name": "punctuation.definition.list.begin.scrawl" }
       },
       "end": "$",
-      "contentName": "markup.list.content.level0.scrawl",
       "patterns": [{ "include": "#inline_content" }]
     },
     "list_arrow_level1": {
       "begin": "^(    )(->)\\s+",
       "beginCaptures": {
-        "1": { "name": "markup.list.indent.scrawl" },
-        "2": { "name": "markup.list.arrow.marker.level1.scrawl" }
+        "2": { "name": "punctuation.definition.list.begin.scrawl" }
       },
       "end": "$",
-      "contentName": "markup.list.content.level1.scrawl",
       "patterns": [{ "include": "#inline_content" }]
     },
     "list_arrow_level2": {
       "begin": "^(        )(->)\\s+",
       "beginCaptures": {
-        "1": { "name": "markup.list.indent.scrawl" },
-        "2": { "name": "markup.list.arrow.marker.level2.scrawl" }
+        "2": { "name": "punctuation.definition.list.begin.scrawl" }
       },
       "end": "$",
-      "contentName": "markup.list.content.level2.scrawl",
       "patterns": [{ "include": "#inline_content" }]
     },
     "list_arrow_level3": {
       "begin": "^(            +)(->)\\s+",
       "beginCaptures": {
-        "1": { "name": "markup.list.indent.scrawl" },
-        "2": { "name": "markup.list.arrow.marker.level3.scrawl" }
+        "2": { "name": "punctuation.definition.list.begin.scrawl" }
       },
       "end": "$",
-      "contentName": "markup.list.content.level3.scrawl",
       "patterns": [{ "include": "#inline_content" }]
     },
 
     "list_thickarrow_level0": {
       "begin": "^(=>)\\s+",
       "beginCaptures": {
-        "1": { "name": "markup.list.thickarrow.marker.level0.scrawl" }
+        "1": { "name": "punctuation.definition.list.begin.scrawl" }
       },
       "end": "$",
-      "contentName": "markup.list.content.level0.scrawl",
       "patterns": [{ "include": "#inline_content" }]
     },
     "list_thickarrow_level1": {
       "begin": "^(    )(=>)\\s+",
       "beginCaptures": {
-        "1": { "name": "markup.list.indent.scrawl" },
-        "2": { "name": "markup.list.thickarrow.marker.level1.scrawl" }
+        "2": { "name": "punctuation.definition.list.begin.scrawl" }
       },
       "end": "$",
-      "contentName": "markup.list.content.level1.scrawl",
       "patterns": [{ "include": "#inline_content" }]
     },
     "list_thickarrow_level2": {
       "begin": "^(        )(=>)\\s+",
       "beginCaptures": {
-        "1": { "name": "markup.list.indent.scrawl" },
-        "2": { "name": "markup.list.thickarrow.marker.level2.scrawl" }
+        "2": { "name": "punctuation.definition.list.begin.scrawl" }
       },
       "end": "$",
-      "contentName": "markup.list.content.level2.scrawl",
       "patterns": [{ "include": "#inline_content" }]
     },
     "list_thickarrow_level3": {
       "begin": "^(            +)(=>)\\s+",
       "beginCaptures": {
-        "1": { "name": "markup.list.indent.scrawl" },
-        "2": { "name": "markup.list.thickarrow.marker.level3.scrawl" }
+        "2": { "name": "punctuation.definition.list.begin.scrawl" }
       },
       "end": "$",
-      "contentName": "markup.list.content.level3.scrawl",
       "patterns": [{ "include": "#inline_content" }]
     },
 
     "list_numbered_sub_level0": {
       "begin": "^(\\d+(?:\\.\\d+)+\\.)\\s+",
       "beginCaptures": {
-        "1": { "name": "markup.list.numbered.marker.level0.scrawl" }
+        "1": { "name": "punctuation.definition.list.begin.scrawl" }
       },
       "end": "$",
-      "contentName": "markup.list.content.level0.scrawl",
       "patterns": [{ "include": "#inline_content" }]
     },
     "list_numbered_sub_level1": {
       "begin": "^(    )(\\d+(?:\\.\\d+)+\\.)\\s+",
       "beginCaptures": {
-        "1": { "name": "markup.list.indent.scrawl" },
-        "2": { "name": "markup.list.numbered.marker.level1.scrawl" }
+        "2": { "name": "punctuation.definition.list.begin.scrawl" }
       },
       "end": "$",
-      "contentName": "markup.list.content.level1.scrawl",
       "patterns": [{ "include": "#inline_content" }]
     },
     "list_numbered_sub_level2": {
       "begin": "^(        )(\\d+(?:\\.\\d+)+\\.)\\s+",
       "beginCaptures": {
-        "1": { "name": "markup.list.indent.scrawl" },
-        "2": { "name": "markup.list.numbered.marker.level2.scrawl" }
+        "2": { "name": "punctuation.definition.list.begin.scrawl" }
       },
       "end": "$",
-      "contentName": "markup.list.content.level2.scrawl",
       "patterns": [{ "include": "#inline_content" }]
     },
     "list_numbered_sub_level3": {
       "begin": "^(            +)(\\d+(?:\\.\\d+)+\\.)\\s+",
       "beginCaptures": {
-        "1": { "name": "markup.list.indent.scrawl" },
-        "2": { "name": "markup.list.numbered.marker.level3.scrawl" }
+        "2": { "name": "punctuation.definition.list.begin.scrawl" }
       },
       "end": "$",
-      "contentName": "markup.list.content.level3.scrawl",
       "patterns": [{ "include": "#inline_content" }]
     },
 
     "list_numbered_level0": {
       "begin": "^(\\d+\\.)\\s+",
       "beginCaptures": {
-        "1": { "name": "markup.list.numbered.marker.level0.scrawl" }
+        "1": { "name": "punctuation.definition.list.begin.scrawl" }
       },
       "end": "$",
-      "contentName": "markup.list.content.level0.scrawl",
       "patterns": [{ "include": "#inline_content" }]
     },
     "list_numbered_level1": {
       "begin": "^(    )(\\d+\\.)\\s+",
       "beginCaptures": {
-        "1": { "name": "markup.list.indent.scrawl" },
-        "2": { "name": "markup.list.numbered.marker.level1.scrawl" }
+        "2": { "name": "punctuation.definition.list.begin.scrawl" }
       },
       "end": "$",
-      "contentName": "markup.list.content.level1.scrawl",
       "patterns": [{ "include": "#inline_content" }]
     },
     "list_numbered_level2": {
       "begin": "^(        )(\\d+\\.)\\s+",
       "beginCaptures": {
-        "1": { "name": "markup.list.indent.scrawl" },
-        "2": { "name": "markup.list.numbered.marker.level2.scrawl" }
+        "2": { "name": "punctuation.definition.list.begin.scrawl" }
       },
       "end": "$",
-      "contentName": "markup.list.content.level2.scrawl",
       "patterns": [{ "include": "#inline_content" }]
     },
     "list_numbered_level3": {
       "begin": "^(            +)(\\d+\\.)\\s+",
       "beginCaptures": {
-        "1": { "name": "markup.list.indent.scrawl" },
-        "2": { "name": "markup.list.numbered.marker.level3.scrawl" }
+        "2": { "name": "punctuation.definition.list.begin.scrawl" }
       },
       "end": "$",
-      "contentName": "markup.list.content.level3.scrawl",
       "patterns": [{ "include": "#inline_content" }]
     },
 
     "list_dash_level0": {
       "begin": "^(-)\\s+",
       "beginCaptures": {
-        "1": { "name": "markup.list.dash.marker.level0.scrawl" }
+        "1": { "name": "punctuation.definition.list.begin.scrawl" }
       },
       "end": "$",
-      "contentName": "markup.list.content.level0.scrawl",
       "patterns": [{ "include": "#inline_content" }]
     },
     "list_dash_level1": {
       "begin": "^(    )(-)\\s+",
       "beginCaptures": {
-        "1": { "name": "markup.list.indent.scrawl" },
-        "2": { "name": "markup.list.dash.marker.level1.scrawl" }
+        "2": { "name": "punctuation.definition.list.begin.scrawl" }
       },
       "end": "$",
-      "contentName": "markup.list.content.level1.scrawl",
       "patterns": [{ "include": "#inline_content" }]
     },
     "list_dash_level2": {
       "begin": "^(        )(-)\\s+",
       "beginCaptures": {
-        "1": { "name": "markup.list.indent.scrawl" },
-        "2": { "name": "markup.list.dash.marker.level2.scrawl" }
+        "2": { "name": "punctuation.definition.list.begin.scrawl" }
       },
       "end": "$",
-      "contentName": "markup.list.content.level2.scrawl",
       "patterns": [{ "include": "#inline_content" }]
     },
     "list_dash_level3": {
       "begin": "^(            +)(-)\\s+",
       "beginCaptures": {
-        "1": { "name": "markup.list.indent.scrawl" },
-        "2": { "name": "markup.list.dash.marker.level3.scrawl" }
+        "2": { "name": "punctuation.definition.list.begin.scrawl" }
       },
       "end": "$",
-      "contentName": "markup.list.content.level3.scrawl",
       "patterns": [{ "include": "#inline_content" }]
     },
 
     "list_asterisk_level0": {
       "begin": "^(\\*)\\s+",
       "beginCaptures": {
-        "1": { "name": "markup.list.asterisk.marker.level0.scrawl" }
+        "1": { "name": "punctuation.definition.list.begin.scrawl" }
       },
       "end": "$",
-      "contentName": "markup.list.content.level0.scrawl",
       "patterns": [{ "include": "#inline_content" }]
     },
     "list_asterisk_level1": {
       "begin": "^(    )(\\*)\\s+",
       "beginCaptures": {
-        "1": { "name": "markup.list.indent.scrawl" },
-        "2": { "name": "markup.list.asterisk.marker.level1.scrawl" }
+        "2": { "name": "punctuation.definition.list.begin.scrawl" }
       },
       "end": "$",
-      "contentName": "markup.list.content.level1.scrawl",
       "patterns": [{ "include": "#inline_content" }]
     },
     "list_asterisk_level2": {
       "begin": "^(        )(\\*)\\s+",
       "beginCaptures": {
-        "1": { "name": "markup.list.indent.scrawl" },
-        "2": { "name": "markup.list.asterisk.marker.level2.scrawl" }
+        "2": { "name": "punctuation.definition.list.begin.scrawl" }
       },
       "end": "$",
-      "contentName": "markup.list.content.level2.scrawl",
       "patterns": [{ "include": "#inline_content" }]
     },
     "list_asterisk_level3": {
       "begin": "^(            +)(\\*)\\s+",
       "beginCaptures": {
-        "1": { "name": "markup.list.indent.scrawl" },
-        "2": { "name": "markup.list.asterisk.marker.level3.scrawl" }
+        "2": { "name": "punctuation.definition.list.begin.scrawl" }
       },
       "end": "$",
-      "contentName": "markup.list.content.level3.scrawl",
       "patterns": [{ "include": "#inline_content" }]
     },
 
     "list_bullet_level0": {
       "begin": "^(•)\\s+",
       "beginCaptures": {
-        "1": { "name": "markup.list.bullet.marker.level0.scrawl" }
+        "1": { "name": "punctuation.definition.list.begin.scrawl" }
       },
       "end": "$",
-      "contentName": "markup.list.content.level0.scrawl",
       "patterns": [{ "include": "#inline_content" }]
     },
     "list_bullet_level1": {
       "begin": "^(    )(•)\\s+",
       "beginCaptures": {
-        "1": { "name": "markup.list.indent.scrawl" },
-        "2": { "name": "markup.list.bullet.marker.level1.scrawl" }
+        "2": { "name": "punctuation.definition.list.begin.scrawl" }
       },
       "end": "$",
-      "contentName": "markup.list.content.level1.scrawl",
       "patterns": [{ "include": "#inline_content" }]
     },
     "list_bullet_level2": {
       "begin": "^(        )(•)\\s+",
       "beginCaptures": {
-        "1": { "name": "markup.list.indent.scrawl" },
-        "2": { "name": "markup.list.bullet.marker.level2.scrawl" }
+        "2": { "name": "punctuation.definition.list.begin.scrawl" }
       },
       "end": "$",
-      "contentName": "markup.list.content.level2.scrawl",
       "patterns": [{ "include": "#inline_content" }]
     },
     "list_bullet_level3": {
       "begin": "^(            +)(•)\\s+",
       "beginCaptures": {
-        "1": { "name": "markup.list.indent.scrawl" },
-        "2": { "name": "markup.list.bullet.marker.level3.scrawl" }
+        "2": { "name": "punctuation.definition.list.begin.scrawl" }
       },
       "end": "$",
-      "contentName": "markup.list.content.level3.scrawl",
       "patterns": [{ "include": "#inline_content" }]
     },
 

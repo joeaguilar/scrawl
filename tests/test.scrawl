@@ -75,11 +75,11 @@ const foo = "bar";
             - Even deeper dash level 3+
 
 ##List Styles - Arrow##
-
--> Arrow list shows flow
--> Another arrow item
-    -> Nested arrow level 1
-        -> Deep arrow level 2
+Items:
+    -> Arrow list shows flow
+    -> Another arrow item
+        -> Nested arrow level 1
+            -> Deep arrow level 2
 
 ##List Styles - Thick Arrow##
 
@@ -119,6 +119,39 @@ const foo = "bar";
 • Bullet item 2
     • Nested bullet
         • Deep bullet
+
+
+##List of items (Arrow, Thick Arrow, Numbered)##
+List of items:
+    -> Items
+    √ -> Items
+    • -> Items
+
+	-> This is an item
+	√ -> This was also an item
+	• -> This is also an item
+
+List Styles - Arrow
+	-> Arrow list shows flow
+	-> Another arrow item
+		-> Nested arrow level 1
+			-> Deep arrow level 2
+
+List Styles - Thick Arrow
+	=> Thick arrow for emphasis
+	=> Strong point here
+		=> Nested thick arrow
+			=> Deep thick arrow
+
+List Styles - Numbered
+	1. First item
+	2. Second item
+	3. Third item
+		1. Nested first
+		2. Nested second
+			1. Deep nested
+			2. Another deep
+
 
 ##Phase 2 - Inline Content##
 

@@ -3,7 +3,6 @@
   "name": "Scrawl",
   "patterns": [
     { "include": "#header_block_specific" },
-    { "include": "#header_block_simple" },
     { "include": "#section_folding" },
     { "include": "#fenced_code_block_typescript" },
     { "include": "#fenced_code_block_javascript" },
@@ -100,19 +99,26 @@
   ],
   "repository": {
     "header_block_specific": {
-      "match": "/\\*\\s*\\n\\s*\\*-*\\s*\\n\\s*\\*\\s*/+\\s*\\n\\s*\\*\\s*\\d+/\\d+/\\d+\\s*\\w+\\s*\\n\\s*\\*\\s*/+\\s*\\n\\s*\\*-*\\s*\\n\\s*\\*/",
-      "name": "punctuation.definition.comment.block"
-    },
-    "header_block_simple": {
+      "comment": "Date header block - everything grey except the date",
       "begin": "/\\*",
       "beginCaptures": {
-        "0": { "name": "punctuation.definition.comment.block.begin" }
+        "0": { "name": "comment.block.scrawl" }
       },
       "end": "\\*/",
       "endCaptures": {
-        "0": { "name": "punctuation.definition.comment.block.end" }
+        "0": { "name": "comment.block.scrawl" }
       },
-      "contentName": "comment.block markup.heading.note-header"
+      "name": "comment.block.scrawl",
+      "patterns": [
+        {
+          "comment": "Date line with day name - highlight just the date and day",
+          "match": "(\\d{1,2}/\\d{1,2}/\\d{4})\\s*(\\w+)?",
+          "captures": {
+            "1": { "name": "constant.numeric.date.scrawl" },
+            "2": { "name": "constant.numeric.date.scrawl" }
+          }
+        }
+      ]
     },
     "section_folding": {
       "match": "(##)([a-zA-Z0-9- \\t]+)(##)",
@@ -198,402 +204,380 @@
     },
 
     "task_priority_level0": {
-      "begin": "^(\\[![0-3]\\])\\s+",
+      "begin": "^(\\[![0-3]\\])(\\s+)(.+?)(?= - |$)",
       "beginCaptures": {
-        "1": { "name": "keyword.control.scrawl" }
+        "1": { "name": "keyword.control.scrawl" },
+        "3": { "name": "keyword.control.scrawl" }
       },
       "end": "$",
-      "contentName": "keyword.control.scrawl",
       "patterns": [{ "include": "#inline_content" }]
     },
     "task_priority_level1": {
-      "begin": "^(    )(\\[![0-3]\\])\\s+",
+      "begin": "^(    )(\\[![0-3]\\])(\\s+)(.+?)(?= - |$)",
       "beginCaptures": {
-        "1": { "name": "markup.list.task.indent.scrawl" },
-        "2": { "name": "keyword.control.scrawl" }
+        "2": { "name": "keyword.control.scrawl" },
+        "4": { "name": "keyword.control.scrawl" }
       },
       "end": "$",
-      "contentName": "keyword.control.scrawl",
       "patterns": [{ "include": "#inline_content" }]
     },
     "task_priority_level2": {
-      "begin": "^(        )(\\[![0-3]\\])\\s+",
+      "begin": "^(        )(\\[![0-3]\\])(\\s+)(.+?)(?= - |$)",
       "beginCaptures": {
-        "1": { "name": "markup.list.task.indent.scrawl" },
-        "2": { "name": "keyword.control.scrawl" }
+        "2": { "name": "keyword.control.scrawl" },
+        "4": { "name": "keyword.control.scrawl" }
       },
       "end": "$",
-      "contentName": "keyword.control.scrawl",
       "patterns": [{ "include": "#inline_content" }]
     },
     "task_priority_level3": {
-      "begin": "^(            +)(\\[![0-3]\\])\\s+",
+      "begin": "^(            +)(\\[![0-3]\\])(\\s+)(.+?)(?= - |$)",
       "beginCaptures": {
-        "1": { "name": "markup.list.task.indent.scrawl" },
-        "2": { "name": "keyword.control.scrawl" }
+        "2": { "name": "keyword.control.scrawl" },
+        "4": { "name": "keyword.control.scrawl" }
       },
       "end": "$",
-      "contentName": "keyword.control.scrawl",
       "patterns": [{ "include": "#inline_content" }]
     },
 
     "task_urgent_level0": {
-      "begin": "^(\\[!\\])\\s+",
+      "begin": "^(\\[!\\])(\\s+)(.+?)(?= - |$)",
       "beginCaptures": {
-        "1": { "name": "keyword.control.scrawl" }
+        "1": { "name": "keyword.control.scrawl" },
+        "3": { "name": "keyword.control.scrawl" }
       },
       "end": "$",
-      "contentName": "keyword.control.scrawl",
       "patterns": [{ "include": "#inline_content" }]
     },
     "task_urgent_level1": {
-      "begin": "^(    )(\\[!\\])\\s+",
+      "begin": "^(    )(\\[!\\])(\\s+)(.+?)(?= - |$)",
       "beginCaptures": {
-        "1": { "name": "markup.list.task.indent.scrawl" },
-        "2": { "name": "keyword.control.scrawl" }
+        "2": { "name": "keyword.control.scrawl" },
+        "4": { "name": "keyword.control.scrawl" }
       },
       "end": "$",
-      "contentName": "keyword.control.scrawl",
       "patterns": [{ "include": "#inline_content" }]
     },
     "task_urgent_level2": {
-      "begin": "^(        )(\\[!\\])\\s+",
+      "begin": "^(        )(\\[!\\])(\\s+)(.+?)(?= - |$)",
       "beginCaptures": {
-        "1": { "name": "markup.list.task.indent.scrawl" },
-        "2": { "name": "keyword.control.scrawl" }
+        "2": { "name": "keyword.control.scrawl" },
+        "4": { "name": "keyword.control.scrawl" }
       },
       "end": "$",
-      "contentName": "keyword.control.scrawl",
       "patterns": [{ "include": "#inline_content" }]
     },
     "task_urgent_level3": {
-      "begin": "^(            +)(\\[!\\])\\s+",
+      "begin": "^(            +)(\\[!\\])(\\s+)(.+?)(?= - |$)",
       "beginCaptures": {
-        "1": { "name": "markup.list.task.indent.scrawl" },
-        "2": { "name": "keyword.control.scrawl" }
+        "2": { "name": "keyword.control.scrawl" },
+        "4": { "name": "keyword.control.scrawl" }
       },
       "end": "$",
-      "contentName": "keyword.control.scrawl",
       "patterns": [{ "include": "#inline_content" }]
     },
 
     "task_inprogress_level0": {
-      "begin": "^(\\[•\\])\\s+",
+      "begin": "^(\\[•\\])(\\s+)(.+?)(?= - |$)",
       "beginCaptures": {
-        "1": { "name": "constant.language.scrawl" }
+        "1": { "name": "constant.language.scrawl" },
+        "3": { "name": "constant.language.scrawl" }
       },
       "end": "$",
-      "contentName": "constant.language.scrawl",
       "patterns": [{ "include": "#inline_content" }]
     },
     "task_inprogress_level1": {
-      "begin": "^(    )(\\[•\\])\\s+",
+      "begin": "^(    )(\\[•\\])(\\s+)(.+?)(?= - |$)",
       "beginCaptures": {
-        "1": { "name": "markup.list.task.indent.scrawl" },
-        "2": { "name": "constant.language.scrawl" }
+        "2": { "name": "constant.language.scrawl" },
+        "4": { "name": "constant.language.scrawl" }
       },
       "end": "$",
-      "contentName": "constant.language.scrawl",
       "patterns": [{ "include": "#inline_content" }]
     },
     "task_inprogress_level2": {
-      "begin": "^(        )(\\[•\\])\\s+",
+      "begin": "^(        )(\\[•\\])(\\s+)(.+?)(?= - |$)",
       "beginCaptures": {
-        "1": { "name": "markup.list.task.indent.scrawl" },
-        "2": { "name": "constant.language.scrawl" }
+        "2": { "name": "constant.language.scrawl" },
+        "4": { "name": "constant.language.scrawl" }
       },
       "end": "$",
-      "contentName": "constant.language.scrawl",
       "patterns": [{ "include": "#inline_content" }]
     },
     "task_inprogress_level3": {
-      "begin": "^(            +)(\\[•\\])\\s+",
+      "begin": "^(            +)(\\[•\\])(\\s+)(.+?)(?= - |$)",
       "beginCaptures": {
-        "1": { "name": "markup.list.task.indent.scrawl" },
-        "2": { "name": "constant.language.scrawl" }
+        "2": { "name": "constant.language.scrawl" },
+        "4": { "name": "constant.language.scrawl" }
       },
       "end": "$",
-      "contentName": "constant.language.scrawl",
       "patterns": [{ "include": "#inline_content" }]
     },
 
     "task_completed_check_level0": {
-      "begin": "^(\\[√\\])\\s+",
+      "begin": "^(\\[√\\])(\\s+)(.+?)(?= - |$)",
       "beginCaptures": {
-        "1": { "name": "string.scrawl" }
+        "1": { "name": "string.scrawl" },
+        "3": { "name": "string.scrawl" }
       },
       "end": "$",
-      "contentName": "string.scrawl",
       "patterns": [{ "include": "#inline_content" }]
     },
     "task_completed_check_level1": {
-      "begin": "^(    )(\\[√\\])\\s+",
+      "begin": "^(    )(\\[√\\])(\\s+)(.+?)(?= - |$)",
       "beginCaptures": {
-        "1": { "name": "markup.list.task.indent.scrawl" },
-        "2": { "name": "string.scrawl" }
+        "2": { "name": "string.scrawl" },
+        "4": { "name": "string.scrawl" }
       },
       "end": "$",
-      "contentName": "string.scrawl",
       "patterns": [{ "include": "#inline_content" }]
     },
     "task_completed_check_level2": {
-      "begin": "^(        )(\\[√\\])\\s+",
+      "begin": "^(        )(\\[√\\])(\\s+)(.+?)(?= - |$)",
       "beginCaptures": {
-        "1": { "name": "markup.list.task.indent.scrawl" },
-        "2": { "name": "string.scrawl" }
+        "2": { "name": "string.scrawl" },
+        "4": { "name": "string.scrawl" }
       },
       "end": "$",
-      "contentName": "string.scrawl",
       "patterns": [{ "include": "#inline_content" }]
     },
     "task_completed_check_level3": {
-      "begin": "^(            +)(\\[√\\])\\s+",
+      "begin": "^(            +)(\\[√\\])(\\s+)(.+?)(?= - |$)",
       "beginCaptures": {
-        "1": { "name": "markup.list.task.indent.scrawl" },
-        "2": { "name": "string.scrawl" }
+        "2": { "name": "string.scrawl" },
+        "4": { "name": "string.scrawl" }
       },
       "end": "$",
-      "contentName": "string.scrawl",
       "patterns": [{ "include": "#inline_content" }]
     },
 
     "task_completed_x_level0": {
-      "begin": "^(\\[x\\])\\s+",
+      "begin": "^(\\[x\\])(\\s+)(.+?)(?= - |$)",
       "beginCaptures": {
-        "1": { "name": "string.scrawl" }
+        "1": { "name": "string.scrawl" },
+        "3": { "name": "string.scrawl" }
       },
       "end": "$",
-      "contentName": "string.scrawl",
       "patterns": [{ "include": "#inline_content" }]
     },
     "task_completed_x_level1": {
-      "begin": "^(    )(\\[x\\])\\s+",
+      "begin": "^(    )(\\[x\\])(\\s+)(.+?)(?= - |$)",
       "beginCaptures": {
-        "1": { "name": "markup.list.task.indent.scrawl" },
-        "2": { "name": "string.scrawl" }
+        "2": { "name": "string.scrawl" },
+        "4": { "name": "string.scrawl" }
       },
       "end": "$",
-      "contentName": "string.scrawl",
       "patterns": [{ "include": "#inline_content" }]
     },
     "task_completed_x_level2": {
-      "begin": "^(        )(\\[x\\])\\s+",
+      "begin": "^(        )(\\[x\\])(\\s+)(.+?)(?= - |$)",
       "beginCaptures": {
-        "1": { "name": "markup.list.task.indent.scrawl" },
-        "2": { "name": "string.scrawl" }
+        "2": { "name": "string.scrawl" },
+        "4": { "name": "string.scrawl" }
       },
       "end": "$",
-      "contentName": "string.scrawl",
       "patterns": [{ "include": "#inline_content" }]
     },
     "task_completed_x_level3": {
-      "begin": "^(            +)(\\[x\\])\\s+",
+      "begin": "^(            +)(\\[x\\])(\\s+)(.+?)(?= - |$)",
       "beginCaptures": {
-        "1": { "name": "markup.list.task.indent.scrawl" },
-        "2": { "name": "string.scrawl" }
+        "2": { "name": "string.scrawl" },
+        "4": { "name": "string.scrawl" }
       },
       "end": "$",
-      "contentName": "string.scrawl",
       "patterns": [{ "include": "#inline_content" }]
     },
 
     "task_skipped_level0": {
-      "begin": "^(\\[-\\])\\s+",
+      "begin": "^(\\[-\\])(\\s+)(.+?)(?= - |$)",
       "beginCaptures": {
-        "1": { "name": "comment.scrawl" }
+        "1": { "name": "comment.scrawl" },
+        "3": { "name": "comment.scrawl" }
       },
       "end": "$",
-      "contentName": "comment.scrawl",
       "patterns": [{ "include": "#inline_content" }]
     },
     "task_skipped_level1": {
-      "begin": "^(    )(\\[-\\])\\s+",
+      "begin": "^(    )(\\[-\\])(\\s+)(.+?)(?= - |$)",
       "beginCaptures": {
-        "1": { "name": "markup.list.task.indent.scrawl" },
-        "2": { "name": "comment.scrawl" }
+        "2": { "name": "comment.scrawl" },
+        "4": { "name": "comment.scrawl" }
       },
       "end": "$",
-      "contentName": "comment.scrawl",
       "patterns": [{ "include": "#inline_content" }]
     },
     "task_skipped_level2": {
-      "begin": "^(        )(\\[-\\])\\s+",
+      "begin": "^(        )(\\[-\\])(\\s+)(.+?)(?= - |$)",
       "beginCaptures": {
-        "1": { "name": "markup.list.task.indent.scrawl" },
-        "2": { "name": "comment.scrawl" }
+        "2": { "name": "comment.scrawl" },
+        "4": { "name": "comment.scrawl" }
       },
       "end": "$",
-      "contentName": "comment.scrawl",
       "patterns": [{ "include": "#inline_content" }]
     },
     "task_skipped_level3": {
-      "begin": "^(            +)(\\[-\\])\\s+",
+      "begin": "^(            +)(\\[-\\])(\\s+)(.+?)(?= - |$)",
       "beginCaptures": {
-        "1": { "name": "markup.list.task.indent.scrawl" },
-        "2": { "name": "comment.scrawl" }
+        "2": { "name": "comment.scrawl" },
+        "4": { "name": "comment.scrawl" }
       },
       "end": "$",
-      "contentName": "comment.scrawl",
       "patterns": [{ "include": "#inline_content" }]
     },
 
     "task_onhold_level0": {
-      "begin": "^(\\[\\.\\])\\s+",
+      "begin": "^(\\[\\.\\])(\\s+)(.+?)(?= - |$)",
       "beginCaptures": {
-        "1": { "name": "comment.scrawl" }
+        "1": { "name": "comment.scrawl" },
+        "3": { "name": "comment.scrawl" }
       },
       "end": "$",
-      "contentName": "comment.scrawl",
       "patterns": [{ "include": "#inline_content" }]
     },
     "task_onhold_level1": {
-      "begin": "^(    )(\\[\\.\\])\\s+",
+      "begin": "^(    )(\\[\\.\\])(\\s+)(.+?)(?= - |$)",
       "beginCaptures": {
-        "1": { "name": "markup.list.task.indent.scrawl" },
-        "2": { "name": "comment.scrawl" }
+        "2": { "name": "comment.scrawl" },
+        "4": { "name": "comment.scrawl" }
       },
       "end": "$",
-      "contentName": "comment.scrawl",
       "patterns": [{ "include": "#inline_content" }]
     },
     "task_onhold_level2": {
-      "begin": "^(        )(\\[\\.\\])\\s+",
+      "begin": "^(        )(\\[\\.\\])(\\s+)(.+?)(?= - |$)",
       "beginCaptures": {
-        "1": { "name": "markup.list.task.indent.scrawl" },
-        "2": { "name": "comment.scrawl" }
+        "2": { "name": "comment.scrawl" },
+        "4": { "name": "comment.scrawl" }
       },
       "end": "$",
-      "contentName": "comment.scrawl",
       "patterns": [{ "include": "#inline_content" }]
     },
     "task_onhold_level3": {
-      "begin": "^(            +)(\\[\\.\\])\\s+",
+      "begin": "^(            +)(\\[\\.\\])(\\s+)(.+?)(?= - |$)",
       "beginCaptures": {
-        "1": { "name": "markup.list.task.indent.scrawl" },
-        "2": { "name": "comment.scrawl" }
+        "2": { "name": "comment.scrawl" },
+        "4": { "name": "comment.scrawl" }
       },
       "end": "$",
-      "contentName": "comment.scrawl",
       "patterns": [{ "include": "#inline_content" }]
     },
 
     "task_added_level0": {
-      "begin": "^(\\[\\+\\])\\s+",
+      "begin": "^(\\[\\+\\])(\\s+)(.+?)(?= - |$)",
       "beginCaptures": {
-        "1": { "name": "entity.name.function.scrawl" }
+        "1": { "name": "entity.name.function.scrawl" },
+        "3": { "name": "entity.name.function.scrawl" }
       },
       "end": "$",
-      "contentName": "entity.name.function.scrawl",
       "patterns": [{ "include": "#inline_content" }]
     },
     "task_added_level1": {
-      "begin": "^(    )(\\[\\+\\])\\s+",
+      "begin": "^(    )(\\[\\+\\])(\\s+)(.+?)(?= - |$)",
       "beginCaptures": {
-        "1": { "name": "markup.list.task.indent.scrawl" },
-        "2": { "name": "entity.name.function.scrawl" }
+        "2": { "name": "entity.name.function.scrawl" },
+        "4": { "name": "entity.name.function.scrawl" }
       },
       "end": "$",
-      "contentName": "entity.name.function.scrawl",
       "patterns": [{ "include": "#inline_content" }]
     },
     "task_added_level2": {
-      "begin": "^(        )(\\[\\+\\])\\s+",
+      "begin": "^(        )(\\[\\+\\])(\\s+)(.+?)(?= - |$)",
       "beginCaptures": {
-        "1": { "name": "markup.list.task.indent.scrawl" },
-        "2": { "name": "entity.name.function.scrawl" }
+        "2": { "name": "entity.name.function.scrawl" },
+        "4": { "name": "entity.name.function.scrawl" }
       },
       "end": "$",
-      "contentName": "entity.name.function.scrawl",
       "patterns": [{ "include": "#inline_content" }]
     },
     "task_added_level3": {
-      "begin": "^(            +)(\\[\\+\\])\\s+",
+      "begin": "^(            +)(\\[\\+\\])(\\s+)(.+?)(?= - |$)",
       "beginCaptures": {
-        "1": { "name": "markup.list.task.indent.scrawl" },
-        "2": { "name": "entity.name.function.scrawl" }
+        "2": { "name": "entity.name.function.scrawl" },
+        "4": { "name": "entity.name.function.scrawl" }
       },
       "end": "$",
-      "contentName": "entity.name.function.scrawl",
       "patterns": [{ "include": "#inline_content" }]
     },
 
     "task_question_level0": {
-      "begin": "^(\\[\\?\\])\\s+",
+      "begin": "^(\\[\\?\\])(\\s+)(.+?)(?= - |$)",
       "beginCaptures": {
-        "1": { "name": "variable.scrawl" }
+        "1": { "name": "variable.scrawl" },
+        "3": { "name": "variable.scrawl" }
       },
       "end": "$",
-      "contentName": "variable.scrawl",
       "patterns": [{ "include": "#inline_content" }]
     },
     "task_question_level1": {
-      "begin": "^(    )(\\[\\?\\])\\s+",
+      "begin": "^(    )(\\[\\?\\])(\\s+)(.+?)(?= - |$)",
       "beginCaptures": {
-        "1": { "name": "markup.list.task.indent.scrawl" },
-        "2": { "name": "variable.scrawl" }
+        "2": { "name": "variable.scrawl" },
+        "4": { "name": "variable.scrawl" }
       },
       "end": "$",
-      "contentName": "variable.scrawl",
       "patterns": [{ "include": "#inline_content" }]
     },
     "task_question_level2": {
-      "begin": "^(        )(\\[\\?\\])\\s+",
+      "begin": "^(        )(\\[\\?\\])(\\s+)(.+?)(?= - |$)",
       "beginCaptures": {
-        "1": { "name": "markup.list.task.indent.scrawl" },
-        "2": { "name": "variable.scrawl" }
+        "2": { "name": "variable.scrawl" },
+        "4": { "name": "variable.scrawl" }
       },
       "end": "$",
-      "contentName": "variable.scrawl",
       "patterns": [{ "include": "#inline_content" }]
     },
     "task_question_level3": {
-      "begin": "^(            +)(\\[\\?\\])\\s+",
+      "begin": "^(            +)(\\[\\?\\])(\\s+)(.+?)(?= - |$)",
       "beginCaptures": {
-        "1": { "name": "markup.list.task.indent.scrawl" },
-        "2": { "name": "variable.scrawl" }
+        "2": { "name": "variable.scrawl" },
+        "4": { "name": "variable.scrawl" }
       },
       "end": "$",
-      "contentName": "variable.scrawl",
       "patterns": [{ "include": "#inline_content" }]
     },
 
     "task_unchecked_level0": {
-      "begin": "^(\\[ \\])\\s+",
+      "begin": "^(\\[)( )(\\])(\\s+)(.+?)(?= - |$)",
       "beginCaptures": {
-        "1": { "name": "markup.list.unnumbered.scrawl" }
+        "1": { "name": "punctuation.definition.task.begin.scrawl" },
+        "2": { "name": "constant.language.scrawl" },
+        "3": { "name": "punctuation.definition.task.end.scrawl" },
+        "5": { "name": "constant.language.scrawl" }
       },
       "end": "$",
-      "contentName": "markup.list.task.unchecked.level0.scrawl",
       "patterns": [{ "include": "#inline_content" }]
     },
     "task_unchecked_level1": {
-      "begin": "^(    )(\\[ \\])\\s+",
+      "begin": "^(    )(\\[)( )(\\])(\\s+)(.+?)(?= - |$)",
       "beginCaptures": {
-        "1": { "name": "markup.list.task.indent.scrawl" },
-        "2": { "name": "markup.list.unnumbered.scrawl" }
+        "2": { "name": "punctuation.definition.task.begin.scrawl" },
+        "3": { "name": "constant.language.scrawl" },
+        "4": { "name": "punctuation.definition.task.end.scrawl" },
+        "6": { "name": "constant.language.scrawl" }
       },
       "end": "$",
-      "contentName": "markup.list.task.unchecked.level1.scrawl",
       "patterns": [{ "include": "#inline_content" }]
     },
     "task_unchecked_level2": {
-      "begin": "^(        )(\\[ \\])\\s+",
+      "begin": "^(        )(\\[)( )(\\])(\\s+)(.+?)(?= - |$)",
       "beginCaptures": {
-        "1": { "name": "markup.list.task.indent.scrawl" },
-        "2": { "name": "markup.list.unnumbered.scrawl" }
+        "2": { "name": "punctuation.definition.task.begin.scrawl" },
+        "3": { "name": "constant.language.scrawl" },
+        "4": { "name": "punctuation.definition.task.end.scrawl" },
+        "6": { "name": "constant.language.scrawl" }
       },
       "end": "$",
-      "contentName": "markup.list.task.unchecked.level2.scrawl",
       "patterns": [{ "include": "#inline_content" }]
     },
     "task_unchecked_level3": {
-      "begin": "^(            +)(\\[ \\])\\s+",
+      "begin": "^(            +)(\\[)( )(\\])(\\s+)(.+?)(?= - |$)",
       "beginCaptures": {
-        "1": { "name": "markup.list.task.indent.scrawl" },
-        "2": { "name": "markup.list.unnumbered.scrawl" }
+        "2": { "name": "punctuation.definition.task.begin.scrawl" },
+        "3": { "name": "constant.language.scrawl" },
+        "4": { "name": "punctuation.definition.task.end.scrawl" },
+        "6": { "name": "constant.language.scrawl" }
       },
       "end": "$",
-      "contentName": "markup.list.task.unchecked.level3.scrawl",
       "patterns": [{ "include": "#inline_content" }]
     },
 

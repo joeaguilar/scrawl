@@ -36,8 +36,8 @@ const foo = "bar";
     [x] Level 1 completed with x
     [!] Level 1 urgent task
     [-] Level 1 skipped task
-    [.] Level 1 on hold task
-    [+] Level 1 added task
+    [.] Level 1 on hold task - paused for now
+    [+] Level 1 added task - newly added
     [?] Level 1 question task
 
 ##Task States - Level 2 (8 spaces)##

@@ -22,20 +22,16 @@ variables:
 
 contexts:
   main:
-    # Header block highlighting - both specific format and general format
-    - match: '/\*\s*\n\s*\*-*\s*\n\s*\*\s*/+\s*\n\s*\*\s*\d+/\d+/\d+\s*\w+\s*\n\s*\*\s*/+\s*\n\s*\*-*\s*\n\s*\*/'
-      scope: punctuation.definition.comment.block
-      push: header_block
+    # Decorative date header block - matches the specific format with dashes and slashes
+    # Uses begin/end for multi-line matching
+    - match: '/\*\s*$'
+      scope: punctuation.definition.comment.block.begin.scrawl
+      push: maybe_date_header
 
-    # Also match simpler header blocks
-    - match: '/\*'
-      scope: punctuation.definition.comment.block.begin
-      push:
-        - clear_scopes: true
-        - match: '\*/'
-          scope: punctuation.definition.comment.block.end
-          pop: true
-        - include: header_content
+    # Regular block comments (for inline /* ... */ on single line)
+    - match: '/\*(?!\s*$)'
+      scope: punctuation.definition.comment.block.begin.scrawl
+      push: block_comment
 
     # Section folding markers
     - match: "(##)([a-zA-Z0-9- \t]+)(##)"
@@ -44,13 +40,6 @@ contexts:
         1: punctuation.definition.tag.begin
         2: entity.name.tag
         3: punctuation.definition.tag.end
-
-    # URL highlighting
-    - match: '(https?:\/\/|www\.)[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)+(\/[^\s\(\)\[\]]*)?'
-      scope: markup.underline.link.url
-      captures:
-        1: markup.underline.link.protocol
-        2: markup.underline.link.domain
 
     # Fenced code blocks with language - completely new approach
     - match: '^(\s*)(`{3,})(typescript|ts)(\s*)$'
@@ -277,10 +266,765 @@ contexts:
         2: punctuation.definition.fenced.markdown
       push: code_block_plain
 
+    # =========================================================================
+    # PHASE 1 & 2: Task Management and Inline Content
+    # =========================================================================
+
+    # Priority tasks [!0] through [!3] - Level 0 (no indent)
+    - match: '^(\[![0-3]\])\s+'
+      captures:
+        1: keyword.control.scrawl
+      push: task_content_urgent_level0
+
+    # Priority tasks - Level 1 (4 spaces)
+    - match: '^(    )(\[![0-3]\])\s+'
+      captures:
+        1: markup.list.task.indent.scrawl
+        2: keyword.control.scrawl
+      push: task_content_urgent_level1
+
+    # Priority tasks - Level 2 (8 spaces)
+    - match: '^(        )(\[![0-3]\])\s+'
+      captures:
+        1: markup.list.task.indent.scrawl
+        2: keyword.control.scrawl
+      push: task_content_urgent_level2
+
+    # Priority tasks - Level 3+ (12+ spaces)
+    - match: '^(            +)(\[![0-3]\])\s+'
+      captures:
+        1: markup.list.task.indent.scrawl
+        2: keyword.control.scrawl
+      push: task_content_urgent_level3
+
+    # Urgent tasks [!] without priority - Level 0
+    - match: '^(\[!\])\s+'
+      captures:
+        1: keyword.control.scrawl
+      push: task_content_urgent_level0
+
+    # Urgent tasks [!] - Level 1
+    - match: '^(    )(\[!\])\s+'
+      captures:
+        1: markup.list.task.indent.scrawl
+        2: keyword.control.scrawl
+      push: task_content_urgent_level1
+
+    # Urgent tasks [!] - Level 2
+    - match: '^(        )(\[!\])\s+'
+      captures:
+        1: markup.list.task.indent.scrawl
+        2: keyword.control.scrawl
+      push: task_content_urgent_level2
+
+    # Urgent tasks [!] - Level 3+
+    - match: '^(            +)(\[!\])\s+'
+      captures:
+        1: markup.list.task.indent.scrawl
+        2: keyword.control.scrawl
+      push: task_content_urgent_level3
+
+    # In-progress tasks [•] - Level 0
+    - match: '^(\[•\])\s+'
+      captures:
+        1: constant.language.scrawl
+      push: task_content_inprogress_level0
+
+    # In-progress tasks [•] - Level 1
+    - match: '^(    )(\[•\])\s+'
+      captures:
+        1: markup.list.task.indent.scrawl
+        2: constant.language.scrawl
+      push: task_content_inprogress_level1
+
+    # In-progress tasks [•] - Level 2
+    - match: '^(        )(\[•\])\s+'
+      captures:
+        1: markup.list.task.indent.scrawl
+        2: constant.language.scrawl
+      push: task_content_inprogress_level2
+
+    # In-progress tasks [•] - Level 3+
+    - match: '^(            +)(\[•\])\s+'
+      captures:
+        1: markup.list.task.indent.scrawl
+        2: constant.language.scrawl
+      push: task_content_inprogress_level3
+
+    # Completed tasks [√] - Level 0
+    - match: '^(\[√\])\s+'
+      captures:
+        1: string.scrawl
+      push: task_content_completed_level0
+
+    # Completed tasks [√] - Level 1
+    - match: '^(    )(\[√\])\s+'
+      captures:
+        1: markup.list.task.indent.scrawl
+        2: string.scrawl
+      push: task_content_completed_level1
+
+    # Completed tasks [√] - Level 2
+    - match: '^(        )(\[√\])\s+'
+      captures:
+        1: markup.list.task.indent.scrawl
+        2: string.scrawl
+      push: task_content_completed_level2
+
+    # Completed tasks [√] - Level 3+
+    - match: '^(            +)(\[√\])\s+'
+      captures:
+        1: markup.list.task.indent.scrawl
+        2: string.scrawl
+      push: task_content_completed_level3
+
+    # Completed tasks [x] - Level 0
+    - match: '^(\[x\])\s+'
+      captures:
+        1: string.scrawl
+      push: task_content_completed_level0
+
+    # Completed tasks [x] - Level 1
+    - match: '^(    )(\[x\])\s+'
+      captures:
+        1: markup.list.task.indent.scrawl
+        2: string.scrawl
+      push: task_content_completed_level1
+
+    # Completed tasks [x] - Level 2
+    - match: '^(        )(\[x\])\s+'
+      captures:
+        1: markup.list.task.indent.scrawl
+        2: string.scrawl
+      push: task_content_completed_level2
+
+    # Completed tasks [x] - Level 3+
+    - match: '^(            +)(\[x\])\s+'
+      captures:
+        1: markup.list.task.indent.scrawl
+        2: string.scrawl
+      push: task_content_completed_level3
+
+    # Skipped tasks [-] - Level 0
+    - match: '^(\[-\])\s+'
+      captures:
+        1: comment.scrawl
+      push: task_content_skipped_level0
+
+    # Skipped tasks [-] - Level 1
+    - match: '^(    )(\[-\])\s+'
+      captures:
+        1: markup.list.task.indent.scrawl
+        2: comment.scrawl
+      push: task_content_skipped_level1
+
+    # Skipped tasks [-] - Level 2
+    - match: '^(        )(\[-\])\s+'
+      captures:
+        1: markup.list.task.indent.scrawl
+        2: comment.scrawl
+      push: task_content_skipped_level2
+
+    # Skipped tasks [-] - Level 3+
+    - match: '^(            +)(\[-\])\s+'
+      captures:
+        1: markup.list.task.indent.scrawl
+        2: comment.scrawl
+      push: task_content_skipped_level3
+
+    # On-hold tasks [.] - Level 0
+    - match: '^(\[\.\])\s+'
+      captures:
+        1: comment.scrawl
+      push: task_content_onhold_level0
+
+    # On-hold tasks [.] - Level 1
+    - match: '^(    )(\[\.\])\s+'
+      captures:
+        1: markup.list.task.indent.scrawl
+        2: comment.scrawl
+      push: task_content_onhold_level1
+
+    # On-hold tasks [.] - Level 2
+    - match: '^(        )(\[\.\])\s+'
+      captures:
+        1: markup.list.task.indent.scrawl
+        2: comment.scrawl
+      push: task_content_onhold_level2
+
+    # On-hold tasks [.] - Level 3+
+    - match: '^(            +)(\[\.\])\s+'
+      captures:
+        1: markup.list.task.indent.scrawl
+        2: comment.scrawl
+      push: task_content_onhold_level3
+
+    # Added tasks [+] - Level 0
+    - match: '^(\[\+\])\s+'
+      captures:
+        1: entity.name.function.scrawl
+      push: task_content_added_level0
+
+    # Added tasks [+] - Level 1
+    - match: '^(    )(\[\+\])\s+'
+      captures:
+        1: markup.list.task.indent.scrawl
+        2: entity.name.function.scrawl
+      push: task_content_added_level1
+
+    # Added tasks [+] - Level 2
+    - match: '^(        )(\[\+\])\s+'
+      captures:
+        1: markup.list.task.indent.scrawl
+        2: entity.name.function.scrawl
+      push: task_content_added_level2
+
+    # Added tasks [+] - Level 3+
+    - match: '^(            +)(\[\+\])\s+'
+      captures:
+        1: markup.list.task.indent.scrawl
+        2: entity.name.function.scrawl
+      push: task_content_added_level3
+
+    # Question tasks [?] - Level 0
+    - match: '^(\[\?\])\s+'
+      captures:
+        1: variable.scrawl
+      push: task_content_question_level0
+
+    # Question tasks [?] - Level 1
+    - match: '^(    )(\[\?\])\s+'
+      captures:
+        1: markup.list.task.indent.scrawl
+        2: variable.scrawl
+      push: task_content_question_level1
+
+    # Question tasks [?] - Level 2
+    - match: '^(        )(\[\?\])\s+'
+      captures:
+        1: markup.list.task.indent.scrawl
+        2: variable.scrawl
+      push: task_content_question_level2
+
+    # Question tasks [?] - Level 3+
+    - match: '^(            +)(\[\?\])\s+'
+      captures:
+        1: markup.list.task.indent.scrawl
+        2: variable.scrawl
+      push: task_content_question_level3
+
+    # Unchecked tasks [ ] - Level 0
+    - match: '^(\[ \])\s+'
+      captures:
+        1: markup.list.unnumbered.bullet.scrawl
+      push: task_content_unchecked_level0
+
+    # Unchecked tasks [ ] - Level 1
+    - match: '^(    )(\[ \])\s+'
+      captures:
+        1: markup.list.task.indent.scrawl
+        2: markup.list.unnumbered.bullet.scrawl
+      push: task_content_unchecked_level1
+
+    # Unchecked tasks [ ] - Level 2
+    - match: '^(        )(\[ \])\s+'
+      captures:
+        1: markup.list.task.indent.scrawl
+        2: markup.list.unnumbered.bullet.scrawl
+      push: task_content_unchecked_level2
+
+    # Unchecked tasks [ ] - Level 3+
+    - match: '^(            +)(\[ \])\s+'
+      captures:
+        1: markup.list.task.indent.scrawl
+        2: markup.list.unnumbered.bullet.scrawl
+      push: task_content_unchecked_level3
+
+    # =========================================================================
+    # LIST STYLES
+    # =========================================================================
+
+    # Arrow list -> Level 0
+    - match: '^(->)\s+'
+      captures:
+        1: markup.list.arrow.marker.level0.scrawl
+      push: list_content_level0
+
+    # Arrow list -> Level 1
+    - match: '^(    )(->)\s+'
+      captures:
+        1: markup.list.indent.scrawl
+        2: markup.list.arrow.marker.level1.scrawl
+      push: list_content_level1
+
+    # Arrow list -> Level 2
+    - match: '^(        )(->)\s+'
+      captures:
+        1: markup.list.indent.scrawl
+        2: markup.list.arrow.marker.level2.scrawl
+      push: list_content_level2
+
+    # Arrow list -> Level 3+
+    - match: '^(            +)(->)\s+'
+      captures:
+        1: markup.list.indent.scrawl
+        2: markup.list.arrow.marker.level3.scrawl
+      push: list_content_level3
+
+    # Thick arrow list => Level 0
+    - match: '^(=>)\s+'
+      captures:
+        1: markup.list.thickarrow.marker.level0.scrawl
+      push: list_content_level0
+
+    # Thick arrow list => Level 1
+    - match: '^(    )(=>)\s+'
+      captures:
+        1: markup.list.indent.scrawl
+        2: markup.list.thickarrow.marker.level1.scrawl
+      push: list_content_level1
+
+    # Thick arrow list => Level 2
+    - match: '^(        )(=>)\s+'
+      captures:
+        1: markup.list.indent.scrawl
+        2: markup.list.thickarrow.marker.level2.scrawl
+      push: list_content_level2
+
+    # Thick arrow list => Level 3+
+    - match: '^(            +)(=>)\s+'
+      captures:
+        1: markup.list.indent.scrawl
+        2: markup.list.thickarrow.marker.level3.scrawl
+      push: list_content_level3
+
+    # Numbered list with sub-numbering (e.g., 1.1., 1.2.3.)
+    - match: '^(\d+(?:\.\d+)+\.)\s+'
+      captures:
+        1: markup.list.numbered.marker.level0.scrawl
+      push: list_content_level0
+
+    - match: '^(    )(\d+(?:\.\d+)+\.)\s+'
+      captures:
+        1: markup.list.indent.scrawl
+        2: markup.list.numbered.marker.level1.scrawl
+      push: list_content_level1
+
+    - match: '^(        )(\d+(?:\.\d+)+\.)\s+'
+      captures:
+        1: markup.list.indent.scrawl
+        2: markup.list.numbered.marker.level2.scrawl
+      push: list_content_level2
+
+    - match: '^(            +)(\d+(?:\.\d+)+\.)\s+'
+      captures:
+        1: markup.list.indent.scrawl
+        2: markup.list.numbered.marker.level3.scrawl
+      push: list_content_level3
+
+    # Simple numbered list (e.g., 1., 2., 10.)
+    - match: '^(\d+\.)\s+'
+      captures:
+        1: markup.list.numbered.marker.level0.scrawl
+      push: list_content_level0
+
+    - match: '^(    )(\d+\.)\s+'
+      captures:
+        1: markup.list.indent.scrawl
+        2: markup.list.numbered.marker.level1.scrawl
+      push: list_content_level1
+
+    - match: '^(        )(\d+\.)\s+'
+      captures:
+        1: markup.list.indent.scrawl
+        2: markup.list.numbered.marker.level2.scrawl
+      push: list_content_level2
+
+    - match: '^(            +)(\d+\.)\s+'
+      captures:
+        1: markup.list.indent.scrawl
+        2: markup.list.numbered.marker.level3.scrawl
+      push: list_content_level3
+
+    # Dash list - Level 0
+    - match: '^(-)\s+'
+      captures:
+        1: markup.list.dash.marker.level0.scrawl
+      push: list_content_level0
+
+    # Dash list - Level 1
+    - match: '^(    )(-)\s+'
+      captures:
+        1: markup.list.indent.scrawl
+        2: markup.list.dash.marker.level1.scrawl
+      push: list_content_level1
+
+    # Dash list - Level 2
+    - match: '^(        )(-)\s+'
+      captures:
+        1: markup.list.indent.scrawl
+        2: markup.list.dash.marker.level2.scrawl
+      push: list_content_level2
+
+    # Dash list - Level 3+
+    - match: '^(            +)(-)\s+'
+      captures:
+        1: markup.list.indent.scrawl
+        2: markup.list.dash.marker.level3.scrawl
+      push: list_content_level3
+
+    # Asterisk list * Level 0
+    - match: '^(\*)\s+'
+      captures:
+        1: markup.list.asterisk.marker.level0.scrawl
+      push: list_content_level0
+
+    # Asterisk list * Level 1
+    - match: '^(    )(\*)\s+'
+      captures:
+        1: markup.list.indent.scrawl
+        2: markup.list.asterisk.marker.level1.scrawl
+      push: list_content_level1
+
+    # Asterisk list * Level 2
+    - match: '^(        )(\*)\s+'
+      captures:
+        1: markup.list.indent.scrawl
+        2: markup.list.asterisk.marker.level2.scrawl
+      push: list_content_level2
+
+    # Asterisk list * Level 3+
+    - match: '^(            +)(\*)\s+'
+      captures:
+        1: markup.list.indent.scrawl
+        2: markup.list.asterisk.marker.level3.scrawl
+      push: list_content_level3
+
+    # Bullet list • Level 0
+    - match: '^(•)\s+'
+      captures:
+        1: markup.list.bullet.marker.level0.scrawl
+      push: list_content_level0
+
+    # Bullet list • Level 1
+    - match: '^(    )(•)\s+'
+      captures:
+        1: markup.list.indent.scrawl
+        2: markup.list.bullet.marker.level1.scrawl
+      push: list_content_level1
+
+    # Bullet list • Level 2
+    - match: '^(        )(•)\s+'
+      captures:
+        1: markup.list.indent.scrawl
+        2: markup.list.bullet.marker.level2.scrawl
+      push: list_content_level2
+
+    # Bullet list • Level 3+
+    - match: '^(            +)(•)\s+'
+      captures:
+        1: markup.list.indent.scrawl
+        2: markup.list.bullet.marker.level3.scrawl
+      push: list_content_level3
+
+    # URL highlighting
+    - match: '(https?:\/\/|www\.)[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)+(\/[^\s\(\)\[\]]*)?'
+      scope: markup.underline.link.url
+      captures:
+        1: markup.underline.link.protocol
+        2: markup.underline.link.domain
+
     # Basic comment support
     - match: "//"
       scope: punctuation.definition.comment
       push: line_comment
+
+    # Standalone inline content (Phase 2) - for non-task lines
+    - include: inline_content
+
+  # =========================================================================
+  # TASK CONTENT CONTEXTS - Each task state has its own context
+  # =========================================================================
+
+  # Urgent task content contexts (for different indent levels)
+  task_content_urgent_level0:
+    - meta_scope: markup.list.task.urgent.level0.scrawl
+    - include: inline_content
+    - match: $
+      pop: true
+
+  task_content_urgent_level1:
+    - meta_scope: markup.list.task.urgent.level1.scrawl
+    - include: inline_content
+    - match: $
+      pop: true
+
+  task_content_urgent_level2:
+    - meta_scope: markup.list.task.urgent.level2.scrawl
+    - include: inline_content
+    - match: $
+      pop: true
+
+  task_content_urgent_level3:
+    - meta_scope: markup.list.task.urgent.level3.scrawl
+    - include: inline_content
+    - match: $
+      pop: true
+
+  # In-progress task content contexts
+  task_content_inprogress_level0:
+    - meta_scope: markup.list.task.inprogress.level0.scrawl
+    - include: inline_content
+    - match: $
+      pop: true
+
+  task_content_inprogress_level1:
+    - meta_scope: markup.list.task.inprogress.level1.scrawl
+    - include: inline_content
+    - match: $
+      pop: true
+
+  task_content_inprogress_level2:
+    - meta_scope: markup.list.task.inprogress.level2.scrawl
+    - include: inline_content
+    - match: $
+      pop: true
+
+  task_content_inprogress_level3:
+    - meta_scope: markup.list.task.inprogress.level3.scrawl
+    - include: inline_content
+    - match: $
+      pop: true
+
+  # Completed task content contexts
+  task_content_completed_level0:
+    - meta_scope: markup.list.task.completed.level0.scrawl
+    - include: inline_content
+    - match: $
+      pop: true
+
+  task_content_completed_level1:
+    - meta_scope: markup.list.task.completed.level1.scrawl
+    - include: inline_content
+    - match: $
+      pop: true
+
+  task_content_completed_level2:
+    - meta_scope: markup.list.task.completed.level2.scrawl
+    - include: inline_content
+    - match: $
+      pop: true
+
+  task_content_completed_level3:
+    - meta_scope: markup.list.task.completed.level3.scrawl
+    - include: inline_content
+    - match: $
+      pop: true
+
+  # Skipped task content contexts
+  task_content_skipped_level0:
+    - meta_scope: markup.list.task.skipped.level0.scrawl
+    - include: inline_content
+    - match: $
+      pop: true
+
+  task_content_skipped_level1:
+    - meta_scope: markup.list.task.skipped.level1.scrawl
+    - include: inline_content
+    - match: $
+      pop: true
+
+  task_content_skipped_level2:
+    - meta_scope: markup.list.task.skipped.level2.scrawl
+    - include: inline_content
+    - match: $
+      pop: true
+
+  task_content_skipped_level3:
+    - meta_scope: markup.list.task.skipped.level3.scrawl
+    - include: inline_content
+    - match: $
+      pop: true
+
+  # On-hold task content contexts
+  task_content_onhold_level0:
+    - meta_scope: markup.list.task.onhold.level0.scrawl
+    - include: inline_content
+    - match: $
+      pop: true
+
+  task_content_onhold_level1:
+    - meta_scope: markup.list.task.onhold.level1.scrawl
+    - include: inline_content
+    - match: $
+      pop: true
+
+  task_content_onhold_level2:
+    - meta_scope: markup.list.task.onhold.level2.scrawl
+    - include: inline_content
+    - match: $
+      pop: true
+
+  task_content_onhold_level3:
+    - meta_scope: markup.list.task.onhold.level3.scrawl
+    - include: inline_content
+    - match: $
+      pop: true
+
+  # Added task content contexts
+  task_content_added_level0:
+    - meta_scope: markup.list.task.added.level0.scrawl
+    - include: inline_content
+    - match: $
+      pop: true
+
+  task_content_added_level1:
+    - meta_scope: markup.list.task.added.level1.scrawl
+    - include: inline_content
+    - match: $
+      pop: true
+
+  task_content_added_level2:
+    - meta_scope: markup.list.task.added.level2.scrawl
+    - include: inline_content
+    - match: $
+      pop: true
+
+  task_content_added_level3:
+    - meta_scope: markup.list.task.added.level3.scrawl
+    - include: inline_content
+    - match: $
+      pop: true
+
+  # Question task content contexts
+  task_content_question_level0:
+    - meta_scope: markup.list.task.question.level0.scrawl
+    - include: inline_content
+    - match: $
+      pop: true
+
+  task_content_question_level1:
+    - meta_scope: markup.list.task.question.level1.scrawl
+    - include: inline_content
+    - match: $
+      pop: true
+
+  task_content_question_level2:
+    - meta_scope: markup.list.task.question.level2.scrawl
+    - include: inline_content
+    - match: $
+      pop: true
+
+  task_content_question_level3:
+    - meta_scope: markup.list.task.question.level3.scrawl
+    - include: inline_content
+    - match: $
+      pop: true
+
+  # Unchecked task content contexts
+  task_content_unchecked_level0:
+    - meta_scope: markup.list.task.unchecked.level0.scrawl
+    - include: inline_content
+    - match: $
+      pop: true
+
+  task_content_unchecked_level1:
+    - meta_scope: markup.list.task.unchecked.level1.scrawl
+    - include: inline_content
+    - match: $
+      pop: true
+
+  task_content_unchecked_level2:
+    - meta_scope: markup.list.task.unchecked.level2.scrawl
+    - include: inline_content
+    - match: $
+      pop: true
+
+  task_content_unchecked_level3:
+    - meta_scope: markup.list.task.unchecked.level3.scrawl
+    - include: inline_content
+    - match: $
+      pop: true
+
+  # =========================================================================
+  # LIST CONTENT CONTEXTS
+  # =========================================================================
+
+  list_content_level0:
+    - meta_scope: markup.list.content.level0.scrawl
+    - include: inline_content
+    - match: $
+      pop: true
+
+  list_content_level1:
+    - meta_scope: markup.list.content.level1.scrawl
+    - include: inline_content
+    - match: $
+      pop: true
+
+  list_content_level2:
+    - meta_scope: markup.list.content.level2.scrawl
+    - include: inline_content
+    - match: $
+      pop: true
+
+  list_content_level3:
+    - meta_scope: markup.list.content.level3.scrawl
+    - include: inline_content
+    - match: $
+      pop: true
+
+  # =========================================================================
+  # PHASE 2: INLINE CONTENT PATTERNS
+  # =========================================================================
+
+  inline_content:
+    # Date token d@ with ISO format (YYYY-MM-DD with optional time)
+    - match: '(d@)(\d{4}-\d{2}-\d{2})(\s+\d{1,2}:\d{2})?'
+      captures:
+        1: keyword.operator.date-marker.scrawl
+        2: constant.other.date.scrawl
+        3: constant.other.time.scrawl
+
+    # Date token d@ with US format (MM/DD/YYYY with optional 12-hour time)
+    - match: '(d@)(\d{1,2}/\d{1,2}/\d{4})(\s+\d{1,2}(:\d{2})?\s*(AM|PM|am|pm))?'
+      captures:
+        1: keyword.operator.date-marker.scrawl
+        2: constant.other.date.scrawl
+        3: constant.other.time.scrawl
+
+    # Time estimate token e@ (hours and/or minutes)
+    - match: '(e@)(\d+h)?(\d+m)?'
+      captures:
+        1: keyword.operator.time-marker.scrawl
+        2: constant.numeric.time-estimate.hours.scrawl
+        3: constant.numeric.time-estimate.minutes.scrawl
+
+    # Progress bar [====>    ] or similar
+    - match: '\[([=>\-\s]{3,20})\]'
+      scope: markup.progress.bar.scrawl
+
+    # Percentage (e.g., 50%, 100%)
+    - match: '\b(\d{1,3})(%)'
+      captures:
+        1: constant.numeric.percentage.value.scrawl
+        2: constant.numeric.percentage.sign.scrawl
+
+    # Quick tags @word (but not d@ or e@)
+    - match: '(?<![de])(@)([a-zA-Z][a-zA-Z0-9_-]*)'
+      captures:
+        1: punctuation.definition.tag.quick.scrawl
+        2: entity.name.tag.quick.scrawl
+
+    # Hashtags #word
+    - match: '(#)([a-zA-Z][a-zA-Z0-9_-]*)'
+      captures:
+        1: punctuation.definition.tag.hashtag.scrawl
+        2: entity.name.tag.hashtag.scrawl
+
+  # =========================================================================
+  # EXISTING CONTEXTS
+  # =========================================================================
 
   # Code block contexts for generic or plain code blocks
   code_block_generic:
@@ -295,30 +1039,49 @@ contexts:
       scope: markup.raw.block.markdown punctuation.definition.fenced.markdown
       pop: true
 
-  # Header content patterns
-  header_content:
-    - meta_content_scope: comment.block markup.heading.note-header
+  # Context to detect if we're in a decorative date header or regular block comment
+  maybe_date_header:
+    # Check for decorative pattern: line starting with *- (dashes)
+    - match: '^\s*\*-+\s*$'
+      scope: comment.block.header.scrawl markup.heading.note-header.scrawl
+      set: date_header_content
+    # If first content line doesn't match header pattern, treat as regular comment
+    - match: '(?=\S)'
+      set: block_comment
+    # Empty lines are ok
+    - match: '^\s*$'
+    # Closing immediately means empty comment
     - match: '\*/'
-      scope: punctuation.definition.comment.block.end
+      scope: punctuation.definition.comment.block.end.scrawl
       pop: true
 
-  # Header block - acts as a style reset
-  header_block:
-    - clear_scopes: true
-    - meta_content_scope: comment.block markup.heading.note-header
+  # Decorative date header content
+  date_header_content:
+    - meta_scope: comment.block.header.scrawl markup.heading.note-header.scrawl
     - match: '\*/'
-      scope: punctuation.definition.comment.block.end
+      scope: punctuation.definition.comment.block.end.scrawl
       pop: true
-    - match: "."
-      scope: comment.block
+    # Match date line specifically
+    - match: '^\s*\*\s*(\d{1,2}/\d{1,2}/\d{4})\s*(\w+)?\s*$'
+      captures:
+        1: constant.other.date.header.scrawl
+        2: constant.other.day.header.scrawl
+    # Match slash decoration lines
+    - match: '^\s*\*\s*/+\s*$'
+      scope: comment.block.header.decoration.scrawl
+    # Match dash decoration lines
+    - match: '^\s*\*-+\s*$'
+      scope: comment.block.header.decoration.scrawl
 
-  line_comment:
-    - meta_scope: comment.line
-    - match: $
-      pop: true
-
+  # Regular block comment
   block_comment:
-    - meta_scope: comment.block
+    - meta_scope: comment.block.scrawl
     - match: '\*/'
-      scope: punctuation.definition.comment.block.end
+      scope: punctuation.definition.comment.block.end.scrawl
+      pop: true
+
+  # Line comment
+  line_comment:
+    - meta_scope: comment.line.scrawl
+    - match: $
       pop: true

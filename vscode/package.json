@@ -1,8 +1,9 @@
 {
-  "name": "scrawl-language",
+  "name": "scrawl",
   "displayName": "Scrawl",
   "description": "Syntax highlighting for Scrawl note-taking format",
-  "version": "0.1.0",
+  "version": "0.2.0",
+  "publisher": "scrawl",
   "engines": {
     "vscode": "^1.60.0"
   },

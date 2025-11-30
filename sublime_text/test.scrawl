@@ -1,189 +1,243 @@
-// This is a test file for the "My Notes" custom syntax
-// Testing line comments (should be highlighted and toggleable with cmd+/)
-
 /*
-*------------------------
-* ///////////////////////
-*  3/22/2025 Sat
-* ///////////////////////
-*------------------------
+*-----------------------------------------
+* ///////////
+* 11/30/2025 Saturday
+* ///////////
+*-----------------------------------------
 */
-
-This header above should be highlighted as a heading.
-
-/* This is a block comment that should be highlighted differently */
-
-Let's test some tags:
-
-##important-note##
-Make sure to check that these tags are properly highlighted.
-
-##example-tag##
-This tag should also work with the symbol list and be navigable.
-
-##nested-elements##
-Tags can contain:
-- Lists
-- **Bold text**
-- *Italic text*
-- `code snippets`
-
-##urls-test##
-URLs should be highlighted and clickable:
-https://www.sublimetext.com/docs/syntax.html
-https://packagecontrol.io/
-
-##testing-comments##
-// Line comments should work with cmd+/
-/* 
-Block comments should 
-span multiple
-lines 
-*/
-
-##auto-pairing##
-Testing that typing ## will auto-complete the closing ##
-Also testing for {"brackets"} and [square brackets] and (parentheses)
-
-##cool## ##bruh##
-
-##folding-test##
-This section should be foldable if folding markers are set up correctly.
-Multiple lines of content here
-should be collapsible when you click
-the fold icon in the gutter.
-
-```json
-{
-  "comments": {
-    "lineComment": "//",
-    "blockComment": ["/*", "*/"]
-  },
-  "brackets": [
-    ["(", ")"],
-    ["[", "]"],
-    ["{", "}"]
-  ],
-  "autoClosingPairs": [
-    { "open": "(", "close": ")" },
-    { "open": "[", "close": "]" },
-    { "open": "{", "close": "}" },
-    { "open": "\"", "close": "\"", "notIn": ["string"] },
-    { "open": "'", "close": "'", "notIn": ["string"] },
-    { "open": "/**", "close": " */", "notIn": ["string"] }
-  ],
-  "surroundingPairs": [
-    ["(", ")"],
-    ["[", "]"],
-    ["{", "}"],
-    ["\"", "\""],
-    ["'", "'"],
-    ["`", "`"]
-  ],
-  "folding": {
-    "markers": {
-      "start": "^\\s*##\\s*[a-zA-Z0-9- \\t]+\\s*##",
-      "end": "^\\s*##\\s*End\\s*##"
-    }
-  }
-}
-```
-
-```yaml
-main:
-   cointext:
-      - something
-      - something else
-```
-
-```cpp
-let s:number = 100;
-
-for (let s = 1) {
-   console.log("Cools");
-}
-```
-
-
-```java
-int extra = 100;
-   for (int i = 0; i < 5; i++) {
-      System.out.print("It kinda works")
-   }
-
-```
 
 ```js
-   for (var i = 0l; i < 10; i++) {
-      console.log("print");
-   }
-   }
+const foo = "bar";
 
 ```
+/*
+*-----------------------------------------
+* ///////////
+* 11/30/2025 Sunday
+* ///////////
+*-----------------------------------------
+*/ 
 
 
-```python
-   def doTheThing:
-      print("it works")
+##Phase 1 and 2 Test File##
 
-```
+// This file tests all Phase 1 and Phase 2 features
 
-```lua
-let s = 100;
+##Task States - Level 0##
 
-for (let s = 1) {
-   console.log("Cools");
-}
-```
+[ ] Unchecked task - this is pending
+[•] In progress task - actively working on this
+[√] Completed task with checkmark
+[x] Completed task with x
+[!] Urgent task - needs attention now
+[-] Skipped task - decided not to do
+[.] On hold task - paused for now
+[+] Added task - newly added
+[?] Question task - needs clarification
 
+##Task States - Level 1 (4 spaces)##
 
-```ts
-for (let s:number = 0; s < 10; s++) {
-   // cool
-   "cool"
-}
+    [ ] Level 1 unchecked task
+    [•] Level 1 in progress task
+    [√] Level 1 completed task
+    [x] Level 1 completed with x
+    [!] Level 1 urgent task
+    [-] Level 1 skipped task
+    [.] Level 1 on hold task
+    [+] Level 1 added task
+    [?] Level 1 question task
+
+##Task States - Level 2 (8 spaces)##
+
+        [ ] Level 2 unchecked task
+        [•] Level 2 in progress task
+        [√] Level 2 completed task
+        [!] Level 2 urgent task
+
+##Task States - Level 3+ (12+ spaces)##
+
+            [ ] Level 3 unchecked task
+            [•] Level 3 in progress task
+            [√] Level 3 completed task
+            [!] Level 3 urgent task
+
+##Priority Levels##
+
+[!0] Critical priority - drop everything
+[!1] High priority - do soon
+[!2] Medium priority - normal importance
+[!3] Lower priority - when time permits
+
+    [!0] Nested critical priority
+    [!1] Nested high priority
+        [!2] Deep nested medium priority
+
+##List Styles - Dash##
+
+- Dash list item 1
+- Dash list item 2
+    - Nested dash item level 1
+    - Another nested dash
+        - Deep nested dash level 2
+            - Even deeper dash level 3+
+
+##List Styles - Arrow##
+
+-> Arrow list shows flow
+-> Another arrow item
+    -> Nested arrow level 1
+        -> Deep arrow level 2
+
+##List Styles - Thick Arrow##
+
+=> Thick arrow for emphasis
+=> Strong point here
+    => Nested thick arrow
+        => Deep thick arrow
+
+##List Styles - Numbered##
+
+1. First item
+2. Second item
+3. Third item
+    1. Nested first
+    2. Nested second
+        1. Deep nested
+        2. Another deep
+
+##List Styles - Sub-numbered##
+
+1.1. Sub-numbered item
+1.2. Another sub-item
+1.2.1. Triple sub-numbered
+    2.1. Indented sub-numbered
+    2.2.3. Complex sub-numbering
+
+##List Styles - Asterisk##
+
+* Asterisk item 1
+* Asterisk item 2
+    * Nested asterisk
+        * Deep asterisk
+
+##List Styles - Bullet##
+
+• Bullet item 1
+• Bullet item 2
+    • Nested bullet
+        • Deep bullet
+
+##Phase 2 - Inline Content##
+
+##Date Tokens - ISO Format##
+
+[ ] Complete report d@2025-12-15
+[•] Working on feature d@2025-12-01
+[ ] Meeting scheduled d@2025-12-20 14:30
+[!] Deadline approaching d@2025-12-10 09:00
+
+##Date Tokens - US Format##
+
+[ ] US format date d@12/15/2025
+[ ] US with time d@12/20/2025 2:30 PM
+[•] Morning meeting d@12/01/2025 9 AM
+[!] Urgent deadline d@12/10/2025 5:00 PM
+
+##Time Estimates##
+
+[ ] Quick task e@30m
+[ ] Medium task e@2h
+[•] Long task e@4h30m
+[!] Critical fix e@1h
+[ ] Documentation e@45m
+
+##Quick Tags##
+
+[ ] Ask @john-smith about the design
+[ ] Deploy to @production server
+[•] Review with @team-lead
+[ ] Check @security-review status
+[ ] Update @frontend components
+
+##Hashtags##
+
+[ ] Review documentation #urgent #technical
+[•] Working on feature #development #frontend
+[ ] Backend changes #api #database
+[!] Critical bug #bug #production #urgent
+
+##Progress Bars and Percentages##
+
+[•] Build frontend [=====>    ] 60%
+[•] API development [==>       ] 25%
+[ ] Testing [          ] 0%
+[√] Documentation [==========] 100%
+[•] Overall progress [======>   ] 70%
+
+##Combined Inline Content##
+
+[ ] Review PR from @john-smith d@2025-12-15 e@1h #code-review
+[•] Fix bug in @api-gateway d@2025-12-10 e@4h #urgent #backend [====>     ] 45%
+[!0] Critical production issue @ops-team d@2025-12-01 e@2h #incident #p0
+
+##Mixed Tasks and Lists##
+
+1. Project setup
+    [ ] Initialize repository d@2025-12-01
+    [ ] Configure CI/CD e@2h #devops
+    [•] Setup development environment
+
+2. Feature development
+    -> Plan architecture #planning
+    -> Implement backend @backend-team e@8h
+        [ ] Create API endpoints
+        [•] Database schema [===>      ] 35%
+    -> Frontend integration @frontend-team
+
+##URLs (existing feature)##
+
+Check out https://example.com for more info
+Also see https://www.github.com/project
+
+##Code Blocks (existing feature)##
+
+[.] Test code block
+[√] This one is done
+
+A task to do here before e@8h
+    - Init Repository
+    - Create Documentation
+    - Create API Endpoints
+    - Create Database Schema
+    - Create Frontend Components
+    - Create Backend Components
+    - Create Frontend Integration
+    - Create Backend Integration
+    - Create Frontend Integration
+
+```bash
+#!/bin/bash
+echo "Hello, World!"
 ```
 
 ```typescript
-for (let s:number = 0; s < 10; s++) {
-"cool";
-}
-
+interface Task {
+  id: string;
+  title: string;
+  status: 'pending' | 'in_progress' | 'completed';
 }
 ```
 
-```javascript
-   for (var i = 0l; i < 10; i++) {
-      console.log("print");
-   }
-
+```python
+def process_task(task: dict) -> bool:
+    return task.get('status') == 'completed'
 ```
 
-## one of two ##
+```c
+int main() {
+    printf("Hello, World!\n");
+    return 0;
+}
+```
 
-
-
-/*
-*------------------------
-* ///////////////////////
-*  3/23/2025 Sun
-* ///////////////////////
-*------------------------
-*/
-
-
-
-The above header should create a new section that's independently foldable.
-
-##snippets-test##
-If you've set up snippets:
-- Type "header" and press Tab to create a note header
-- Type "tag" and press Tab to create a tag
-
-##keyboard-shortcuts##
-- cmd+/ should toggle comments
-- cmd+shift+h should insert a header (if VSCode extension)
-- cmd+shift+t should insert a tag (if VSCode extension)
-
-// Final line with a comment
-
+##End##

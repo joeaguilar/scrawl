@@ -1,0 +1,14 @@
+{
+  "name": "scrawl-grammar-tests",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Automated scope assertions for the Scrawl TextMate grammars",
+  "scripts": {
+    "test": "node test.js"
+  },
+  "dependencies": {
+    "js-yaml": "^4.1.0",
+    "vscode-oniguruma": "^2.0.1",
+    "vscode-textmate": "^9.0.0"
+  }
+}

@@ -128,7 +128,7 @@ because the Microsoft Marketplace is licensed for official VS Code builds only.
 
 ### Basic Note Structure
 
-```scrawl
+~~~scrawl
 /*
 *------------------------
 * ///////////////////////
@@ -175,7 +175,7 @@ const processData = (data) => {
 ```
 
 ##End##
-```
+~~~
 
 ### Snippets
 
@@ -189,22 +189,25 @@ const processData = (data) => {
 
 ## Project Structure
 
-```
+| Path | Purpose |
+|------|---------|
+| `install.sh` | Symlinks Scrawl into Sublime Text and detected VS Code-family editors |
+| `docs/FEATURE_REFERENCE.md` | Complete language reference with examples and TextMate scopes |
+| `docs/FEATURE_TEST.scrawl` | Visual test file for the full Scrawl syntax surface |
+| `sublime_text/` | Sublime Text package: grammar, snippets, completions, settings, URL helper |
+| `vscode/` | VS Code-family extension: manifest, language configuration, TextMate grammar |
+| `tests/*.scrawl` | Sample notes for manual editor checks |
+| `tests/grammar/` | Automated TextMate grammar tests |
+
+```text
 Scrawl/
-├── README.md                    # This file
-├── sublime_text/               # Sublime Text package
-│   ├── Scrawl.sublime-syntax   # Syntax highlighting rules
-│   ├── *.sublime-completions  # Auto-completions
-│   ├── *.sublime-snippet       # Code snippets
-│   └── README.md               # Sublime Text specific docs
-├── vscode/                     # VS Code extension
-│   ├── package.json            # Extension manifest
-│   ├── language-configuration.json
-│   ├── syntaxes/
-│   │   └── scrawl.tmLanguage.json
-│   └── README.md               # VS Code specific docs
-└── tests/                      # Example Scrawl files
-    └── test.scrawl
+|-- docs/             Feature reference and visual test notes
+|-- sublime_text/     Sublime Text language package
+|-- tests/            Sample files and grammar test suite
+|-- vscode/           VS Code-family extension
+|-- install.sh        Multi-editor installer
+|-- LICENSE
+`-- README.md
 ```
 
 ## Contributing
@@ -246,4 +249,4 @@ This project is open source and available under the MIT License.
 
 ---
 
-**Happy note-taking with Scrawl! 📝✨** 
+**Happy note-taking with Scrawl! 📝✨**

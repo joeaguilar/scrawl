@@ -446,6 +446,10 @@ contexts:
   # =========================================================================
 
   inline_content:
+    # URLs inside tasks and list items (same pattern as main context)
+    - match: '(?:https?://|www\.)(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?\.)+[a-zA-Z]{2,}(?:/[^\s\(\)\[\]]{0,2000})?'
+      scope: markup.underline.link.url
+
     # Highlight marker <<|...|>> - hot pink/invalid styling
     - match: '<<\|'
       scope: punctuation.definition.highlight.begin.scrawl
@@ -536,6 +540,11 @@ contexts:
     - match: '\*/'
       scope: punctuation.definition.comment.block.end.scrawl
       pop: true
+    # Dates highlighted inside any block comment (parity with VS Code)
+    - match: '(\d{1,2}/\d{1,2}/\d{4})\s*(\w+)?'
+      captures:
+        1: constant.numeric.date.scrawl
+        2: constant.numeric.date.scrawl
 
   # Line comment
   line_comment:

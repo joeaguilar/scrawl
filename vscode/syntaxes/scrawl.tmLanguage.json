@@ -101,6 +101,7 @@
 
     "inline_content": {
       "patterns": [
+        { "include": "#url" },
         {
           "comment": "Highlight marker <<|...|>> - hot pink/invalid styling; unclosed markers bail out at the first blank line",
           "begin": "<<\\|",

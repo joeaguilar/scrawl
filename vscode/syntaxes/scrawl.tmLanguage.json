@@ -77,7 +77,7 @@
       "beginCaptures": {
         "1": { "name": "storage.type.section.scrawl" }
       },
-      "end": "(##)",
+      "end": "(##)|$",
       "endCaptures": {
         "1": { "name": "storage.type.section.scrawl" }
       },
@@ -130,7 +130,7 @@
         },
         {
           "comment": "Time estimate token e@ - yellow (same as Added Task)",
-          "match": "e@(?:\\d+h)?(?:\\d+m)?",
+          "match": "e@(?=\\d)(?:\\d+h)?(?:\\d+m)?",
           "name": "entity.name.function.scrawl"
         },
         {

@@ -464,7 +464,7 @@ contexts:
       scope: entity.name.function.scrawl
 
     # Time estimate token e@ (hours and/or minutes) - yellow
-    - match: 'e@(?:\d+h)?(?:\d+m)?'
+    - match: 'e@(?=\d)(?:\d+h)?(?:\d+m)?'
       scope: entity.name.function.scrawl
 
     # Progress bar [====>    ] or similar
@@ -544,12 +544,11 @@ contexts:
       pop: true
 
   # Highlight content - hot pink/invalid styling for <<|...|>>
+  # Multi-line: only |>> closes the highlight (matches VS Code behavior)
   highlight_content:
     - meta_scope: invalid.illegal.highlight.scrawl
     - match: '\|>>'
       scope: punctuation.definition.highlight.end.scrawl
-      pop: true
-    - match: '$'
       pop: true
 
   # Section content - red heading text, ## markers in cyan

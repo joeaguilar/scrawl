@@ -1,6 +1,17 @@
 
 
 
+
+/*
+*------------------------
+* ///////////////////////
+*  11/30/20205 Sun
+* ///////////////////////
+*------------------------
+*/
+
+##Some important thing##
+
 /*
 *-----------------------------------------
 * ///////////
@@ -255,6 +266,28 @@ interface Task {
 def process_task(task: dict) -> bool:
     return task.get('status') == 'completed'
 ```
+
+
+
+
+AI Project 
+    [!0] Get this done first
+    [√] Get sign off
+    [ ] Get the code in order
+
+
+
+
+<<|
+This is a highlighted section
+|>>
+##Section Name##
+
+
+##Another Section Name##
+
+    This is a section that is not highlighted
+
 
 ##End##
 

@@ -102,14 +102,14 @@
     "inline_content": {
       "patterns": [
         {
-          "comment": "Highlight marker <<|...|>> - hot pink/invalid styling",
+          "comment": "Highlight marker <<|...|>> - hot pink/invalid styling; unclosed markers bail out at the first blank line",
           "begin": "<<\\|",
-          "end": "\\|>>",
+          "end": "(\\|>>)|^(?=\\s*$)",
           "beginCaptures": {
             "0": { "name": "punctuation.definition.highlight.begin.scrawl" }
           },
           "endCaptures": {
-            "0": { "name": "punctuation.definition.highlight.end.scrawl" }
+            "1": { "name": "punctuation.definition.highlight.end.scrawl" }
           },
           "contentName": "invalid.illegal.highlight.scrawl"
         },

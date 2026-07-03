@@ -1,7 +1,11 @@
 #!/bin/bash
 
 # Scrawl Language Support - Installation Script
-# This script creates symlinks for Sublime Text, VS Code, and Cursor
+# Creates symlinks for Sublime Text and every detected VS Code-compatible
+# editor (VS Code, Insiders, VSCodium, Cursor, Windsurf, Trae, Kiro, ...).
+# All VS Code forks share the same extension format, so the one vscode/
+# folder serves them all - each editor just needs a symlink in its own
+# extensions directory.
 
 set -e
 
@@ -70,6 +74,29 @@ create_symlink() {
     fi
 }
 
+# Remove duplicate symlinks that point at our extension under another name.
+# Two links to the same folder give the editor two extensions with the same
+# ID; VS Code's scanner then marks the ID obsolete and BOTH copies vanish
+# from the language picker.
+remove_duplicate_links() {
+    local ext_dir="$1"
+    local name="$2"
+    local expected_source
+    expected_source="$(echo "$SCRIPT_DIR/vscode" | sed 's:/*$::')"
+
+    local link
+    for link in "$ext_dir"/*; do
+        [ -L "$link" ] || continue
+        [ "$(basename "$link")" = "scrawl" ] && continue
+        local link_target
+        link_target="$(readlink "$link" | sed 's:/*$::')"
+        if [ "$link_target" = "$expected_source" ]; then
+            rm "$link"
+            echo -e "${YELLOW}!${NC} $name: Removed duplicate symlink $(basename "$link") (same extension ID twice breaks the editor's extension scanner)"
+        fi
+    done
+}
+
 # Track installations
 installed=0
 skipped=0
@@ -93,40 +120,35 @@ fi
 echo ""
 
 # ============================================
-# VS Code
+# VS Code and compatible editors
+# One entry per editor: "Display Name|extensions dir"
 # ============================================
-echo -e "${BLUE}VS Code${NC}"
-VSCODE_EXTENSIONS="$HOME/.vscode/extensions"
+VSCODE_FAMILY=(
+    "VS Code|$HOME/.vscode/extensions"
+    "VS Code Insiders|$HOME/.vscode-insiders/extensions"
+    "VSCodium|$HOME/.vscode-oss/extensions"
+    "Cursor|$HOME/.cursor/extensions"
+    "Windsurf|$HOME/.windsurf/extensions"
+    "Trae|$HOME/.trae/extensions"
+    "Kiro|$HOME/.kiro/extensions"
+    "Positron|$HOME/.positron/extensions"
+)
 
-if [ -d "$VSCODE_EXTENSIONS" ]; then
-    create_symlink "$SCRIPT_DIR/vscode" "$VSCODE_EXTENSIONS/scrawl" "VS Code"
-    ((installed++)) || true
-else
-    echo -e "${YELLOW}!${NC} VS Code: Extensions folder not found"
-    echo -e "   Expected: $VSCODE_EXTENSIONS"
-    echo -e "   Is VS Code installed?"
-    ((skipped++)) || true
-fi
+for entry in "${VSCODE_FAMILY[@]}"; do
+    name="${entry%%|*}"
+    ext_dir="${entry##*|}"
 
-echo ""
-
-# ============================================
-# Cursor
-# ============================================
-echo -e "${BLUE}Cursor${NC}"
-CURSOR_EXTENSIONS="$HOME/.cursor/extensions"
-
-if [ -d "$CURSOR_EXTENSIONS" ]; then
-    create_symlink "$SCRIPT_DIR/vscode" "$CURSOR_EXTENSIONS/scrawl" "Cursor"
-    ((installed++)) || true
-else
-    echo -e "${YELLOW}!${NC} Cursor: Extensions folder not found"
-    echo -e "   Expected: $CURSOR_EXTENSIONS"
-    echo -e "   Is Cursor installed?"
-    ((skipped++)) || true
-fi
-
-echo ""
+    echo -e "${BLUE}${name}${NC}"
+    if [ -d "$ext_dir" ]; then
+        remove_duplicate_links "$ext_dir" "$name"
+        create_symlink "$SCRIPT_DIR/vscode" "$ext_dir/scrawl" "$name"
+        ((installed++)) || true
+    else
+        echo -e "${YELLOW}-${NC} $name: Not installed (no $ext_dir)"
+        ((skipped++)) || true
+    fi
+    echo ""
+done
 
 # ============================================
 # Summary
@@ -137,10 +159,11 @@ echo -e "${BLUE}=================================${NC}"
 echo ""
 echo -e "To activate the syntax highlighting:"
 echo -e "  ${YELLOW}Sublime Text:${NC} Tools > Developer > Reload Syntax Definitions"
-echo -e "  ${YELLOW}VS Code:${NC} Cmd+Shift+P > Developer: Reload Window"
-echo -e "  ${YELLOW}Cursor:${NC} Cmd+Shift+P > Developer: Reload Window"
+echo -e "  ${YELLOW}VS Code family:${NC} fully quit and relaunch the editor"
+echo -e "  (a plain 'Reload Window' is enough for grammar edits, but new"
+echo -e "   installs and removed duplicates need a full restart to rescan)"
 echo ""
 echo -e "Test files are available at:"
 echo -e "  - tests/test.scrawl"
-echo -e "  - docs/FEATURE_TEST.scrawl"
+echo -e "  - tests/test1.scrawl"
 echo ""

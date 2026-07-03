@@ -1,0 +1,520 @@
+/*
+*-----------------------------------------
+* ///////////
+* 11/30/2025 Sunday
+* ///////////
+*-----------------------------------------
+*/
+
+##Scrawl Feature Visual Test##
+
+// Open this file in Sublime Text or VS Code to verify syntax highlighting
+// Each section demonstrates a specific feature
+
+/*
+==================================================
+SECTION 1: COMMENTS
+==================================================
+*/
+
+// This is a line comment - should appear muted/gray
+// Another line comment with TODO: marker
+
+/*
+This is a block comment
+spanning multiple lines
+All of this should appear in comment styling
+*/
+
+##Section Tags##
+
+// Section tags like ##Name## should be bold/highlighted
+// They create foldable regions in the editor
+
+##End##
+
+/*
+==================================================
+SECTION 2: TASK STATES
+==================================================
+*/
+
+##Task States - All 9 Types##
+
+[ ] Unchecked task - pending work
+[•] In progress task - actively working on this
+[√] Completed task - finished with checkmark
+[x] Completed task - finished with x mark
+[!] Urgent task - needs immediate attention
+[-] Skipped task - decided not to do this
+[.] On hold task - paused for now
+[+] Added task - newly added to the list
+[?] Question task - needs clarification
+
+##End##
+
+/*
+==================================================
+SECTION 3: PRIORITY LEVELS
+==================================================
+*/
+
+##Priority Levels##
+
+[!0] CRITICAL - Drop everything and fix this now
+[!1] HIGH - Do this very soon
+[!2] MEDIUM - Normal priority task
+[!3] LOW - When you have time
+
+##End##
+
+/*
+==================================================
+SECTION 4: INDENT LEVELS
+==================================================
+*/
+
+##Indent Levels - 4 Levels Deep##
+
+[ ] Level 0 task (no indent)
+    [ ] Level 1 task (4 spaces)
+        [ ] Level 2 task (8 spaces)
+            [ ] Level 3 task (12 spaces)
+
+[•] Level 0 in progress
+    [•] Level 1 in progress
+        [•] Level 2 in progress
+            [•] Level 3 in progress
+
+[√] Level 0 completed
+    [√] Level 1 completed
+        [√] Level 2 completed
+            [√] Level 3 completed
+
+[!] Level 0 urgent
+    [!] Level 1 urgent
+        [!] Level 2 urgent
+            [!] Level 3 urgent
+
+##End##
+
+/*
+==================================================
+SECTION 5: LIST STYLES
+==================================================
+*/
+
+##Dash Lists##
+
+- Dash list item one
+- Dash list item two
+    - Nested dash level 1
+    - Another nested dash
+        - Deep nested dash level 2
+            - Even deeper dash level 3
+
+##End##
+
+##Arrow Lists##
+
+-> Arrow indicates flow or sequence
+-> Next step in the process
+    -> Sub-step here
+    -> Another sub-step
+        -> Detailed step
+            -> Very detailed
+
+##End##
+
+##Thick Arrow Lists##
+
+=> Thick arrow for emphasis
+=> Important point to make
+    => Supporting point
+        => Detail here
+
+##End##
+
+##Asterisk Lists##
+
+* Asterisk item one
+* Asterisk item two
+    * Nested asterisk
+        * Deep asterisk
+
+##End##
+
+##Bullet Lists##
+
+• Bullet point one
+• Bullet point two
+    • Nested bullet
+        • Deep bullet
+
+##End##
+
+##Numbered Lists##
+
+1. First numbered item
+2. Second numbered item
+3. Third numbered item
+    1. Nested first
+    2. Nested second
+        1. Deep nested one
+        2. Deep nested two
+
+##End##
+
+##Sub-Numbered Lists##
+
+1.1. Sub-numbered item
+1.2. Another sub-item
+1.3. Third sub-item
+    2.1. Indented sub-numbered
+    2.2. Another indented
+        3.1.1. Triple sub-numbered
+
+##End##
+
+/*
+==================================================
+SECTION 6: DATE TOKENS
+==================================================
+*/
+
+##Date Tokens - ISO Format##
+
+[ ] Task with date d@2025-12-15
+[ ] Task with date and time d@2025-12-20 14:30
+[•] Working on this d@2025-12-01 09:00
+[!] Urgent deadline d@2025-12-10
+
+##End##
+
+##Date Tokens - US Format##
+
+[ ] US format date d@12/15/2025
+[ ] US with time d@12/20/2025 2:30 PM
+[•] Morning meeting d@12/01/2025 9 AM
+[!] EOD deadline d@12/10/2025 5:00 PM
+
+##End##
+
+/*
+==================================================
+SECTION 7: TIME ESTIMATES
+==================================================
+*/
+
+##Time Estimates##
+
+[ ] Quick task e@15m
+[ ] Half hour task e@30m
+[ ] One hour task e@1h
+[ ] Two hour task e@2h
+[ ] Combined time e@4h30m
+[ ] Long task e@8h
+[•] Currently working e@2h30m
+
+##End##
+
+/*
+==================================================
+SECTION 8: QUICK TAGS
+==================================================
+*/
+
+##Quick Tags (@mentions)##
+
+[ ] Ask @john-smith about the design
+[ ] Deploy to @production server
+[ ] Review with @team-lead tomorrow
+[ ] Check @security-review status
+[ ] Update @frontend components
+[ ] Notify @backend-team of changes
+[ ] Schedule with @project-manager
+
+##End##
+
+/*
+==================================================
+SECTION 9: HASHTAGS
+==================================================
+*/
+
+##Hashtags##
+
+[ ] Review documentation #urgent
+[ ] Code review needed #code-review
+[ ] Bug fix required #bug #critical
+[•] Feature work #development #frontend
+[ ] API changes #api #backend #database
+[!] Production issue #incident #p0
+
+##End##
+
+/*
+==================================================
+SECTION 10: PROGRESS BARS
+==================================================
+*/
+
+##Progress Bars##
+
+[ ] Not started [          ]
+[•] Just begun [=>        ]
+[•] Quarter done [==>       ]
+[•] One third [===>      ]
+[•] Halfway [=====>    ]
+[•] Two thirds [======>   ]
+[•] Almost there [========> ]
+[√] Complete [==========]
+
+##End##
+
+/*
+==================================================
+SECTION 11: PERCENTAGES
+==================================================
+*/
+
+##Percentages##
+
+[ ] Starting 0%
+[•] Beginning 10%
+[•] Quarter 25%
+[•] Third 33%
+[•] Half 50%
+[•] Two thirds 66%
+[•] Three quarters 75%
+[•] Almost 90%
+[•] Nearly there 99%
+[√] Done 100%
+
+##End##
+
+/*
+==================================================
+SECTION 12: URLS
+==================================================
+*/
+
+##URLs##
+
+Check out https://example.com for more information
+Documentation at https://docs.example.com/api/v2
+GitHub repo: https://github.com/user/project
+Also see www.example.org for details
+Simple: www.test.com
+
+##End##
+
+/*
+==================================================
+SECTION 13: CODE BLOCKS
+==================================================
+*/
+
+##Code Block - TypeScript##
+
+```typescript
+interface Task {
+  id: string;
+  title: string;
+  status: 'pending' | 'in_progress' | 'completed';
+  priority?: number;
+}
+
+function createTask(title: string): Task {
+  return {
+    id: crypto.randomUUID(),
+    title,
+    status: 'pending'
+  };
+}
+```
+
+##End##
+
+##Code Block - JavaScript##
+
+```javascript
+const tasks = [];
+
+function addTask(title) {
+  tasks.push({
+    id: Date.now(),
+    title,
+    completed: false
+  });
+}
+
+tasks.forEach(task => console.log(task.title));
+```
+
+##End##
+
+##Code Block - Python##
+
+```python
+from dataclasses import dataclass
+from typing import Optional
+
+@dataclass
+class Task:
+    id: str
+    title: str
+    status: str = 'pending'
+    priority: Optional[int] = None
+
+def process_tasks(tasks: list[Task]) -> list[Task]:
+    return [t for t in tasks if t.status != 'completed']
+```
+
+##End##
+
+##Code Block - Bash##
+
+```bash
+#!/bin/bash
+
+# Build and deploy script
+npm install
+npm run build
+npm run test
+
+if [ $? -eq 0 ]; then
+    echo "Deploying..."
+    npm run deploy
+fi
+```
+
+##End##
+
+##Code Block - SQL##
+
+```sql
+SELECT
+    t.id,
+    t.title,
+    t.status,
+    u.name as assignee
+FROM tasks t
+LEFT JOIN users u ON t.assignee_id = u.id
+WHERE t.status != 'completed'
+ORDER BY t.priority ASC;
+```
+
+##End##
+
+##Code Block - JSON##
+
+```json
+{
+  "tasks": [
+    {
+      "id": "task-001",
+      "title": "Implement feature",
+      "status": "in_progress",
+      "tags": ["development", "frontend"]
+    }
+  ]
+}
+```
+
+##End##
+
+##Code Block - YAML##
+
+```yaml
+tasks:
+  - id: task-001
+    title: Implement feature
+    status: in_progress
+    priority: 1
+    tags:
+      - development
+      - frontend
+```
+
+##End##
+
+/*
+==================================================
+SECTION 14: COMBINED EXAMPLES
+==================================================
+*/
+
+##Combined - Simple##
+
+[ ] Review PR from @john-smith d@2025-12-15 e@1h #code-review
+[•] Fix critical bug @backend-team d@2025-12-10 e@4h #urgent #backend
+[!0] Production down @ops-team d@2025-12-01 e@2h #incident #p0
+
+##End##
+
+##Combined - With Progress##
+
+[•] Build frontend @frontend-team d@2025-12-20 e@8h #development [=====>    ] 60%
+[•] API development @backend-team d@2025-12-18 e@16h #api [==>       ] 25%
+[ ] Testing @qa-team d@2025-12-25 e@4h #testing [          ] 0%
+[√] Documentation @tech-writer d@2025-12-15 e@2h #docs [==========] 100%
+
+##End##
+
+##Combined - Nested Structure##
+
+1. Project Setup Phase
+    [ ] Initialize repository d@2025-12-01 e@30m
+    [ ] Configure CI/CD pipeline e@2h #devops @ops-team
+    [•] Setup development environment [===>      ] 35%
+        [ ] Install dependencies e@15m
+        [√] Configure linting 100%
+        [ ] Setup testing framework e@1h
+
+2. Development Phase
+    -> Plan architecture #planning @tech-lead
+    -> Implement backend @backend-team e@24h
+        [ ] Create API endpoints d@2025-12-10
+        [•] Database schema design [====>     ] 45%
+        [ ] Authentication system e@8h #security
+    -> Build frontend @frontend-team e@32h
+        [ ] Component library d@2025-12-15
+        [ ] State management e@4h
+        [ ] API integration e@8h
+
+3. Testing Phase
+    [!1] Unit tests @dev-team e@8h #testing
+    [!2] Integration tests @qa-team e@16h #testing
+    [ ] Performance testing e@4h #performance
+
+##End##
+
+/*
+==================================================
+END OF VISUAL TEST FILE
+==================================================
+*/
+
+##Summary##
+
+// All features tested:
+// - Line comments (this line)
+// - Block comments (sections above)
+// - Date headers (top of file)
+// - Section tags (##Name##)
+// - 9 task states
+// - 4 priority levels
+// - 4 indent levels
+// - 6 list styles
+// - Date tokens (d@)
+// - Time estimates (e@)
+// - Quick tags (@)
+// - Hashtags (#)
+// - Progress bars [===]
+// - Percentages (%)
+// - URLs
+// - Code blocks (7 languages shown)
+// - Combined inline elements
+
+##End##

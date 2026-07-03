@@ -14,7 +14,7 @@ git clone <repo-url> Scrawl
 # Test changes
 # Open test files in Sublime Text:
 # - tests/test.scrawl
-# - sublime_text/test.scrawl
+# - tests/test1.scrawl
 ```
 
 ### VS Code Extension Development
@@ -25,16 +25,21 @@ npm install -g @vscode/vsce  # Install if needed
 vsce package
 
 # Install extension locally
-code --install-extension scrawl-language-*.vsix
+code --install-extension scrawl-*.vsix
 
-# Manual installation (alternative)
-mkdir -p ~/.vscode/extensions/scrawl-language
-cp -r vscode/* ~/.vscode/extensions/scrawl-language/
+# Manual installation (alternative) - always install under the single
+# name 'scrawl'; a second copy under another name gives the editor a
+# duplicate extension ID and it silently drops the language
+ln -s "$(pwd)" ~/.vscode/extensions/scrawl
+# Or run ../install.sh to set up every detected VS Code-family editor
 ```
 
 ### Testing
-- **Manual testing only** - no automated test framework
-- Test files: `tests/test.scrawl`, `sublime_text/test.scrawl`, `vscode/test.scrawl`
+- **Automated grammar tests**: `cd tests/grammar && npm ci && npm test`
+  tokenizes Scrawl samples through the real TextMate engine
+  (vscode-textmate + oniguruma) and asserts scopes; CI runs this on
+  every push
+- Visual checks remain manual - test files: `tests/test.scrawl`, `tests/test1.scrawl`
 - Verify syntax highlighting by opening `.scrawl` files in each editor
 - Test code blocks with various languages to ensure proper highlighting
 - Check URL underlining (Sublime) and linking (VS Code)

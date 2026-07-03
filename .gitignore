@@ -32,6 +32,9 @@ yarn-error.log*
 # Backup files from install script
 *.backup.*
 
-# Docs
-docs/
+# Docs - private notes stay ignored; the language reference and its
+# companion fixture are published
+docs/*
+!docs/FEATURE_REFERENCE.md
+!docs/FEATURE_TEST.scrawl
 ideas/

@@ -69,7 +69,7 @@ not enough for the extension scanner to pick up a new install).
 1. Clone this repository into your Sublime Text packages directory:
    ```bash
    cd ~/Library/Application\ Support/Sublime\ Text/Packages/
-   git clone https://github.com/yourusername/Scrawl.git
+   git clone https://github.com/JosefAguilar/Scrawl.git
    ```
 2. Restart Sublime Text
 

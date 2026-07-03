@@ -5,6 +5,14 @@
   "version": "0.3.0",
   "publisher": "scrawl",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/JosefAguilar/Scrawl.git"
+  },
+  "bugs": {
+    "url": "https://github.com/JosefAguilar/Scrawl/issues"
+  },
+  "homepage": "https://github.com/JosefAguilar/Scrawl#readme",
   "keywords": [
     "scrawl",
     "note-taking",
